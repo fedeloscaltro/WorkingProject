@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Salvatore</string>
+    <string name="login_text">LOGIN</string>
+    <string name="register_text">REGISTRATI</string>
+    <string name="login_email">E-mail</string>
+    <string name="login_pswd">Password</string>
+    <string name="conferma_login">Entra</string>
+
+    <string name="automobilista_text">Automobilista</string>
+    <string name="distributore_text">Distributore</string>
+</resources>
