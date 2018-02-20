@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class LoginRegisterActivity extends AppCompatActivity {
 
@@ -13,7 +14,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_register);
         final Button login = (Button) findViewById(R.id.login);
-        final Button register = (Button) findViewById(R.id.register);
+        final TextView register = (TextView) findViewById(R.id.register);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -28,7 +29,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
         });
     }
     private void goToLogin(){
-        final Intent intent = new Intent(this, LoginActivity.class);
+        final Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
