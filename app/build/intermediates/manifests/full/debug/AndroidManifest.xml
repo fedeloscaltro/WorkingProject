@@ -43,6 +43,9 @@
             android:name="com.gibbo.salvatore.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.gibbo.salvatore.SettingsAutomobilista"
+            android:label="@string/title_activity_settings_automobilista" />
 
         <meta-data
             android:name="android.support.VERSION"

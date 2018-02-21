@@ -1,5 +1,6 @@
 package com.gibbo.salvatore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -68,10 +69,15 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            goToSettings();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void goToSettings(){
+        final Intent intent = new Intent(this, SettingsAutomobilista.class);
+        startActivity(intent);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
