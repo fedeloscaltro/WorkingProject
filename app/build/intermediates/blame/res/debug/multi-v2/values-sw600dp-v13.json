@@ -4,7 +4,7 @@
             "outputFile": "C:\\Users\\stefano.scaltriti\\Documents\\tesina\\WorkingProject\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\stefano.scaltriti\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1099bfc2508a579d3d34739f8d85b659\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\stefano.scaltriti\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b192850a8c953142f84d0223fb0e90ac\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\stefano.scaltriti\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\f37d7b7621e77488d709bd6d780d2940\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\stefano.scaltriti\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59e42954955072cd7db5ecef285abc3a\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

@@ -4,26 +4,45 @@
             "outputFile": "C:\\Users\\stefano.scaltriti\\Documents\\tesina\\WorkingProject\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v21\\values-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\stefano.scaltriti\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\1099bfc2508a579d3d34739f8d85b659\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\stefano.scaltriti\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\d1c3a66076f07085a5766696a0967739\\res\\values-v21\\values-v21.xml",
                     "from": {
-                        "startLines": "2,5",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,266",
-                        "endLines": "4,5",
-                        "endColumns": "12,96",
-                        "endOffsets": "261,358"
+                        "startLines": "2,5,8,11",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,223,386,554",
+                        "endLines": "4,7,10,13",
+                        "endColumns": "12,12,12,12",
+                        "endOffsets": "218,381,549,716"
                     },
                     "to": {
-                        "startLines": "164,228",
-                        "startColumns": "4,4",
-                        "startOffsets": "12577,17127",
-                        "endLines": "166,228",
-                        "endColumns": "12,96",
-                        "endOffsets": "12783,17219"
+                        "startLines": "285,288,292,296",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "21001,21169,21458,21754",
+                        "endLines": "287,290,294,298",
+                        "endColumns": "12,12,12,12",
+                        "endOffsets": "21164,21327,21621,21916"
                     }
                 },
                 {
-                    "source": "C:\\Users\\stefano.scaltriti\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\f37d7b7621e77488d709bd6d780d2940\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\stefano.scaltriti\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\53a9a1ca5f221b45f60c319b8c905a9a\\res\\values-v21\\values-v21.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,13",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,159,223,290,354,470,596,722,850,1022",
+                        "endLines": "2,3,4,5,6,7,8,9,12,17",
+                        "endColumns": "103,63,66,63,115,125,125,127,12,12",
+                        "endOffsets": "154,218,285,349,465,591,717,845,1017,1355"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,283,284,291,295,301,304",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,159,223,290,20759,20875,21332,21626,22051,22223",
+                        "endLines": "2,3,4,5,283,284,291,295,303,308",
+                        "endColumns": "103,63,66,63,115,125,125,127,12,12",
+                        "endOffsets": "154,218,285,349,20870,20996,21453,21749,22218,22556"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\stefano.scaltriti\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\59e42954955072cd7db5ecef285abc3a\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,19,20,21,22,24,26,27,28,29,30,32,34,36,38,40,42,43,48,50,52,53,54,56,58,59,60,61,62,63,107,110,154,157,160,162,164,166,169,171,174,175,176,179,180,181,182,183,184,187,188,190,192,194,196,200,202,203,204,205,207,211,213,215,216,217,218,219,221,222,223,233,234,235,247,259,260,261,264,267,268,271,272",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -42,41 +61,41 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\stefano.scaltriti\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\28912ea2440bd95b17e87702dfe43662\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\stefano.scaltriti\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b192850a8c953142f84d0223fb0e90ac\\res\\values-v21\\values-v21.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,13",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,159,223,290,354,470,596,722,850,1022",
-                        "endLines": "2,3,4,5,6,7,8,9,12,17",
-                        "endColumns": "103,63,66,63,115,125,125,127,12,12",
-                        "endOffsets": "154,218,285,349,465,591,717,845,1017,1355"
+                        "startLines": "2,5",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,266",
+                        "endLines": "4,5",
+                        "endColumns": "12,96",
+                        "endOffsets": "261,358"
                     },
                     "to": {
-                        "startLines": "2,3,4,5,283,284,291,295,299,302",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,159,223,290,20759,20875,21332,21626,21921,22093",
-                        "endLines": "2,3,4,5,283,284,291,295,301,306",
-                        "endColumns": "103,63,66,63,115,125,125,127,12,12",
-                        "endOffsets": "154,218,285,349,20870,20996,21453,21749,22088,22426"
+                        "startLines": "164,228",
+                        "startColumns": "4,4",
+                        "startOffsets": "12577,17127",
+                        "endLines": "166,228",
+                        "endColumns": "12,96",
+                        "endOffsets": "12783,17219"
                     }
                 },
                 {
-                    "source": "C:\\Users\\stefano.scaltriti\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\5046ad73b4a9b111af5bdbb90e92b858\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\stefano.scaltriti\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-appinvite-11.8.0.aar\\613790323a4a11e0130121e5b65906e4\\res\\values-v21\\values.xml",
                     "from": {
-                        "startLines": "2,5,8,11",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,223,386,554",
-                        "endLines": "4,7,10,13",
-                        "endColumns": "12,12,12,12",
-                        "endOffsets": "218,381,549,716"
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "172",
+                        "endLines": "5",
+                        "endColumns": "8",
+                        "endOffsets": "297"
                     },
                     "to": {
-                        "startLines": "285,288,292,296",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "21001,21169,21458,21754",
-                        "endLines": "287,290,294,298",
-                        "endColumns": "12,12,12,12",
-                        "endOffsets": "21164,21327,21621,21916"
+                        "startLines": "299",
+                        "startColumns": "4",
+                        "startOffsets": "21921",
+                        "endLines": "300",
+                        "endColumns": "8",
+                        "endOffsets": "22046"
                     }
                 }
             ]
