@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-35:12
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-37:12
 MERGED from [com.google.firebase:firebase-core:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-core-11.8.0.aar\f26ad3a2e265fd231f5585398724ded3\AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.firebase:firebase-database:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-database-11.8.0.aar\ff92be9b2b4ddb48c7e9bd97d8d82dda\AndroidManifest.xml:2:1-8:12
 MERGED from [com.google.firebase:firebase-firestore:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-firestore-11.8.0.aar\6c40825bc2fae2c40256c68ca028d2c9\AndroidManifest.xml:2:1-8:12
@@ -68,20 +68,20 @@ MERGED from [com.google.firebase:firebase-analytics-impl-license:11.8.0] C:\User
 MERGED from [com.google.firebase:firebase-dynamic-links-license:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-dynamic-links-license-11.8.0.aar\92ab18b3329f80d45161705c8194e435\AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-ads-lite-license:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-license-11.8.0.aar\6c2f37800f9de1c0be3832acd5cea8c1\AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-gass-license:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-gass-license-11.8.0.aar\bbfb3bd70cbe8dce48e55b59736ff383\AndroidManifest.xml:2:1-6:12
-INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-37:12
 	package
 		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:3:5-34
 		INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-35:12
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-37:12
 		INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-35:12
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-37:12
 		INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:11-69
@@ -265,6 +265,26 @@ ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\ma
 		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:32:13-74
 	android:name
 		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:31:13-50
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:35:5-67
+MERGED from [com.google.firebase:firebase-crash:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-crash-11.8.0.aar\1adf0291a834629b56a04c6be1745d29\AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-crash:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-crash-11.8.0.aar\1adf0291a834629b56a04c6be1745d29\AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-perf:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-perf-11.8.0.aar\a4dc2ed767a0b347fd7e03e92f8aa3d6\AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-perf:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-perf-11.8.0.aar\a4dc2ed767a0b347fd7e03e92f8aa3d6\AndroidManifest.xml:22:5-67
+MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\f57bb9858568d788376fff3237b592fa\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\f57bb9858568d788376fff3237b592fa\AndroidManifest.xml:24:5-67
+MERGED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\97cb23a2dd92e52c16fc18f231e71c54\AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\97cb23a2dd92e52c16fc18f231e71c54\AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\fa70631c5ec3df8fc959f435b0cef333\AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\fa70631c5ec3df8fc959f435b0cef333\AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\00603fe0a4e8c0fae49f7c2ddb116b6a\AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\00603fe0a4e8c0fae49f7c2ddb116b6a\AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-appinvite:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-appinvite-11.8.0.aar\613790323a4a11e0130121e5b65906e4\AndroidManifest.xml:22:5-67
+MERGED from [com.google.android.gms:play-services-appinvite:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-appinvite-11.8.0.aar\613790323a4a11e0130121e5b65906e4\AndroidManifest.xml:22:5-67
+MERGED from [com.google.android.gms:play-services-ads-lite:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-11.8.0.aar\22ed53bd916d37f6c90910186d14861e\AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-ads-lite:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-11.8.0.aar\22ed53bd916d37f6c90910186d14861e\AndroidManifest.xml:23:5-67
+	android:name
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:35:22-64
 uses-sdk
 INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml
@@ -409,24 +429,6 @@ INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src
 		INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml
 		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml
-uses-permission#android.permission.INTERNET
-ADDED from [com.google.firebase:firebase-crash:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-crash-11.8.0.aar\1adf0291a834629b56a04c6be1745d29\AndroidManifest.xml:22:5-67
-MERGED from [com.google.firebase:firebase-perf:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-perf-11.8.0.aar\a4dc2ed767a0b347fd7e03e92f8aa3d6\AndroidManifest.xml:22:5-67
-MERGED from [com.google.firebase:firebase-perf:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-perf-11.8.0.aar\a4dc2ed767a0b347fd7e03e92f8aa3d6\AndroidManifest.xml:22:5-67
-MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\f57bb9858568d788376fff3237b592fa\AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\f57bb9858568d788376fff3237b592fa\AndroidManifest.xml:24:5-67
-MERGED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\97cb23a2dd92e52c16fc18f231e71c54\AndroidManifest.xml:23:5-67
-MERGED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\97cb23a2dd92e52c16fc18f231e71c54\AndroidManifest.xml:23:5-67
-MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\fa70631c5ec3df8fc959f435b0cef333\AndroidManifest.xml:23:5-67
-MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\fa70631c5ec3df8fc959f435b0cef333\AndroidManifest.xml:23:5-67
-MERGED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\00603fe0a4e8c0fae49f7c2ddb116b6a\AndroidManifest.xml:23:5-67
-MERGED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\00603fe0a4e8c0fae49f7c2ddb116b6a\AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-appinvite:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-appinvite-11.8.0.aar\613790323a4a11e0130121e5b65906e4\AndroidManifest.xml:22:5-67
-MERGED from [com.google.android.gms:play-services-appinvite:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-appinvite-11.8.0.aar\613790323a4a11e0130121e5b65906e4\AndroidManifest.xml:22:5-67
-MERGED from [com.google.android.gms:play-services-ads-lite:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-11.8.0.aar\22ed53bd916d37f6c90910186d14861e\AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-ads-lite:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-11.8.0.aar\22ed53bd916d37f6c90910186d14861e\AndroidManifest.xml:23:5-67
-	android:name
-		ADDED from [com.google.firebase:firebase-crash:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-crash-11.8.0.aar\1adf0291a834629b56a04c6be1745d29\AndroidManifest.xml:22:22-64
 activity#com.google.firebase.auth.internal.FederatedSignInActivity
 ADDED from [com.google.firebase:firebase-auth:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-auth-11.8.0.aar\36703d17abe07f07f5dd2af48dd089a4\AndroidManifest.xml:23:9-29:75
 	android:excludeFromRecents

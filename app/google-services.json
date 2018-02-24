@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "492812698857",
+    "firebase_url": "https://workingproject-880c3.firebaseio.com",
+    "project_id": "workingproject-880c3",
+    "storage_bucket": "workingproject-880c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492812698857:android:b52de27202c992cc",
+        "android_client_info": {
+          "package_name": "com.gibbo.salvatore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "492812698857-tdhq02ql7bjmbpcno7aeqm3is2j0642u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gibbo.salvatore",
+            "certificate_hash": "84272fea60b7224ed284f8d3bae8afd3e52c553c"
+          }
+        },
+        {
+          "client_id": "492812698857-a6ah7b2ggjcqsh0beo3b07npnr433khs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEpnAF7cGIaT8g8Z5HlnTgKk3FJePLHLU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "492812698857-a6ah7b2ggjcqsh0beo3b07npnr433khs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
