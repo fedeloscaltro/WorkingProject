@@ -18,12 +18,12 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
         access.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToRegistration();
+                goToMainActivity();
             }
         });
     }
 
-    private void goToRegistration(){
+    private void goToMainActivity(){
         final Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();

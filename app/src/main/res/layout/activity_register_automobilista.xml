@@ -18,12 +18,13 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp">
+
             <EditText
-                android:id="@+id/signup_input_name"
+                android:id="@+id/signupNameA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Name"/>
+                android:hint="Name" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:id="@+id/signup_input_layout_email"
@@ -31,13 +32,14 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp">
+
             <EditText
-                android:id="@+id/signup_input_email"
+                android:id="@+id/signupEmailA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textEmailAddress"
-                android:hint="Email" />
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:id="@+id/signup_input_layout_password"
@@ -45,13 +47,14 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp">
+
             <EditText
-                android:id="@+id/signup_input_password"
+                android:id="@+id/signupPsswdA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPassword"
-                android:hint="@string/hintPassword" />
+                android:hint="@string/hintPassword"
+                android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:id="@+id/signup_input_layout_age"
@@ -61,7 +64,7 @@
             android:layout_marginTop="10dp">
 
             <EditText
-                android:id="@+id/signup_input_age"
+                android:id="@+id/signupAgeA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -87,19 +90,19 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/gender_textview"
                 android:orientation="horizontal">
+
                 <RadioButton
-                    android:id="@+id/male_radio_btn"
+                    android:id="@+id/maleBtnA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/male"
                     android:checked="true"
-                    />
+                    android:text="@string/male" />
+
                 <RadioButton
-                    android:id="@+id/female_radio_btn"
+                    android:id="@+id/femaleBtnA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text = "@string/female"
-                    />
+                    android:text="@string/female" />
             </RadioGroup>
         </RelativeLayout>
 
