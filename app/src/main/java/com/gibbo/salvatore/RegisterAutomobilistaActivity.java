@@ -27,9 +27,9 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
 
     //private Firebase mRootRef;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    final DatabaseReference ref = database.getReference();
+    final DatabaseReference ref = database.getReference("/drivers");
 
-    final DatabaseReference usersRef = ref.child("drivers"); //DA CAMBIARE PER IL DISTRIBUTORE
+    //final DatabaseReference usersRef = ref.child("drivers"); //DA CAMBIARE PER IL DISTRIBUTORE
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +49,6 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
         addToDB = (Button) findViewById(R.id.regAutomobilista);
 
 
-        usersRef.keepSynced(true);
-
         addToDB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,46 +58,12 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
                 String age = ageValue.getText().toString();
 
                 users.put(username, new User(username, mail, psswd, age));
-                usersRef.setValue(users);
 
-                usersRef.push();
+                ref.updateChildren(users);
 
-                //ref.updateChildren(users);
                 goToMainActivity();
             }
         });
-
-
-        /*nameValue = findViewById(R.id.signupNameA);
-        mailValue = findViewById(R.id.signupEmailA);
-        psswdValue = findViewById(R.id.signupPsswdA);
-        ageValue = findViewById(R.id.signupAgeA);
-
-        mRootRef = new Firebase("https://workingproject-880c3.firebaseio.com/"+contatore); //connetto il DB Firebase all'app
-
-        addToDB = (Button) findViewById(R.id.regAutomobilista);
-
-        addToDB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                contatore++;
-                String name = nameValue.getText().toString();
-                String mail = mailValue.getText().toString();
-                String psswd = psswdValue.getText().toString();
-                String age = ageValue.getText().toString();
-
-                Firebase childNameRef = mRootRef.child(keyName);
-                childNameRef.setValue(name);
-                Firebase childMailRef = mRootRef.child(keyMail);
-                childMailRef.setValue(mail);
-                Firebase childPsswdRef = mRootRef.child(keyPsswd);
-                childPsswdRef.setValue(psswd);
-                Firebase childAgeRef = mRootRef.child(keyAge);
-                childAgeRef.setValue(age);
-
-                goToMainActivity();
-            }
-        });*/
     }
 
     private void goToMainActivity(){
