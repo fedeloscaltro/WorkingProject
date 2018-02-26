@@ -25,7 +25,11 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
     private String keyAge="Age";
 
 
-    private Firebase mRootRef;
+    //private Firebase mRootRef;
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    final DatabaseReference ref = database.getReference();
+
+    final DatabaseReference usersRef = ref.child("drivers"); //DA CAMBIARE PER IL DISTRIBUTORE
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +37,7 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register_automobilista);
 
 
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference ref = database.getReference();
 
-        final DatabaseReference usersRef = ref.child("drivers"); //DA CAMBIARE PER IL DISTRIBUTORE
 
         usernameValue = findViewById(R.id.signupNameA);
         mailValue = findViewById(R.id.signupEmailA);
@@ -47,18 +48,23 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
 
         addToDB = (Button) findViewById(R.id.regAutomobilista);
 
+
+        usersRef.keepSynced(true);
+
         addToDB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = usernameValue.getText().toString();
+                String username = usernameValue.getText().toString();
                 String mail = mailValue.getText().toString();
                 String psswd = psswdValue.getText().toString();
                 String age = ageValue.getText().toString();
 
-                users.put(name, new User(name, mail, psswd, age));
+                users.put(username, new User(username, mail, psswd, age));
                 usersRef.setValue(users);
 
-                ref.updateChildren(users);
+                usersRef.push();
+
+                //ref.updateChildren(users);
                 goToMainActivity();
             }
         });
