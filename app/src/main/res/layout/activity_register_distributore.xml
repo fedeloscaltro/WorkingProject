@@ -18,12 +18,13 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp">
+
             <EditText
-                android:id="@+id/signup_input_name"
+                android:id="@+id/signupNameD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Name"/>
+                android:hint="Name" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:id="@+id/signup_input_layout_email"
@@ -31,13 +32,14 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp">
+
             <EditText
-                android:id="@+id/signup_input_email"
+                android:id="@+id/signupEmailD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textEmailAddress"
-                android:hint="Email" />
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:id="@+id/signup_input_layout_password"
@@ -45,13 +47,14 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp">
+
             <EditText
-                android:id="@+id/signup_input_password"
+                android:id="@+id/signupPsswdD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPassword"
-                android:hint="@string/hintPassword" />
+                android:hint="@string/hintPassword"
+                android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:id="@+id/signup_input_layout_age"
@@ -59,12 +62,13 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp">
+
             <EditText
-                android:id="@+id/signup_input_address"
+                android:id="@+id/signupAddressD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/hintAddress"/>
+                android:hint="@string/hintAddress" />
         </android.support.design.widget.TextInputLayout>
 
         <RelativeLayout
@@ -82,7 +86,7 @@
             </RadioGroup>
 
             <CheckBox
-                android:id="@+id/checkBox"
+                android:id="@+id/checkBenza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView2"
@@ -105,39 +109,39 @@
                 android:textSize="20sp" />
 
             <CheckBox
-                android:id="@+id/checkBox2"
+                android:id="@+id/checkDiesel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/checkBox"
-                android:layout_alignStart="@+id/checkBox"
-                android:layout_below="@+id/checkBox"
+                android:layout_alignLeft="@+id/checkBenza"
+                android:layout_alignStart="@+id/checkBenza"
+                android:layout_below="@+id/checkBenza"
                 android:text="Gasolio / Diesel" />
 
             <CheckBox
-                android:id="@+id/checkBox3"
+                android:id="@+id/checkGPL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/checkBox2"
-                android:layout_alignStart="@+id/checkBox2"
-                android:layout_below="@+id/checkBox2"
+                android:layout_alignLeft="@+id/checkDiesel"
+                android:layout_alignStart="@+id/checkDiesel"
+                android:layout_below="@+id/checkDiesel"
                 android:text="GPL" />
 
             <CheckBox
-                android:id="@+id/checkBox4"
+                android:id="@+id/checkMetano"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/checkBox3"
-                android:layout_alignStart="@+id/checkBox3"
-                android:layout_below="@+id/checkBox3"
+                android:layout_alignLeft="@+id/checkGPL"
+                android:layout_alignStart="@+id/checkGPL"
+                android:layout_below="@+id/checkGPL"
                 android:text="Metano" />
 
             <CheckBox
-                android:id="@+id/checkBox5"
+                android:id="@+id/checkElettrico"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/checkBox4"
+                android:layout_alignLeft="@+id/checkMetano"
                 android:layout_alignParentBottom="true"
-                android:layout_alignStart="@+id/checkBox4"
+                android:layout_alignStart="@+id/checkMetano"
                 android:text="Elettricità" />
 
         </RelativeLayout>

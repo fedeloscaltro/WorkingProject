@@ -97,12 +97,14 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="@string/male" />
-
+                <!-- 2131296385 -->
                 <RadioButton
                     android:id="@+id/femaleBtnA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="false"
                     android:text="@string/female" />
+                <!-- 2131296346 -->
             </RadioGroup>
         </RelativeLayout>
 

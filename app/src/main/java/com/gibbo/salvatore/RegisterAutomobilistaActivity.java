@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
 
     private Button addToDB;
     private EditText usernameValue, mailValue, psswdValue, ageValue;
+    private RadioButton maleBtnA, femaleBtnA;
     private String keyName="Name";
     private String keyMail="Email";
     private String keyPsswd="Password";
@@ -34,11 +37,10 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
 
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    final DatabaseReference ref = database.getReference("/drivers");
+    final DatabaseReference ref = database.getReference("/drivers"); //DA CAMBIARE PER IL DISTRIBUTORE
     private FirebaseAuth mAuth;
     final Map<String, Object> users = new HashMap<>();
-
-    //final DatabaseReference usersRef = ref.child("drivers"); //DA CAMBIARE PER IL DISTRIBUTORE
+    private static RadioGroup radioButtonGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +49,18 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-
+        maleBtnA = findViewById(R.id.maleBtnA);
         usernameValue = findViewById(R.id.signupNameA);
         mailValue = findViewById(R.id.signupEmailA);
         psswdValue = findViewById(R.id.signupPsswdA);
         ageValue = findViewById(R.id.signupAgeA);
+        radioButtonGroup = (RadioGroup) findViewById(R.id.gender_radio_group);
 
 
-
+        //bottone che, una volta cliccato, aggiunge i dati sul db
         addToDB = (Button) findViewById(R.id.regAutomobilista);
 
-
+        //gestione aggiunta utenti su db
         addToDB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,18 +68,13 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
                 String mail = mailValue.getText().toString();
                 String psswd = psswdValue.getText().toString();
 
-
+                //funzione per creazione account
                 createAccount(mail, psswd);
-
-                /*users.put(username, new User(username, mail, psswd, age));
-
-                ref.updateChildren(users);*/
-
-                //goToMainActivity();
             }
         });
     }
 
+    //porta utente nella schermata principale
     private void goToMainActivity(){
         final Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -91,40 +89,45 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
         //updateUI(currentUser); per vedere se è loggato
     }
 
-    private void updateUI(String mail, String psswd){
+    //crea e aggiorna l'entità dell'utente
+    private void updateUI(String mail, String password){
 
+        String gender;
         String username = usernameValue.getText().toString();
         String age = ageValue.getText().toString();
-        users.put(username, new User(username, mail, psswd, age));
+        int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
+        if (((RadioButton) findViewById(radioButtonID)).getText().equals("Uomo")){
+            gender="Uomo";
+        } else {
+            gender="Donna";
+        }
 
+        //inserisco i dati nella mappa Hash
+        users.put(username, new User(username, mail, password, age, gender));
+
+        //aggiorno il DB
         ref.updateChildren(users);
     }
 
+    //crea l'account con l'ausilio di email e password
     private void createAccount(final String email, final String password){
-        /*controlli su email e password
-
-        */
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        //se la registrazione è andata bene aggiorna il db con le informazioni di sing-in
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Log.d("#", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             updateUI(email, password);
                             goToMainActivity();
-                        } else {
-                            // If sign in fails, display a message to the user.
+                        } else {//se la registrazione è fallita, mostra un messaggio
                             Log.w("#", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterAutomobilistaActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null, null);
+                            Toast.makeText(RegisterAutomobilistaActivity.this, "Mail già in uso",
+                                    Toast.LENGTH_LONG).show();
                         }
-
-                        // ...
                     }
                 });
     }
