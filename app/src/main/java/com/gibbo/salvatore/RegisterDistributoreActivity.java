@@ -81,7 +81,7 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
 
     //porta utente nella schermata principale
     private void goToMainActivity(){
-        final Intent intent = new Intent(this, MainActivity.class);
+        final Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
         finish();
     }
@@ -98,7 +98,8 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
     private void updateUI(String mail, String password){
 
         String username = usernameValue.getText().toString();
-
+        String sede = sedeValue.getText().toString();
+        //checkBenzaValue.;
         //inserisco i dati nella mappa Hash
 
 
@@ -125,7 +126,7 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
 
 
 
-        
+
 
         //aggiorno il DB
         ref.updateChildren(users);
