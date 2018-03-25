@@ -1,4 +1,4 @@
-#Wed Feb 21 17:07:23 CET 2018
-base.0=C\:\\Users\\stefano.scaltriti\\Documents\\tesina\\WorkingProject\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\8
+#Sun Mar 25 21:48:54 CEST 2018
+base.0=C\:\\WorkingProject\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\9
 path.0=classes.dex
 renamed.0=classes.dex
