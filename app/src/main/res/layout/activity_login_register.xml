@@ -32,11 +32,11 @@
         tools:ignore="MissingConstraints">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/passwordSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editText2"
-            android:layout_alignStart="@+id/editText2"
+            android:layout_alignLeft="@+id/signInMail"
+            android:layout_alignStart="@+id/signInMail"
             android:layout_centerVertical="true"
             android:ems="10"
             android:inputType="textPassword"
@@ -47,10 +47,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/signInMail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/editText"
+            android:layout_above="@+id/passwordSignIn"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="35dp"
             android:ems="10"

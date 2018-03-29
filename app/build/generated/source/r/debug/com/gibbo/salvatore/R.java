@@ -4008,8 +4008,8 @@ public final class R {
     public static final int disableHome=0x7f09004a;
     public static final int distributore_button=0x7f09004b;
     public static final int drawer_layout=0x7f09004c;
-    public static final int editText=0x7f09004d;
-    public static final int editText2=0x7f09004e;
+    public static final int passwordSignIn =0x7f09004d;
+    public static final int signInMail =0x7f09004e;
     public static final int edit_query=0x7f09004f;
     public static final int email=0x7f090050;
     public static final int end=0x7f090051;

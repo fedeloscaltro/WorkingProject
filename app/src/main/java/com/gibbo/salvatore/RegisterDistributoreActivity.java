@@ -23,13 +23,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterDistributoreActivity extends AppCompatActivity {
 
     private Button addToDB;
-    private EditText usernameValue, mailValue, psswdValue, sedeValue, carburantiValue;
+    private EditText usernameValue, mailValue, psswdValue, sedeValue;
     private CheckBox checkBenzaValue, checkDieselValue, checkGPLValue, checkMetanoValue, checkElettricoValue;
     /*private String keyName="Name";
     private String keyMail="Email";
@@ -44,7 +45,7 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_automobilista);
+        setContentView(R.layout.activity_register_distributore);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -59,11 +60,9 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
         checkGPLValue = findViewById(R.id.checkGPL);
         checkMetanoValue = findViewById(R.id.checkMetano);
 
-        //carburantiValue = findViewById(R.id.);//CREARE UNA CHECKBOXVIEW
-
 
         //bottone che, una volta cliccato, aggiunge i dati sul db
-        addToDB = (Button) findViewById(R.id.regAutomobilista);
+        addToDB = (Button) findViewById(R.id.regDistributore);
 
         //gestione aggiunta utenti su db
         addToDB.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +80,7 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
 
     //porta utente nella schermata principale
     private void goToMainActivity(){
-        final Intent intent = new Intent(this, MapsActivity.class);
+        final Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
@@ -99,34 +98,25 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
 
         String username = usernameValue.getText().toString();
         String sede = sedeValue.getText().toString();
-        //checkBenzaValue.;
+        ArrayList<String> carburanti = new ArrayList<String>();
+        if(checkBenzaValue.isChecked()){
+            carburanti.add(checkBenzaValue.getText().toString());
+        }
+        if (checkMetanoValue.isChecked()){
+            carburanti.add(checkMetanoValue.getText().toString());
+        }
+        if (checkGPLValue.isChecked()){
+            carburanti.add(checkGPLValue.getText().toString());
+        }
+        if (checkElettricoValue.isChecked()){
+            carburanti.add(checkElettricoValue.getText().toString());
+        }
+        if (checkDieselValue.isChecked()){
+            carburanti.add(checkDieselValue.getText().toString());
+        }
+
         //inserisco i dati nella mappa Hash
-
-
-
-
-
-
-
-
-
-
-        //users.put(username, new User(username, mail, password, sede, carburanti));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        users.put(username, new User(username, mail, password, sede, carburanti));
 
         //aggiorno il DB
         ref.updateChildren(users);
@@ -143,16 +133,16 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d("#", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-
                             updateUI(email, password);
                             goToMainActivity();
                         } else {//se la registrazione è fallita, mostra un messaggio
                             Log.w("#", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterDistributoreActivity.this, "Mail già in uso",
+                            Toast.makeText(RegisterDistributoreActivity.this, "Mail già in uso o non valida",
                                     Toast.LENGTH_LONG).show();
                         }
                     }
                 });
     }
 }
+
 
