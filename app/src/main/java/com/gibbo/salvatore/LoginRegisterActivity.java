@@ -29,7 +29,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
         });
     }
     private void goToLogin(){
-        final Intent intent = new Intent(this, MainActivity.class);
+        final Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
         finish();
     }
