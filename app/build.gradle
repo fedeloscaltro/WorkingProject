@@ -11,6 +11,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -31,24 +32,24 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
-    compile 'com.google.firebase:firebase-core:11.8.0'
+    implementation 'com.google.firebase:firebase-core:11.8.0'
 
-    compile 'com.google.firebase:firebase-core:11.8.0'        //Analytics
-    compile 'com.google.firebase:firebase-database:11.8.0'    //Realtime Database
-    compile 'com.google.firebase:firebase-firestore:11.8.0'    //Cloud Firestore
-    compile 'com.google.firebase:firebase-storage:11.8.0'     //Storage
-    compile 'com.google.firebase:firebase-crash:11.8.0'        //Crash Reporting
-    compile 'com.google.firebase:firebase-auth:11.8.0'        //Authentication
-    compile 'com.google.firebase:firebase-messaging:11.8.0'    //Cloud Messaging
-    compile 'com.google.firebase:firebase-config:11.8.0'        //Remote Config
-    compile 'com.google.firebase:firebase-invites:11.8.0'        //Invites and Dynamic Links
-    compile 'com.google.firebase:firebase-ads:11.8.0'            //AdMob
-    compile 'com.google.firebase:firebase-appindexing:11.8.0'    //App Indexing
-    compile 'com.google.firebase:firebase-perf:11.8.0'        //Performance Monitoring
+    implementation 'com.google.firebase:firebase-core:11.8.0'        //Analytics
+    implementation 'com.google.firebase:firebase-database:11.8.0'    //Realtime Database
+    implementation 'com.google.firebase:firebase-firestore:11.8.0'    //Cloud Firestore
+    implementation 'com.google.firebase:firebase-storage:11.8.0'     //Storage
+    implementation 'com.google.firebase:firebase-crash:11.8.0'        //Crash Reporting
+    implementation 'com.google.firebase:firebase-auth:11.8.0'        //Authentication
+    implementation 'com.google.firebase:firebase-messaging:11.8.0'    //Cloud Messaging
+    implementation 'com.google.firebase:firebase-config:11.8.0'        //Remote Config
+    implementation 'com.google.firebase:firebase-invites:11.8.0'        //Invites and Dynamic Links
+    implementation 'com.google.firebase:firebase-ads:11.8.0'            //AdMob
+    implementation 'com.google.firebase:firebase-appindexing:11.8.0'    //App Indexing
+    implementation 'com.google.firebase:firebase-perf:11.8.0'        //Performance Monitoring
 
-    compile 'com.firebase:firebase-client-android:2.3.1'
+    implementation 'com.firebase:firebase-client-android:2.3.1'
 
-    compile 'com.crashlytics.sdk.android:crashlytics:2.9.1'     //crashlitics
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.1'     //crashlitics
 }
 
 

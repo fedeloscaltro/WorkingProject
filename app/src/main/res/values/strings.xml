@@ -2,9 +2,10 @@
     <string name="app_name">Salvatore</string>
     <string name="loginButton">LOGIN</string>
     <string name="registerButton">REGISTRATI</string>
-    <string name="login_email">E-mail</string>
-    <string name="login_pswd">Password</string>
+    <string name="login_email">fedescaltro99@gmail.com</string><!--E-mail-->
+    <string name="login_pswd">22052010</string><!--Password-->
     <string name="conferma_login">Entra</string>
+    <string name="auth_failed">Authentication failed</string>
 
     <string name="automobilista_text">Automobilista</string>
     <string name="distributore_text">Distributore</string>
