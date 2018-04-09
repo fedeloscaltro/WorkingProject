@@ -76,7 +76,7 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
 
     //porta utente nella schermata principale
     private void goToMainActivity(){
-        final Intent intent = new Intent(this, MapsActivity.class);
+        final Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }

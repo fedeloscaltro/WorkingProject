@@ -135,26 +135,26 @@ public final class R {
         public static final int intent_extra_data = 0x7f090073;
         public static final int large_icon_uri = 0x7f090077;
         public static final int light = 0x7f090079;
-        public static final int match_global_nicknames = 0x7f090082;
-        public static final int none = 0x7f090091;
-        public static final int normal = 0x7f090092;
-        public static final int omnibox_title_section = 0x7f090096;
-        public static final int omnibox_url_section = 0x7f090097;
-        public static final int plain = 0x7f09009f;
-        public static final int progressBar = 0x7f0900a0;
-        public static final int radio = 0x7f0900a3;
-        public static final int rfc822 = 0x7f0900a8;
-        public static final int satellite = 0x7f0900ac;
-        public static final int standard = 0x7f0900dd;
-        public static final int terrain = 0x7f0900e4;
-        public static final int text = 0x7f0900e5;
-        public static final int text1 = 0x7f0900e6;
-        public static final int text2 = 0x7f0900e7;
-        public static final int thing_proto = 0x7f0900ef;
-        public static final int toolbar = 0x7f0900f4;
-        public static final int url = 0x7f0900ff;
-        public static final int wide = 0x7f090103;
-        public static final int wrap_content = 0x7f090106;
+        public static final int match_global_nicknames = 0x7f090083;
+        public static final int none = 0x7f090092;
+        public static final int normal = 0x7f090093;
+        public static final int omnibox_title_section = 0x7f090097;
+        public static final int omnibox_url_section = 0x7f090098;
+        public static final int plain = 0x7f0900a0;
+        public static final int progressBar = 0x7f0900a1;
+        public static final int radio = 0x7f0900a4;
+        public static final int rfc822 = 0x7f0900a9;
+        public static final int satellite = 0x7f0900ad;
+        public static final int standard = 0x7f0900de;
+        public static final int terrain = 0x7f0900e5;
+        public static final int text = 0x7f0900e6;
+        public static final int text1 = 0x7f0900e7;
+        public static final int text2 = 0x7f0900e8;
+        public static final int thing_proto = 0x7f0900f0;
+        public static final int toolbar = 0x7f0900f5;
+        public static final int url = 0x7f090100;
+        public static final int wide = 0x7f090104;
+        public static final int wrap_content = 0x7f090107;
     }
     public static final class integer {
         public static final int google_play_services_version = 0x7f0a0007;
@@ -179,13 +179,13 @@ public final class R {
         public static final int common_signin_button_text = 0x7f0e003a;
         public static final int common_signin_button_text_long = 0x7f0e003b;
         public static final int fcm_fallback_notification_channel_label = 0x7f0e0043;
-        public static final int s1 = 0x7f0e006e;
-        public static final int s2 = 0x7f0e006f;
-        public static final int s3 = 0x7f0e0070;
-        public static final int s4 = 0x7f0e0071;
-        public static final int s5 = 0x7f0e0072;
-        public static final int s6 = 0x7f0e0073;
-        public static final int s7 = 0x7f0e0074;
+        public static final int s1 = 0x7f0e006f;
+        public static final int s2 = 0x7f0e0070;
+        public static final int s3 = 0x7f0e0071;
+        public static final int s4 = 0x7f0e0072;
+        public static final int s5 = 0x7f0e0073;
+        public static final int s6 = 0x7f0e0074;
+        public static final int s7 = 0x7f0e0075;
     }
     public static final class style {
         public static final int Theme_AppInvite_Preview = 0x7f0f012c;

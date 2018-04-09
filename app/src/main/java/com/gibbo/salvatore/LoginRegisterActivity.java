@@ -67,7 +67,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
     }
 
     private void goToMainActivity(){
-            final Intent intent = new Intent(this, MapsActivity.class);
+            final Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
     }
