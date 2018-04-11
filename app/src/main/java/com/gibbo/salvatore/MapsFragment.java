@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.location.Address;
@@ -22,7 +23,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
@@ -48,10 +52,16 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class MapsFragment extends Fragment implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
+public class MapsFragment extends Fragment implements OnMapReadyCallback,
+        ActivityCompat.OnRequestPermissionsResultCallback{
 
     private static final String TAG = MapsFragment.class.getSimpleName();
-    public static int MY_REQUEST_ACCESS_FINE_LOCATION = 1;
+    public static final int MY_REQUEST_ACCESS_FINE_LOCATION = 1;
+    public static boolean mRequestingLocationUpdates = false;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private LocationRequest mLocationRequest;
+    private LocationCallback mLocationCallback;
+
     //private OnFragmentInteractionListener mListener;
     GoogleMap mGoogleMap;
     MapView mMapView;
@@ -67,7 +77,25 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Activi
         if (checkFinePermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_REQUEST_ACCESS_FINE_LOCATION);
         }
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    LatLng newPos = new LatLng(location.getLatitude(), location.getLongitude());
+
+                    MarkerOptions markerOptions = new MarkerOptions()
+                            .position(newPos);
+
+                    mGoogleMap.addMarker(markerOptions);
+                    //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                }
+            };
+        };
     }
 
     private boolean checkFinePermission(Context context, String accessPermission) {
@@ -101,9 +129,10 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Activi
         MapsInitializer.initialize(getContext());
         mGoogleMap = googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mGoogleMap.setMyLocationEnabled(true);
-
+            mLocationRequest = createLocationRequest();
+        }
 
         //gestisco azioni quando si clicca sulla mappa
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -122,13 +151,21 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Activi
                 //seleziono la località da far apparire sopra il marker
                 try {
                     addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                    address = "";
                     if (addresses.size() > 0) {
-                        address = addresses.get(0).getAddressLine(0);
+                        Address addr = addresses.get(0);
+                        if(addr.getThoroughfare() != null && addr.getThoroughfare() != "") {
+                            address = addr.getThoroughfare() + " " + addresses.get(0).getSubThoroughfare();
+                        } else if (addr.getThoroughfare() == null && addr.getThoroughfare() != ""){
+                            address = addr.getSubThoroughfare();
+                        } else if (addr.getThoroughfare() != null && addr.getThoroughfare() == ""){
+                            address = addr.getThoroughfare();
+                        }
                         city = addresses.get(0).getLocality();
 
                         MarkerOptions markerOptions = new MarkerOptions()
                                 .position(latLng)
-                                .title(city);
+                                .title(address + ", " + city);
 
                         Marker marker = googleMap.addMarker(markerOptions);
                         marker.showInfoWindow();
@@ -152,10 +189,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Activi
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
-    private void ciao(){
-
-    }
-    protected void createLocationRequest() {
+    protected LocationRequest createLocationRequest() {
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(5000);
@@ -171,8 +205,10 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Activi
             @Override
             public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
                 Log.i(TAG, "le impostazioni solo abilitate correttamente");
+                MapsFragment.mRequestingLocationUpdates= true;
             }
         });
+        return mLocationRequest;
     }
 
     @Override
@@ -186,4 +222,22 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Activi
             }
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mRequestingLocationUpdates) {
+            startLocationUpdates();
+        }
+    }
+
+    private void startLocationUpdates() {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest,
+                    mLocationCallback,
+                    null /* Looper */);
+        }
+    }
+
+
 }
