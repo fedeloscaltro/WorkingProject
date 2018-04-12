@@ -140,7 +140,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             public void onMapClick(LatLng latLng) {
                 googleMap.clear(); //elimino i marker precedenti
 
-                String address;
+                String address, locality;
                 String city;
 
                 Geocoder geocoder;
@@ -152,20 +152,35 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                 try {
                     addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
                     address = "";
+                    city = addresses.get(0).getLocality();
                     if (addresses.size() > 0) {
                         Address addr = addresses.get(0);
-                        if(addr.getThoroughfare() != null && addr.getThoroughfare() != "") {
-                            address = addr.getThoroughfare() + " " + addresses.get(0).getSubThoroughfare();
-                        } else if (addr.getThoroughfare() == null && addr.getThoroughfare() != ""){
-                            address = addr.getSubThoroughfare();
-                        } else if (addr.getThoroughfare() != null && addr.getThoroughfare() == ""){
-                            address = addr.getThoroughfare();
+                        if (addr.getThoroughfare() != null && addr.getThoroughfare() != ""){
+                            address += addr.getThoroughfare() + " ";
                         }
-                        city = addresses.get(0).getLocality();
+                        if(addr.getSubThoroughfare() != null && addr.getSubThoroughfare() != ""){
+                            address += addr.getSubThoroughfare() + ", ";
+                        }
+                        if (city != null && city != ""){
+                            address += city;
+                        } else {
+                            address += addr.getCountryName();
+                        }/*if (address==null || address=="" || address=="Unnamed Road"){
+
+                        }*/
+                        /*if(addr.getSubThoroughfare() != null && addr.getSubThoroughfare() != ""){
+                                address += addr.getThoroughfare()+ " " + addr.getSubThoroughfare() + ", "+ city;
+                        } else if (addr.getThoroughfare() != null && addr.getThoroughfare() != ""){
+                                address += addr.getThoroughfare()+ ", "+ city;
+                        } else if (city != null && city != ""){
+                            address += city;
+                        } else {
+                            address += addr.getCountryName();
+                        }*/
 
                         MarkerOptions markerOptions = new MarkerOptions()
                                 .position(latLng)
-                                .title(address + ", " + city);
+                                .title(address);
 
                         Marker marker = googleMap.addMarker(markerOptions);
                         marker.showInfoWindow();
