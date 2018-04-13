@@ -165,18 +165,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                             address += city;
                         } else {
                             address += addr.getCountryName();
-                        }/*if (address==null || address=="" || address=="Unnamed Road"){
-
-                        }*/
-                        /*if(addr.getSubThoroughfare() != null && addr.getSubThoroughfare() != ""){
-                                address += addr.getThoroughfare()+ " " + addr.getSubThoroughfare() + ", "+ city;
-                        } else if (addr.getThoroughfare() != null && addr.getThoroughfare() != ""){
-                                address += addr.getThoroughfare()+ ", "+ city;
-                        } else if (city != null && city != ""){
-                            address += city;
-                        } else {
-                            address += addr.getCountryName();
-                        }*/
+                        }
 
                         MarkerOptions markerOptions = new MarkerOptions()
                                 .position(latLng)
@@ -206,7 +195,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
     protected LocationRequest createLocationRequest() {
         LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
+        mLocationRequest.setInterval(100);
         mLocationRequest.setFastestInterval(5000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
