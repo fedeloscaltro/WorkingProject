@@ -39,8 +39,10 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     final DatabaseReference ref = database.getReference("/dispensers");
+    final DatabaseReference refAddr = database.getReference("/addresses");
     private FirebaseAuth mAuth;
     final Map<String, Object> users = new HashMap<>();
+    final Map<String, Object> addresses = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,9 +119,11 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
 
         //inserisco i dati nella mappa Hash
         users.put(username, new User(username, mail, password, sede, carburanti));
+        addresses.put(username, new Addresses(sede));
 
         //aggiorno il DB
         ref.updateChildren(users);
+        refAddr.updateChildren(addresses);
     }
 
     //crea l'account con l'ausilio di email e password
@@ -137,7 +141,7 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
                             goToMainActivity();
                         } else {//se la registrazione è fallita, mostra un messaggio
                             Log.w("#", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterDistributoreActivity.this, "Mail già in uso o non valida",
+                            Toast.makeText(RegisterDistributoreActivity.this, task.getException().getMessage(),
                                     Toast.LENGTH_LONG).show();
                         }
                     }

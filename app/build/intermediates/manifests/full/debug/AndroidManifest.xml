@@ -17,7 +17,7 @@
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
+         location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -47,23 +47,33 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.gibbo.salvatore.LoginRegisterActivity" >
+        <activity
+            android:name="com.gibbo.salvatore.LoginRegisterActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.gibbo.salvatore.RegisterActivity" />
-        <activity android:name="com.gibbo.salvatore.RegisterAutomobilistaActivity" />
-        <activity android:name="com.gibbo.salvatore.RegisterDistributoreActivity" />
+        <activity
+            android:name="com.gibbo.salvatore.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.gibbo.salvatore.RegisterAutomobilistaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.gibbo.salvatore.RegisterDistributoreActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.gibbo.salvatore.MainActivity"
             android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.gibbo.salvatore.SettingsAutomobilista"
-            android:label="@string/title_activity_settings_automobilista" />
+            android:label="@string/title_activity_settings_automobilista"
+            android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -78,7 +88,8 @@
 
         <activity
             android:name="com.gibbo.salvatore.MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="android.support.VERSION"

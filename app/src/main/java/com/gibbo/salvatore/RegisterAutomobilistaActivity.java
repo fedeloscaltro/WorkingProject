@@ -37,7 +37,7 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
 
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    final DatabaseReference ref = database.getReference("/drivers"); //DA CAMBIARE PER IL DISTRIBUTORE
+    final DatabaseReference ref = database.getReference("/drivers");
     private FirebaseAuth mAuth;
     final Map<String, Object> users = new HashMap<>();
     private static RadioGroup radioButtonGroup;
@@ -125,7 +125,7 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
                             goToMainActivity();
                         } else {//se la registrazione è fallita, mostra un messaggio
                             Log.w("#", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterAutomobilistaActivity.this, "Mail già in uso",
+                            Toast.makeText(RegisterAutomobilistaActivity.this, task.getException().getMessage(),
                                     Toast.LENGTH_LONG).show();
                         }
                     }

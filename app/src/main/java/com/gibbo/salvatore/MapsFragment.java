@@ -196,7 +196,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     protected LocationRequest createLocationRequest() {
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(100);
-        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setFastestInterval(100);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()

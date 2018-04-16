@@ -93,18 +93,31 @@ public class LoginRegisterActivity extends AppCompatActivity {
 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        boolean at = email.contains("@");
+                        FirebaseUser user = mAuth.getCurrentUser();
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("#", "signInWithEmail:success");
                             goToMainActivity();
-                            /*FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);*/
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("#", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginRegisterActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginRegisterActivity.this, task.getException().getMessage(),
                                     Toast.LENGTH_LONG).show();
-                            //updateUI(null);
+                            /*if (password.length()<6) {
+                                Toast.makeText(LoginRegisterActivity.this, "Inserisci password con almeno 6 caratteri",
+                                        Toast.LENGTH_LONG).show();
+                            } else if(!at){
+                                Toast.makeText(LoginRegisterActivity.this, "Formato della mail non valido",
+                                        Toast.LENGTH_LONG).show();
+                            }else if (!user.isEmailVerified()){
+                                Toast.makeText(LoginRegisterActivity.this, "Email già in uso",
+                                        Toast.LENGTH_LONG).show();
+                            } else (!user.isEmailVerified()){
+                                Toast.makeText(LoginRegisterActivity.this, "Autenticazione fallita",
+                                        Toast.LENGTH_LONG).show();
+                            }*/
                         }
 
                         // [START_EXCLUDE]
