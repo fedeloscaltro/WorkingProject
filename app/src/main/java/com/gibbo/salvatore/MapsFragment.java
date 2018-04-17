@@ -134,6 +134,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             mLocationRequest = createLocationRequest();
         }
 
+        //LatLng address = getLocationFromAddress(this, yourAddressString("Street Number, Street, Suburb, State, Postcode");
+
         //gestisco azioni quando si clicca sulla mappa
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -174,7 +176,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                         Marker marker = googleMap.addMarker(markerOptions);
                         marker.showInfoWindow();
                         //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                        pointToPosition(marker.getPosition());
+                        Util.pointToPosition(mGoogleMap, marker.getPosition());
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -184,14 +186,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         });
     }
 
-    private void pointToPosition(LatLng position) {
-        //Build camera position
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(position)
-                .zoom(10).build();
-        //Zoom in and animate the camera.
-        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-    }
 
     protected LocationRequest createLocationRequest() {
         LocationRequest mLocationRequest = new LocationRequest();

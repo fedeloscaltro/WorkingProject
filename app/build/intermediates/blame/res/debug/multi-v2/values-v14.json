@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\stefano.scaltriti\\Documents\\tesina\\WorkingProject\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v14\\values-v14.xml",
+            "outputFile": "C:\\WorkingProject\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v14\\values-v14.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\stefano.scaltriti\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\5d56805f4782b8488286ce46ec899e5f\\res\\values-v14\\values-v14.xml",
+                    "source": "C:\\Users\\gibertonif\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\29077ab1fa90a12ed043d3a82dd6ee74\\res\\values-v14\\values-v14.xml",
                     "from": {
                         "startLines": "2,7,8,9,15",
                         "startColumns": "4,4,4,4,4",

@@ -1,7 +1,11 @@
 package com.gibbo.salvatore;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class RegisterDistributoreActivity extends AppCompatActivity {
@@ -138,6 +143,7 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
                             Log.d("#", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(email, password);
+                            getLocationFromAddress(task.getContext(), sedeValue.getText().toString());
                             goToMainActivity();
                         } else {//se la registrazione è fallita, mostra un messaggio
                             Log.w("#", "createUserWithEmail:failure", task.getException());
@@ -147,6 +153,29 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    @Nullable
+    private LatLng getLocationFromAddress(Context context, String strAddress){
+        Geocoder coder= new Geocoder(context);
+        List<Address> address;
+        LatLng position = null;
+
+        try{
+            address = coder.getFromLocationName(strAddress, 5);
+            if(address==null){
+                return null;
+            }
+            Address location = address.get(0);
+            location.getLatitude();
+            location.getLongitude();
+
+            position = new LatLng(location.getLatitude(), location.getLongitude());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return position;
+    }
+
 }
 
 

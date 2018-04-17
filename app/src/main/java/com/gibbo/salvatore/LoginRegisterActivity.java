@@ -1,7 +1,10 @@
 package com.gibbo.salvatore;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.List;
 
 public class LoginRegisterActivity extends AppCompatActivity {
 
@@ -105,19 +110,6 @@ public class LoginRegisterActivity extends AppCompatActivity {
                             Log.w("#", "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginRegisterActivity.this, task.getException().getMessage(),
                                     Toast.LENGTH_LONG).show();
-                            /*if (password.length()<6) {
-                                Toast.makeText(LoginRegisterActivity.this, "Inserisci password con almeno 6 caratteri",
-                                        Toast.LENGTH_LONG).show();
-                            } else if(!at){
-                                Toast.makeText(LoginRegisterActivity.this, "Formato della mail non valido",
-                                        Toast.LENGTH_LONG).show();
-                            }else if (!user.isEmailVerified()){
-                                Toast.makeText(LoginRegisterActivity.this, "Email già in uso",
-                                        Toast.LENGTH_LONG).show();
-                            } else (!user.isEmailVerified()){
-                                Toast.makeText(LoginRegisterActivity.this, "Autenticazione fallita",
-                                        Toast.LENGTH_LONG).show();
-                            }*/
                         }
 
                         // [START_EXCLUDE]
@@ -162,3 +154,4 @@ public class LoginRegisterActivity extends AppCompatActivity {
         progressBar.setVisibility(View.INVISIBLE);
     }
 }
+
