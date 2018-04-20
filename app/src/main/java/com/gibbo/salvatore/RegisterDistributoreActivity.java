@@ -19,13 +19,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.firebase.client.Query;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -87,6 +92,7 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
 
     //porta utente nella schermata principale
     private void goToMainActivity(){
+        queryDB(refAddr);
         final Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -143,7 +149,7 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
                             Log.d("#", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(email, password);
-                            getLocationFromAddress(task.getContext(), sedeValue.getText().toString());
+                            getLocationFromAddress(RegisterDistributoreActivity.this, sedeValue.getText().toString());
                             goToMainActivity();
                         } else {//se la registrazione è fallita, mostra un messaggio
                             Log.w("#", "createUserWithEmail:failure", task.getException());
@@ -174,6 +180,27 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return position;
+    }
+
+    public void queryDB(DatabaseReference refAddresses){
+        com.google.firebase.database.Query query = refAddresses.child("addresses").child("address").equalTo(sedeValue.getText().toString());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    Bundle bundle = new Bundle();
+                    bundle.putString(dataSnapshot.toString(), "From RegisterDistributoreActivity");
+                    //set Fragmentclass Arguments
+                    MapsFragment mapsFragment = new MapsFragment();
+                    mapsFragment.setArguments(bundle);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }

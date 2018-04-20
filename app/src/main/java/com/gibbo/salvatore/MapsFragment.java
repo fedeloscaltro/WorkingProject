@@ -107,6 +107,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        String positionFromRegisterDistributoreAcotivity = getArguments().getString(savedInstanceState.toString());
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_maps, container, false);
         return mView;
