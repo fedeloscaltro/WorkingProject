@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +40,7 @@ import java.util.Map;
 
 public class RegisterDistributoreActivity extends AppCompatActivity {
 
+    private static final String TAG = RegisterDistributoreActivity.class.getSimpleName();
     private Button addToDB;
     private EditText usernameValue, mailValue, psswdValue, sedeValue;
     private CheckBox checkBenzaValue, checkDieselValue, checkGPLValue, checkMetanoValue, checkElettricoValue;
@@ -189,8 +191,8 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
                     Bundle bundle = new Bundle();
-                    bundle.putString(dataSnapshot.toString(), "From RegisterDistributoreActivity");
-                    //set Fragmentclass Arguments
+                    Addresses ad = (Addresses) dataSnapshot.getValue(false);
+                    bundle.putString("indirizzo", ad.getAddress());
                     MapsFragment mapsFragment = new MapsFragment();
                     mapsFragment.setArguments(bundle);
                 }

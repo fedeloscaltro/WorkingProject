@@ -61,6 +61,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest mLocationRequest;
     private LocationCallback mLocationCallback;
+    public String positionFromRegisterDistributoreActivity;
 
     //private OnFragmentInteractionListener mListener;
     GoogleMap mGoogleMap;
@@ -74,6 +75,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        positionFromRegisterDistributoreActivity = getArguments().getString("indirizzo");
         if (checkFinePermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_REQUEST_ACCESS_FINE_LOCATION);
         }
@@ -107,7 +109,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        String positionFromRegisterDistributoreAcotivity = getArguments().getString(savedInstanceState.toString());
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_maps, container, false);
         return mView;
@@ -135,6 +136,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             mLocationRequest = createLocationRequest();
         }
 
+        MarkerOptions markerOptions = new MarkerOptions()
+                .position(Util.getLocationFromAddress(getContext(), positionFromRegisterDistributoreActivity))
+                .title("posizione ricevuta");
+
+        Marker marker = googleMap.addMarker(markerOptions);
+        marker.showInfoWindow();
+        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        Util.pointToPosition(mGoogleMap, marker.getPosition());
         //LatLng address = getLocationFromAddress(this, yourAddressString("Street Number, Street, Suburb, State, Postcode");
 
         //gestisco azioni quando si clicca sulla mappa
