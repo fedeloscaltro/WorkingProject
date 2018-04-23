@@ -95,10 +95,10 @@ public final class R {
         public static final int item_touch_helper_previous_elevation = 0x7f090075;
         public static final int line1 = 0x7f09007a;
         public static final int line3 = 0x7f09007b;
-        public static final int normal = 0x7f090094;
-        public static final int notification_background = 0x7f090095;
-        public static final int notification_main_column = 0x7f090096;
-        public static final int notification_main_column_container = 0x7f090097;
+        public static final int normal = 0x7f090095;
+        public static final int notification_background = 0x7f090096;
+        public static final int notification_main_column = 0x7f090097;
+        public static final int notification_main_column_container = 0x7f090098;
         public static final int right_icon = 0x7f0900ad;
         public static final int right_side = 0x7f0900ae;
         public static final int text = 0x7f0900e8;

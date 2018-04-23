@@ -69,20 +69,21 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp">
 
-            <TextView
+            <EditText
                 android:id="@+id/signupAgeA"
+                android:hint="@string/hintDob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="date"
                  /><!--android:ems="10"
-                android:hint="@string/hintDob"
-                android:inputType="date"-->
+
 
             <Button
                 android:id="@+id/pick_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pick date"
-                android:onClick="showDatePickerDialog" />
+                android:onClick="showDatePickerDialog" />-->
         </android.support.design.widget.TextInputLayout>
 
         <RelativeLayout

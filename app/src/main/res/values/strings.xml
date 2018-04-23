@@ -33,7 +33,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="hintPassword">Password</string>
-    <string name="hintDob">Età</string>
+    <string name="hintDob">Data di nascita</string>
     <string name="hintGender">Sono </string>
     <string name="male">Uomo</string>
     <string name="female">Donna</string>

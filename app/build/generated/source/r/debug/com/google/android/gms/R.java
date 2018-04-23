@@ -135,11 +135,11 @@ public final class R {
         public static final int intent_extra_data = 0x7f090073;
         public static final int large_icon_uri = 0x7f090077;
         public static final int light = 0x7f090079;
-        public static final int match_global_nicknames = 0x7f090084;
-        public static final int none = 0x7f090093;
-        public static final int normal = 0x7f090094;
-        public static final int omnibox_title_section = 0x7f090098;
-        public static final int omnibox_url_section = 0x7f090099;
+        public static final int match_global_nicknames = 0x7f090085;
+        public static final int none = 0x7f090094;
+        public static final int normal = 0x7f090095;
+        public static final int omnibox_title_section = 0x7f090099;
+        public static final int omnibox_url_section = 0x7f09009a;
         public static final int plain = 0x7f0900a2;
         public static final int progressBar = 0x7f0900a3;
         public static final int radio = 0x7f0900a6;

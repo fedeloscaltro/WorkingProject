@@ -42,14 +42,14 @@ public class MainActivity extends AppCompatActivity
                     builder = new AlertDialog.Builder(MainActivity.this);
                 }
                 //View dialogView = View.inflate(MainActivity.this, );
-                builder.setTitle("Aggiungi un distributore").setMessage("Are you sure?")
-                        .setPositiveButton("Positive", new DialogInterface.OnClickListener() {
+                builder.setTitle("Aggiungi un distributore").setMessage("Sei sicuro?")
+                        .setPositiveButton("Sì", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int i) {
                                 dialog.cancel();
                             }
                         })
-                        .setNegativeButton("Negative", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int i) {
                                 dialog.cancel();

@@ -33,8 +33,7 @@ import java.util.Map;
 public class RegisterAutomobilistaActivity extends AppCompatActivity {
 
     private Button addToDB;
-    private EditText usernameValue, mailValue, psswdValue;
-    private TextView ageValue;
+    private EditText usernameValue, mailValue, psswdValue, dateOfBirth;
     private RadioButton maleBtnA, femaleBtnA;
     private String keyName="Name";
     private String keyMail="Email";
@@ -62,11 +61,10 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
         usernameValue = findViewById(R.id.signupNameA);
         mailValue = findViewById(R.id.signupEmailA);
         psswdValue = findViewById(R.id.signupPsswdA);
-        ageValue = findViewById(R.id.signupAgeA);
+
+        dateOfBirth = findViewById(R.id.signupAgeA);
+
         radioButtonGroup = (RadioGroup) findViewById(R.id.gender_radio_group);
-
-
-        final Button pickDate = (Button) findViewById(R.id.pick_date);
 
 
         //bottone che, una volta cliccato, aggiunge i dati sul db
@@ -86,10 +84,6 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
         final Calendar myCalendar = Calendar.getInstance();
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener()
         {
@@ -103,13 +97,13 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
                 // myCalendar.add(Calendar.DATE, 0);
                 String myFormat = "yyyy-MM-dd"; //In which you need put here
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                ageValue.setText(sdf.format(myCalendar.getTime()));
+                dateOfBirth.setText(sdf.format(myCalendar.getTime()));
             }
 
 
         };
 
-        pickDate.setOnClickListener(new View.OnClickListener() {
+        dateOfBirth.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -137,7 +131,7 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
                                 if (dayOfMonth < mDay && year == mYear && monthOfYear == mMonth)
                                     view.updateDate(mYear,mMonth,mDay);
 
-                                ageValue.setText(dayOfMonth + "-"
+                                dateOfBirth.setText(dayOfMonth + "-"
                                         + (monthOfYear + 1) + "-" + year);
 
                             }
@@ -170,7 +164,7 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
 
         String gender;
         String username = usernameValue.getText().toString();
-        String age = ageValue.getText().toString();
+        String age = dateOfBirth.getText().toString();
         int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
         if (((RadioButton) findViewById(radioButtonID)).getText().equals("Uomo")){
             gender="Uomo";
