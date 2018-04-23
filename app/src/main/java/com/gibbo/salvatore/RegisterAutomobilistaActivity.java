@@ -1,5 +1,6 @@
 package com.gibbo.salvatore;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,13 +24,17 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class RegisterAutomobilistaActivity extends AppCompatActivity {
 
     private Button addToDB;
-    private EditText usernameValue, mailValue, psswdValue, ageValue;
+    private EditText usernameValue, mailValue, psswdValue;
+    private TextView ageValue;
     private RadioButton maleBtnA, femaleBtnA;
     private String keyName="Name";
     private String keyMail="Email";
@@ -41,6 +47,9 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     final Map<String, Object> users = new HashMap<>();
     private static RadioGroup radioButtonGroup;
+
+
+    private int mYear,mMonth,mDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +64,9 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
         psswdValue = findViewById(R.id.signupPsswdA);
         ageValue = findViewById(R.id.signupAgeA);
         radioButtonGroup = (RadioGroup) findViewById(R.id.gender_radio_group);
+
+
+        final Button pickDate = (Button) findViewById(R.id.pick_date);
 
 
         //bottone che, una volta cliccato, aggiunge i dati sul db
@@ -72,6 +84,70 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
                 createAccount(mail, psswd);
             }
         });
+
+
+
+
+
+
+        final Calendar myCalendar = Calendar.getInstance();
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener()
+        {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                // myCalendar.add(Calendar.DATE, 0);
+                String myFormat = "yyyy-MM-dd"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                ageValue.setText(sdf.format(myCalendar.getTime()));
+            }
+
+
+        };
+
+        pickDate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                // Launch Date Picker Dialog
+                DatePickerDialog dpd = new DatePickerDialog(RegisterAutomobilistaActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // Display Selected date in textbox
+
+                                if (year < mYear)
+                                    view.updateDate(mYear,mMonth,mDay);
+
+                                if (monthOfYear < mMonth && year == mYear)
+                                    view.updateDate(mYear,mMonth,mDay);
+
+                                if (dayOfMonth < mDay && year == mYear && monthOfYear == mMonth)
+                                    view.updateDate(mYear,mMonth,mDay);
+
+                                ageValue.setText(dayOfMonth + "-"
+                                        + (monthOfYear + 1) + "-" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                dpd.getDatePicker().setMaxDate(System.currentTimeMillis());
+                dpd.show();
+
+            }
+        });
+
     }
 
     //porta utente nella schermata principale
@@ -131,5 +207,7 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 }
 

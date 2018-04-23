@@ -75,7 +75,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        positionFromRegisterDistributoreActivity = getArguments().getString("indirizzo");
+        //positionFromRegisterDistributoreActivity = getArguments().getString("indirizzo");
         if (checkFinePermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_REQUEST_ACCESS_FINE_LOCATION);
         }
@@ -136,14 +136,15 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             mLocationRequest = createLocationRequest();
         }
 
-        MarkerOptions markerOptions = new MarkerOptions()
+        /*MarkerOptions markerOptions = new MarkerOptions()
                 .position(Util.getLocationFromAddress(getContext(), positionFromRegisterDistributoreActivity))
                 .title("posizione ricevuta");
 
         Marker marker = googleMap.addMarker(markerOptions);
         marker.showInfoWindow();
         //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        Util.pointToPosition(mGoogleMap, marker.getPosition());
+        Util.pointToPosition(mGoogleMap, marker.getPosition());*/
+
         //LatLng address = getLocationFromAddress(this, yourAddressString("Street Number, Street, Suburb, State, Postcode");
 
         //gestisco azioni quando si clicca sulla mappa
