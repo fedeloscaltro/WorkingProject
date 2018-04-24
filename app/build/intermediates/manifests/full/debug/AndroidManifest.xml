@@ -90,6 +90,7 @@
             android:name="com.gibbo.salvatore.MapsActivity"
             android:label="@string/title_activity_maps"
             android:screenOrientation="portrait" />
+        <activity android:name="com.gibbo.salvatore.AddDispenser" />
 
         <meta-data
             android:name="android.support.VERSION"

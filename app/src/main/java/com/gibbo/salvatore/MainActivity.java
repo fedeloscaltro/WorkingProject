@@ -37,16 +37,16 @@ public class MainActivity extends AppCompatActivity
                 //creazione finestra di dialogo per inserire un nuovo distributore
                 AlertDialog.Builder builder;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-                    builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                    builder = new AlertDialog.Builder(MainActivity.this,R.style.Theme_AppCompat_Light_Dialog ); //android.R.style.Theme_Material_Dialog_Alert
                 } else {
-                    builder = new AlertDialog.Builder(MainActivity.this);
+                    builder = new AlertDialog.Builder(MainActivity.this, R.style.Theme_AppCompat_Light_Dialog);
                 }
                 //View dialogView = View.inflate(MainActivity.this, );
-                builder.setTitle("Aggiungi un distributore").setMessage("Sei sicuro?")
+                builder.setTitle("Aggiungi un distributore").setMessage("Sei sicuro di voler aggiungere la posizione di un distributore?")
                         .setPositiveButton("Sì", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int i) {
-                                dialog.cancel();
+                                goToAddDispenser();
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -113,6 +113,11 @@ public class MainActivity extends AppCompatActivity
 
     private void goToSettings(){
         final Intent intent = new Intent(this, SettingsAutomobilista.class);
+        startActivity(intent);
+    }
+
+    private void goToAddDispenser(){
+        final Intent intent = new Intent(this, AddDispenser.class);
         startActivity(intent);
     }
 

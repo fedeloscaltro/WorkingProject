@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddDispenser">
+
+    <TextView
+        android:id="@+id/titleAddDispenser"
+        android:layout_width="364dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="56dp"
+        android:text="Aggiungi un distributore"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAlignment="center"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/signup_input_layout_age"
+        android:layout_width="339dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleAddDispenser">
+
+        <EditText
+            android:id="@+id/ragioneSociale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Ragione sociale" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/compagnia"
+        android:layout_width="344dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_input_layout_age" />
+
+    <Button
+        android:id="@+id/addDispenserButton"
+        android:layout_width="163dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:text="Aggiungi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/compagnia" />
+
+</android.support.constraint.ConstraintLayout>

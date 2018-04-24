@@ -90,7 +90,6 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -107,7 +106,6 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 final Calendar c = Calendar.getInstance();
                 mYear = c.get(Calendar.YEAR);
                 mMonth = c.get(Calendar.MONTH);
@@ -190,7 +188,6 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d("#", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-
                             updateUI(email, password);
                             goToMainActivity();
                         } else {//se la registrazione è fallita, mostra un messaggio
