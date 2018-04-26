@@ -15,6 +15,7 @@ public class AddDispenser extends AppCompatActivity {
     EditText ragioneSociale;
     Button addDispenserButton;
     String defaultCompagnia = "Seleziona una compagnia";
+    String ragioneSocialeValue = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class AddDispenser extends AppCompatActivity {
         addDispenserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String ragioneSocialeValue = ragioneSociale.getText().toString();
+                ragioneSocialeValue = ragioneSociale.getText().toString();
                 String compagniaValue = dropdown.getSelectedItem().toString();
 
                 checkValidityFields(ragioneSocialeValue, compagniaValue);
@@ -55,13 +56,13 @@ public class AddDispenser extends AppCompatActivity {
 
     private void checkValidityFields(String ragioneSocialeValue, String compagniaValue){
 
-        if (ragioneSocialeValue == "" && compagniaValue.equals(defaultCompagnia)){
+        if (ragioneSocialeValue.equals("") && compagniaValue.equals(defaultCompagnia)){
             Toast.makeText(AddDispenser.this, "Ragione sociale non valida",
                     Toast.LENGTH_LONG).show();
-        }else if (compagniaValue.equals(defaultCompagnia) && ragioneSocialeValue != ""){
+        }else if (compagniaValue.equals(defaultCompagnia) && !ragioneSocialeValue.equals("")){
             Toast.makeText(AddDispenser.this, "Compagnia non valida",
                     Toast.LENGTH_LONG).show();
-        } else if (ragioneSocialeValue != "" && compagniaValue != defaultCompagnia) {
+        } else {
             Toast.makeText(AddDispenser.this, "Tutto ok",
                     Toast.LENGTH_LONG).show();
             //goToMainActivity();
