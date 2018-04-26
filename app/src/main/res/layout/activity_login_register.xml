@@ -74,7 +74,8 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="16dp"
-            android:text="Accedi" />
+            android:text="Accedi"
+            style="@style/Widget.AppCompat.Button.Colored"/>
 
         <TextView
             android:id="@+id/status"

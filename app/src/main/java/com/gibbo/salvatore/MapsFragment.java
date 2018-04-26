@@ -51,6 +51,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.Executor;
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback{
@@ -62,6 +63,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     private LocationRequest mLocationRequest;
     private LocationCallback mLocationCallback;
     public String positionFromRegisterDistributoreActivity;
+    protected static final int REQUEST_CHECK_SETTINGS = 0x1;
 
     //private OnFragmentInteractionListener mListener;
     GoogleMap mGoogleMap;
@@ -134,6 +136,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mGoogleMap.setMyLocationEnabled(true);
             mLocationRequest = createLocationRequest();
+
         }
 
         /*MarkerOptions markerOptions = new MarkerOptions()
@@ -215,6 +218,25 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
                 Log.i(TAG, "le impostazioni solo abilitate correttamente");
                 MapsFragment.mRequestingLocationUpdates= true;
+            }
+        });
+        task.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if (e instanceof ResolvableApiException) {
+                    // Location settings are not satisfied, but this can be fixed
+                    // by showing the user a dialog.
+                    try {
+                        // Show the dialog by calling startResolutionForResult(),
+                        // and check the result in onActivityResult().
+                        ResolvableApiException resolvable = (ResolvableApiException) e;
+                        resolvable.startResolutionForResult(getActivity(),
+                                REQUEST_CHECK_SETTINGS);
+                    } catch (IntentSender.SendIntentException sendEx) {
+                        // Ignore the error.
+                    }
+                }
+
             }
         });
         return mLocationRequest;

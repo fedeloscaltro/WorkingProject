@@ -16,7 +16,7 @@ public class Util {
         //Build camera position
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(position)
-                .zoom(10).build();
+                .zoom(14).build();
         //Zoom in and animate the camera.
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }

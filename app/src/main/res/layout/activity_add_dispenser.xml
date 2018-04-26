@@ -55,6 +55,7 @@
         android:text="Aggiungi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/compagnia" />
+        app:layout_constraintTop_toBottomOf="@+id/compagnia"
+        style="@style/Widget.AppCompat.Button.Colored"/>
 
 </android.support.constraint.ConstraintLayout>

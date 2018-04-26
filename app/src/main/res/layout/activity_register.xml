@@ -34,7 +34,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_title" />
+        app:layout_constraintTop_toBottomOf="@+id/register_title"
+        style="@style/Widget.AppCompat.Button.Colored"/>
 
     <Button
         android:id="@+id/distributore_button"
@@ -50,6 +51,7 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/automobilista_button"
-        app:layout_constraintVertical_bias="0.077" />
+        app:layout_constraintVertical_bias="0.077"
+        style="@style/Widget.AppCompat.Button.Colored"/>
 
 </android.support.constraint.ConstraintLayout>

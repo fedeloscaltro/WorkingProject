@@ -131,7 +131,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="@string/btnSignUp"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            style="@style/Widget.AppCompat.Button.Colored"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
