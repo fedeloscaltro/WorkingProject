@@ -66,11 +66,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"
-            android:screenOrientation="portrait" />
-        <activity android:name=".AddDispenser"></activity>
+        <activity android:name=".AddDispenser"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

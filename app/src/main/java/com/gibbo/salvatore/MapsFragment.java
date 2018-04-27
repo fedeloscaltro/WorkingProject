@@ -135,7 +135,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mGoogleMap.setMyLocationEnabled(true);
-            mLocationRequest = createLocationRequest();
+            createLocationRequest();
 
         }
 
@@ -257,9 +257,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onResume() {
         super.onResume();
-        if (mRequestingLocationUpdates) {
+        /*if (mRequestingLocationUpdates) {
             startLocationUpdates();
-        }
+        }*/
     }
 
     private void startLocationUpdates() {

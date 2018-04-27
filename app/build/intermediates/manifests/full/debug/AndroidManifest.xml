@@ -87,10 +87,9 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name="com.gibbo.salvatore.MapsActivity"
-            android:label="@string/title_activity_maps"
-            android:screenOrientation="portrait" />
-        <activity android:name="com.gibbo.salvatore.AddDispenser" />
+            android:name="com.gibbo.salvatore.AddDispenser"
+            android:screenOrientation="portrait" >
+        </activity>
 
         <meta-data
             android:name="android.support.VERSION"

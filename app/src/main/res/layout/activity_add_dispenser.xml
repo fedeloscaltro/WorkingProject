@@ -23,39 +23,116 @@
         android:layout_width="339dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleAddDispenser">
 
         <EditText
-            android:id="@+id/ragioneSociale"
+            android:id="@+id/indirizzo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Ragione sociale" />
+            android:hint="Indirizzo" />
     </android.support.design.widget.TextInputLayout>
 
     <Spinner
         android:id="@+id/compagnia"
         android:layout_width="344dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_input_layout_age" />
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="284dp"
+        android:layout_height="193dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:paddingTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/compagnia">
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/gender_radio_group"
+            android:layout_marginTop="12dp"
+            android:text="Eroga"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/checkBenza"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView2"
+            android:layout_alignBottom="@+id/textView2"
+            android:layout_marginLeft="27dp"
+            android:layout_marginStart="27dp"
+            android:layout_toEndOf="@+id/textView2"
+            android:layout_toRightOf="@+id/textView2"
+            android:text="Benzina" />
+
+        <CheckBox
+            android:id="@+id/checkDiesel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/checkBenza"
+            android:layout_alignStart="@+id/checkBenza"
+            android:layout_below="@+id/checkBenza"
+            android:text="Gasolio / Diesel" />
+
+        <CheckBox
+            android:id="@+id/checkGPL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/checkDiesel"
+            android:layout_alignStart="@+id/checkDiesel"
+            android:layout_below="@+id/checkDiesel"
+            android:text="GPL" />
+
+        <CheckBox
+            android:id="@+id/checkMetano"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/checkGPL"
+            android:layout_alignStart="@+id/checkGPL"
+            android:layout_below="@+id/checkGPL"
+            android:text="Metano" />
+
+        <CheckBox
+            android:id="@+id/checkElettrico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/checkMetano"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/checkMetano"
+            android:text="Elettricità" />
+
+
+    </RelativeLayout>
+
     <Button
         android:id="@+id/addDispenserButton"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="163dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="36dp"
         android:text="Aggiungi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/compagnia"
-        style="@style/Widget.AppCompat.Button.Colored"/>
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
 </android.support.constraint.ConstraintLayout>

@@ -12,10 +12,10 @@ import android.widget.Toast;
 
 public class AddDispenser extends AppCompatActivity {
 
-    EditText ragioneSociale;
+    EditText indirizzo;
     Button addDispenserButton;
     String defaultCompagnia = "Seleziona una compagnia";
-    String ragioneSocialeValue = "";
+    String indirizzoValue = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +34,17 @@ public class AddDispenser extends AppCompatActivity {
         //set the spinners adapter to the previously created one.
         dropdown.setAdapter(adapter);
 
-        ragioneSociale = findViewById(R.id.ragioneSociale);
+        indirizzo = findViewById(R.id.indirizzo);
 
         addDispenserButton = (Button) findViewById(R.id.addDispenserButton);
 
         addDispenserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ragioneSocialeValue = ragioneSociale.getText().toString();
+                indirizzoValue = indirizzo.getText().toString();
                 String compagniaValue = dropdown.getSelectedItem().toString();
 
-                checkValidityFields(ragioneSocialeValue, compagniaValue);
+                checkValidityFields(indirizzoValue, compagniaValue);
             }
         });
     }
@@ -57,15 +57,13 @@ public class AddDispenser extends AppCompatActivity {
     private void checkValidityFields(String ragioneSocialeValue, String compagniaValue){
 
         if (ragioneSocialeValue.equals("") && compagniaValue.equals(defaultCompagnia)){
-            Toast.makeText(AddDispenser.this, "Ragione sociale non valida",
+            Toast.makeText(AddDispenser.this, "Indirizzo non valido",
                     Toast.LENGTH_LONG).show();
         }else if (compagniaValue.equals(defaultCompagnia) && !ragioneSocialeValue.equals("")){
             Toast.makeText(AddDispenser.this, "Compagnia non valida",
                     Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(AddDispenser.this, "Tutto ok",
-                    Toast.LENGTH_LONG).show();
-            //goToMainActivity();
+            goToMainActivity();
         }
     }
 }
