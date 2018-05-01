@@ -136,7 +136,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mGoogleMap.setMyLocationEnabled(true);
             createLocationRequest();
-
         }
 
         /*MarkerOptions markerOptions = new MarkerOptions()
@@ -189,6 +188,16 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
                         Marker marker = googleMap.addMarker(markerOptions);
                         marker.showInfoWindow();
+                        /*Location meNow = null;
+                        try {
+                            meNow = ((LocationManager)(getContext().getSystemService(Context.LOCATION_SERVICE))).getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        }
+                        catch (SecurityException e){
+
+                        }
+
+                        Util.calculationByDistance(new LatLng(meNow.getLatitude(), meNow.getLongitude()) ,
+                                latLng);*/
                         //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                         Util.pointToPosition(mGoogleMap, marker.getPosition());
                     }
@@ -217,7 +226,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             @Override
             public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
                 Log.i(TAG, "le impostazioni solo abilitate correttamente");
-                MapsFragment.mRequestingLocationUpdates= true;
+                MapsFragment.mRequestingLocationUpdates = true;
             }
         });
         task.addOnFailureListener(new OnFailureListener() {
