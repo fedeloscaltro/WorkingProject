@@ -38,7 +38,7 @@
     <string name="male">Uomo</string>
     <string name="female">Donna</string>
     <string name="btnSignUp">REGISTRATI</string>
-    <string name="hintAddress">Sede distributore</string>
+    <string name="hintAddress">Sede (Via Civico, Città)</string>
     <string name="title_activity_settings_automobilista">Impostazioni</string>
 
     <!-- Strings related to Settings -->
