@@ -4,38 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gibbo.salvatore.RegisterActivity">
+    tools:context="com.gibbo.salvatore.RegisterActivity"
+    android:background="@drawable/background_login2">
 
-    <TextView
-        android:id="@+id/register_title"
-        android:layout_width="276dp"
-        android:layout_height="62dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/registerButton"
-        android:textAlignment="center"
-        android:textSize="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/enter_email"
+    <ImageView
+        android:id="@+id/logoView"
+        android:layout_width="262dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/logo_british"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.344" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/automobilista_button"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="195dp"
         android:layout_height="57dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/roundbutton"
         android:text="@string/automobilista_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_title"
-        style="@style/Widget.AppCompat.Button.Colored"/>
+        app:layout_constraintTop_toBottomOf="@+id/logoView" />
 
     <Button
         android:id="@+id/distributore_button"
@@ -52,6 +51,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/automobilista_button"
         app:layout_constraintVertical_bias="0.077"
-        style="@style/Widget.AppCompat.Button.Colored"/>
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:background="@drawable/roundbutton"/>
 
 </android.support.constraint.ConstraintLayout>
