@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -46,6 +47,7 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     final Map<String, Object> users = new HashMap<>();
     private static RadioGroup radioButtonGroup;
+    //Firebase.AuthStateListener mAuthListener;
 
 
     private int mYear,mMonth,mDay;
@@ -103,7 +105,6 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
         };
 
         dateOfBirth.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 final Calendar c = Calendar.getInstance();
@@ -140,6 +141,22 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
             }
         });
 
+        /*mAuthListener = new Firebase.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull AuthData authData) {
+                FirebaseUser user = mAuth.getCurrentUser();
+                if (user != null){
+                    //User is signed in
+                    //NOTE: this Activity should get open when the user is not signed in, otherwise
+                    //the user will receive another verification email
+                    sendVerificationEmail();
+                } else {
+                    //User is signed out
+
+                }
+            }
+        };*/
+
     }
 
     //porta utente nella schermata principale
@@ -157,8 +174,33 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
         //updateUI(currentUser); per vedere se è loggato
     }
 
+    //crea l'account con l'ausilio di email e password
+    private void createAccount(final String email, final String password){
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        //se la registrazione è andata bene aggiorna il db con le informazioni di sing-in
+                        if (task.isSuccessful()) {
+                            Log.d("#", "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateDB(email, password);
+                            user.sendEmailVerification();
+                            //mAuthListener.notify();
+
+                            goToMainActivity();
+                        } else {//se la registrazione è fallita, mostra un messaggio
+                            Log.w("#", "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(RegisterAutomobilistaActivity.this, task.getException().getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
+
     //crea e aggiorna l'entità dell'utente
-    private void updateUI(String mail, String password){
+    private void updateDB(String mail, String password){
 
         String gender;
         String username = usernameValue.getText().toString();
@@ -177,28 +219,32 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
         ref.updateChildren(users);
     }
 
-    //crea l'account con l'ausilio di email e password
-    private void createAccount(final String email, final String password){
+    /*private void sendVerificationEmail(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        //se la registrazione è andata bene aggiorna il db con le informazioni di sing-in
-                        if (task.isSuccessful()) {
-                            Log.d("#", "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(email, password);
-                            goToMainActivity();
-                        } else {//se la registrazione è fallita, mostra un messaggio
-                            Log.w("#", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterAutomobilistaActivity.this, task.getException().getMessage(),
-                                    Toast.LENGTH_LONG).show();
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            //email sent
+
+                            //after email is sent just logout the user and finish this activity
+                            /*FirebaseAuth.getInstance().signOut();
+                            startActivity(new Intent(RegisterAutomobilistaActivity.this, getClass()));
+                            finish();*/
+                            /*Toast.makeText(RegisterAutomobilistaActivity.this, "EMAIL VERIFIED", Toast.LENGTH_LONG);
+                        } else {
+                            //email not sent, so display message and restart the activity or do whatever you wish to do
+
+                                //restart this acrivity
+                                overridePendingTransition(0, 0);
+                                finish();
+                                overridePendingTransition(0,0);
+                                startActivity(getIntent());
                         }
                     }
                 });
-    }
-
-
+    }*/
 }
 
