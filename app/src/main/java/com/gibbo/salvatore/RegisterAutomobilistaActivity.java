@@ -26,6 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
@@ -217,6 +219,24 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
 
         //aggiorno il DB
         ref.updateChildren(users);
+    }
+
+    public String[] getData(){
+        String gender;
+        int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
+        if (((RadioButton) findViewById(radioButtonID)).getText().equals("Uomo")){
+            gender="Uomo";
+        } else {
+            gender="Donna";
+        }
+
+        String[] data = new String[5];
+        String[] values = {usernameValue.getText().toString(), mailValue.getText().toString(), psswdValue.getText().toString(), dateOfBirth.getText().toString(), gender};
+
+        for (int i=0; i<data.length; i++){
+            data[i]= values[i];
+        }
+        return data;
     }
 
     /*private void sendVerificationEmail(){

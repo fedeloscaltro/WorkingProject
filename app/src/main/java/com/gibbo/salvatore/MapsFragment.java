@@ -2,6 +2,7 @@ package com.gibbo.salvatore;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -10,17 +11,21 @@ import android.location.LocationProvider;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -49,6 +54,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Executor;
@@ -64,6 +70,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     private LocationCallback mLocationCallback;
     public String positionFromRegisterDistributoreActivity;
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
+    String[] accountData;
 
     //private OnFragmentInteractionListener mListener;
     GoogleMap mGoogleMap;
@@ -113,7 +120,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_maps, container, false);
-
+        /*RegisterAutomobilistaActivity activity = (RegisterAutomobilistaActivity) getActivity();
+        accountData = activity.getData();*/
         return mView;
     }
 
@@ -153,9 +161,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         //gestisco azioni quando si clicca sulla mappa
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
-            public void onMapClick(LatLng latLng) {
+            public void onMapClick(final LatLng latLng) {
                 googleMap.clear(); //elimino i marker precedenti
-
                 String address, locality;
                 String city;
 
@@ -189,19 +196,30 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
                         Marker marker = googleMap.addMarker(markerOptions);
                         marker.showInfoWindow();
-                        /*Location meNow = null;
-                        try {
-                            meNow = ((LocationManager)(getContext().getSystemService(Context.LOCATION_SERVICE))).getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                        }
-                        catch (SecurityException e){
 
-                        }
-
-                        Util.calculationByDistance(new LatLng(meNow.getLatitude(), meNow.getLongitude()) ,
-                                latLng);*/
-                        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                         Util.pointToPosition(mGoogleMap, marker.getPosition());
-                        Util.launchNavigation(getContext(), latLng);
+                        //ins. richiesta
+
+                        AlertDialog.Builder builder;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                            builder = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog ); //android.R.style.Theme_Material_Dialog_Alert
+                        } else {
+                            builder = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog);
+                        }
+                        builder.setTitle("Navigazione").setMessage("Iniziare la navigazione verso "+address+"?")
+                                .setPositiveButton("Sì", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int i) {
+                                        Util.launchNavigation(getContext(), latLng);
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int i) {
+                                        dialog.cancel();
+                                    }
+                                }).setIcon(android.R.drawable.ic_dialog_map).show();
+
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

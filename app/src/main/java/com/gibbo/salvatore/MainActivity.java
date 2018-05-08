@@ -19,9 +19,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    String[] accountData = new String[5];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,15 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        RegisterAutomobilistaActivity activity = new RegisterAutomobilistaActivity();
+        accountData = activity.getData();
+
+        TextView accountUsername = (TextView) findViewById(R.id.accountUsername);
+        TextView accountMail = (TextView) findViewById(R.id.accountMail);
+        accountUsername.setText(accountData[0]);
+        accountMail.setText(accountData[1]);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
