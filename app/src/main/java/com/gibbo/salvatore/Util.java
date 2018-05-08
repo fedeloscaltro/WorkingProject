@@ -1,8 +1,10 @@
 package com.gibbo.salvatore;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -14,6 +16,18 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 public class Util {
+    public static void launchNavigation(Context context, LatLng destination){
+        /*String destinantionIntent = "https://www.google.com/maps/dir/?api=1&origin="+myPos.latitude+", "+myPos.longitude+
+                "&destination="+destination.latitude+", "+destination.longitude+"&travelmode=driving";*/
+        //oppure
+
+        String destinantionIntent2 = "google.navigation:q="+destination.latitude+", "+destination.longitude;
+
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(destinantionIntent2));
+        mapIntent.setPackage("com.google.android.apps.maps");
+        context.startActivity(mapIntent);
+    }
+
     public static void pointToPosition(GoogleMap mGoogleMap, LatLng position) {
         //Build camera position
         CameraPosition cameraPosition = new CameraPosition.Builder()

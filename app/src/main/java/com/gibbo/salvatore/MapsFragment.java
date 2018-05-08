@@ -201,6 +201,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                                 latLng);*/
                         //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                         Util.pointToPosition(mGoogleMap, marker.getPosition());
+                        Util.launchNavigation(getContext(), latLng);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
