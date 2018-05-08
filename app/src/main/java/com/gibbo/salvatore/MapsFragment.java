@@ -113,6 +113,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_maps, container, false);
+
         return mView;
     }
 
