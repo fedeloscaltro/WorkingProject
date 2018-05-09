@@ -70,7 +70,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     private LocationCallback mLocationCallback;
     public String positionFromRegisterDistributoreActivity;
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
-    String[] accountData;
+    //String[] accountData;
 
     //private OnFragmentInteractionListener mListener;
     GoogleMap mGoogleMap;

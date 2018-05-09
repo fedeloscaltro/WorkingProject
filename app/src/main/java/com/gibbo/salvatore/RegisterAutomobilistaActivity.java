@@ -221,7 +221,8 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
         ref.updateChildren(users);
     }
 
-    public String[] getData(){
+    public void getData(){
+
         String gender;
         int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
         if (((RadioButton) findViewById(radioButtonID)).getText().equals("Uomo")){
@@ -236,7 +237,28 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
         for (int i=0; i<data.length; i++){
             data[i]= values[i];
         }
-        return data;
+
+        Bundle bundle = new Bundle();
+        bundle.putString("dataAccount", data.toString());
+        // set Fragmentclass Arguments
+        MapsFragment fragobj = new MapsFragment();
+        fragobj.setArguments(bundle);
+
+        /*String gender;
+        int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
+        if (((RadioButton) findViewById(radioButtonID)).getText().equals("Uomo")){
+            gender="Uomo";
+        } else {
+            gender="Donna";
+        }
+
+        String[] data = new String[5];
+        String[] values = {usernameValue.getText().toString(), mailValue.getText().toString(), psswdValue.getText().toString(), dateOfBirth.getText().toString(), gender};
+
+        for (int i=0; i<data.length; i++){
+            data[i]= values[i];
+        }
+        */
     }
 
     /*private void sendVerificationEmail(){

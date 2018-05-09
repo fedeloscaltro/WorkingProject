@@ -3,6 +3,8 @@ package com.gibbo.salvatore;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -21,12 +23,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
+import java.util.BitSet;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    String[] accountData = new String[5];
+    //String[] accountData = new String[5];
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +42,19 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        RegisterAutomobilistaActivity activity = new RegisterAutomobilistaActivity();
-        accountData = activity.getData();
+        mAuth = FirebaseAuth.getInstance();
 
-        TextView accountUsername = (TextView) findViewById(R.id.accountUsername);
-        TextView accountMail = (TextView) findViewById(R.id.accountMail);
-        accountUsername.setText(accountData[0]);
-        accountMail.setText(accountData[1]);
+        RegisterAutomobilistaActivity activity = new RegisterAutomobilistaActivity();
+        //accountData = activity.getData();
+
+        TextView accountUsername = findViewById(R.id.nav_view).findViewById(R.id.accountUsername);
+        TextView accountMail = findViewById(R.id.nav_view).findViewById(R.id.accountMail);
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user!=null) {
+            accountUsername.setText(user.getDisplayName());
+            accountMail.setText(user.getEmail());
+        }
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

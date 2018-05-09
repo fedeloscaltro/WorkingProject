@@ -2,9 +2,11 @@ package com.gibbo.salvatore;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -82,4 +84,13 @@ public class Util {
 
         return Radius * c;
     }
+
+    /*class LoadImage extends AsyncTask<Object, Void, Bitmap> {
+
+
+        @Override
+        protected Bitmap doInBackground(Object... objects) {
+            return null;
+        }
+    }*/
 }
