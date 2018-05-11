@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
 
-        RegisterAutomobilistaActivity activity = new RegisterAutomobilistaActivity();
+        /*RegisterAutomobilistaActivity activity = new RegisterAutomobilistaActivity();
         //accountData = activity.getData();
 
         TextView accountUsername = findViewById(R.id.nav_view).findViewById(R.id.accountUsername);
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
         if (user!=null) {
             accountUsername.setText(user.getDisplayName());
             accountMail.setText(user.getEmail());
-        }
+        }*/
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

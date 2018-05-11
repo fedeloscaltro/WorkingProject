@@ -38,10 +38,6 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
     private Button addToDB;
     private EditText usernameValue, mailValue, psswdValue, dateOfBirth;
     private RadioButton maleBtnA, femaleBtnA;
-    private String keyName="Name";
-    private String keyMail="Email";
-    private String keyPsswd="Password";
-    private String keyAge="Age";
 
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -188,7 +184,12 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
                             Log.d("#", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateDB(email, password);
-                            user.sendEmailVerification();
+                            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Log.i("Registration", String.valueOf(task.isSuccessful()));
+                                }
+                            });
                             //mAuthListener.notify();
 
                             goToMainActivity();
@@ -221,7 +222,7 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
         ref.updateChildren(users);
     }
 
-    public void getData(){
+    /*public void getData(){
 
         String gender;
         int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
@@ -258,8 +259,8 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
         for (int i=0; i<data.length; i++){
             data[i]= values[i];
         }
-        */
-    }
+
+    }*/
 
     /*private void sendVerificationEmail(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
