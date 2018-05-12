@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity
 
     //String[] accountData = new String[5];
     private FirebaseAuth mAuth;
+    TextView textViewUsername;
+    TextView textViewEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,16 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View mHeaderView = navigationView.getHeaderView(0);
+
+        textViewUsername = (TextView) mHeaderView.findViewById(R.id.accountUsername);
+        textViewEmail= (TextView) mHeaderView.findViewById(R.id.accountMail);
+
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+
+        textViewUsername.setText(firebaseUser.getDisplayName());
+        textViewEmail.setText(firebaseUser.getEmail());
     }
 
     //per settare il titolo dell'Activity
@@ -148,7 +160,6 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Gestire gli elementi della navigation view cliccati qui.
