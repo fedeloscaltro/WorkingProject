@@ -1,10 +1,13 @@
 package com.gibbo.salvatore;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -26,6 +29,8 @@ public class RegisterActivity extends AppCompatActivity {
                 goToDistributore();
             }
         });
+        ConstraintLayout cL = (ConstraintLayout) findViewById(R.id.constraintRegister);
+        cL.setBackground(new ImageLoader(this).doInBackground());
     }
     private void goToAutomobilista(){
         final Intent intent = new Intent(this, RegisterAutomobilistaActivity.class);

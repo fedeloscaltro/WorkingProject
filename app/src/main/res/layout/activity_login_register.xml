@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/constraintLoginRegister"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gibbo.salvatore.LoginRegisterActivity"
-    android:background="@drawable/background_login">
+    tools:context="com.gibbo.salvatore.LoginRegisterActivity">
+    <!--android:background="@drawable/background_login"-->
 
     <ProgressBar
         android:id="@+id/progressBar"

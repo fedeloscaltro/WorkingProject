@@ -3,6 +3,7 @@ package com.gibbo.salvatore;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -69,6 +70,9 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
 
         //bottone che, una volta cliccato, aggiunge i dati sul db
         addToDB = (Button) findViewById(R.id.regAutomobilista);
+
+        ConstraintLayout cL = (ConstraintLayout) findViewById(R.id.constraintRegisterAutomobilista);
+        cL.setBackground(new ImageLoader(this).doInBackground());
 
         //gestione aggiunta utenti su db
         addToDB.setOnClickListener(new View.OnClickListener() {

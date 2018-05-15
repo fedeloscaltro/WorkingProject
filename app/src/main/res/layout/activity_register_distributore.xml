@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/constraintRegisterDistributore"
     android:layout_height="match_parent"
     tools:context="com.gibbo.salvatore.RegisterDistributoreActivity"
-    android:background="@drawable/background_login">
+    ><!--android:background="@drawable/background_login"-->
 
     <ImageView
         android:id="@+id/logoView"
@@ -134,7 +135,6 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="17dp"
                     android:text="Erogo "

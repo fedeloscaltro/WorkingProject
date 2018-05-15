@@ -26,6 +26,10 @@ public class User extends Object{
         this.carburanti = carburanti;
     }
 
+    public User(){
+
+    }
+
     public String getGender() { return gender; }
 
     public void setGender(String gender) { this.gender = gender; }

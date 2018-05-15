@@ -7,6 +7,7 @@ import android.location.Geocoder;
 import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -77,6 +78,10 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
 
         //bottone che, una volta cliccato, aggiunge i dati sul db
         addToDB = (Button) findViewById(R.id.regDistributore);
+
+
+        ConstraintLayout cL = (ConstraintLayout) findViewById(R.id.constraintRegisterDistributore);
+        cL.setBackground(new ImageLoader(this).doInBackground());
 
         //gestione aggiunta utenti su db
         addToDB.setOnClickListener(new View.OnClickListener() {

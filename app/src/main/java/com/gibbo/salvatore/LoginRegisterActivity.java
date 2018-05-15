@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -42,12 +43,15 @@ public class LoginRegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
 
         setContentView(R.layout.activity_login_register);
         final Button login = (Button) findViewById(R.id.login);
         final Button register = (Button) findViewById(R.id.signin);
-        
+
+        ConstraintLayout cL = (ConstraintLayout) findViewById(R.id.constraintLoginRegister);
+        cL.setBackground(new ImageLoader(this).doInBackground());
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -69,6 +73,8 @@ public class LoginRegisterActivity extends AppCompatActivity {
         statusTextView = findViewById(R.id.status);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
+
+
     }
 
     private void goToMainActivity(){

@@ -22,9 +22,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -101,12 +108,28 @@ public class MainActivity extends AppCompatActivity
 
         View mHeaderView = navigationView.getHeaderView(0);
 
+        //https://stackoverflow.com/questions/43023042/android-firebase-database-fetch-username-by-user-id
+
         textViewUsername = (TextView) mHeaderView.findViewById(R.id.accountUsername);
         textViewEmail= (TextView) mHeaderView.findViewById(R.id.accountMail);
 
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference ref = database.getReference("/drivers");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //dataSnapshot.getRef().getKey();
+                textViewUsername.setText(dataSnapshot.getChildren().toString());
+            }
 
-        textViewUsername.setText(firebaseUser.getDisplayName());
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        //textViewUsername.setText(firebaseUser.getUid());
         textViewEmail.setText(firebaseUser.getEmail());
     }
 
