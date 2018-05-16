@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.util.List;
 
@@ -78,7 +79,9 @@ public class LoginRegisterActivity extends AppCompatActivity {
     }
 
     private void goToMainActivity(){
+
             final Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("user_data", mAuth.getCurrentUser().getDisplayName());
             startActivity(intent);
             finish();
     }

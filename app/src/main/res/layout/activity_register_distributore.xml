@@ -136,9 +136,62 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="17dp"
+                    android:layout_marginTop="1dp"
                     android:text="Erogo "
                     android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/benzaPrice"
+                    android:layout_width="67dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/textView2"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="-17dp"
+                    android:inputType="numberDecimal" />
+
+                <EditText
+                    android:id="@+id/dieselPrice"
+                    android:layout_width="67dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/checkDiesel"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
+                    android:inputType="numberDecimal" />
+
+                <EditText
+                    android:id="@+id/gplPrice"
+                    android:layout_width="67dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/benzaPrice"
+                    android:layout_below="@+id/checkDiesel"
+                    android:layout_marginTop="-11dp"
+                    android:inputType="numberDecimal"
+                    tools:ignore="RtlCompat" />
+
+                <EditText
+                    android:id="@+id/metanoPrice"
+                    android:layout_width="67dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignStart="@+id/benzaPrice"
+                    android:layout_marginBottom="57dp"
+                    android:inputType="numberDecimal"
+                    tools:ignore="RtlCompat" />
+
+                <EditText
+                    android:id="@+id/elettricitàPrice"
+                    android:layout_width="67dp"
+                    android:layout_height="40dp"
+                    android:layout_alignStart="@+id/benzaPrice"
+                    android:layout_below="@+id/gplPrice"
+                    android:layout_marginTop="-2dp"
+                    android:inputType="numberDecimal"
+                    tools:ignore="RtlCompat" />
 
                 <CheckBox
                     android:id="@+id/checkBenza"
@@ -194,7 +247,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_alignParentStart="true"
                     android:background="@drawable/roundbutton"
                     android:text="@string/btnSignUp"
                     android:textColor="@android:color/white" />

@@ -164,6 +164,7 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
     //porta utente nella schermata principale
     private void goToMainActivity(){
         final Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("user_data", usernameValue.getText().toString());
         startActivity(intent);
         finish();
     }

@@ -31,6 +31,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -113,23 +114,14 @@ public class MainActivity extends AppCompatActivity
         textViewUsername = (TextView) mHeaderView.findViewById(R.id.accountUsername);
         textViewEmail= (TextView) mHeaderView.findViewById(R.id.accountMail);
 
-        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        final FirebaseUser firebaseUser = mAuth.getCurrentUser();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference ref = database.getReference("/drivers");
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //dataSnapshot.getRef().getKey();
-                textViewUsername.setText(dataSnapshot.getChildren().toString());
-            }
+        //final Query query = ref.orderByChild("name").equalTo(firebaseUser.getEmail());
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+        String s = getIntent().getStringExtra("user_data");
 
-            }
-        });
-
-        //textViewUsername.setText(firebaseUser.getUid());
+        textViewUsername.setText(s);
         textViewEmail.setText(firebaseUser.getEmail());
     }
 

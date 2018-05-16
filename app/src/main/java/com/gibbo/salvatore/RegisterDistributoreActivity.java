@@ -101,6 +101,7 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
     private void goToMainActivity(){
         queryDB(refAddr);
         final Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("user_data", usernameValue.getText().toString());
         startActivity(intent);
         finish();
     }
