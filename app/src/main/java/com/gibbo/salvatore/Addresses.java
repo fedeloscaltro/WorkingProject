@@ -1,10 +1,15 @@
 package com.gibbo.salvatore;
 
+import java.util.ArrayList;
+
 public class Addresses {
     public String address;
+    private ArrayList<String> prices, carburanti;
 
-    public Addresses(String address){
+    public Addresses(String address, ArrayList<String> prices, ArrayList<String> carburanti){
         this.address = address;
+        this.prices = prices;
+        this.carburanti = carburanti;
     }
 
     public String getAddress() {
@@ -13,5 +18,21 @@ public class Addresses {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public ArrayList<String> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(ArrayList<String> prices) {
+        this.prices = prices;
+    }
+
+    public ArrayList<String> getCarburanti() {
+        return carburanti;
+    }
+
+    public void setCarburanti(ArrayList<String> carburanti) {
+        this.carburanti = carburanti;
     }
 }

@@ -174,7 +174,7 @@
                     tools:ignore="RtlCompat" />
 
                 <EditText
-                    android:id="@+id/metanoPrice"
+                    android:id="@+id/elettricitàPrice"
                     android:layout_width="67dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -184,14 +184,15 @@
                     tools:ignore="RtlCompat" />
 
                 <EditText
-                    android:id="@+id/elettricitàPrice"
+                    android:id="@+id/metanoPrice"
                     android:layout_width="67dp"
                     android:layout_height="40dp"
                     android:layout_alignStart="@+id/benzaPrice"
                     android:layout_below="@+id/gplPrice"
                     android:layout_marginTop="-2dp"
                     android:inputType="numberDecimal"
-                    tools:ignore="RtlCompat" />
+                    tools:ignore="RtlCompat"
+                    />
 
                 <CheckBox
                     android:id="@+id/checkBenza"
@@ -238,7 +239,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@+id/checkBenza"
                     android:layout_below="@+id/checkMetano"
-                    android:text="Elettricità" />
+                    android:text="Elettricità"
+                    android:layout_alignLeft="@+id/checkBenza" />
 
 
                 <Button

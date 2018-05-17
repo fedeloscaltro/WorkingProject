@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -68,7 +69,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest mLocationRequest;
     private LocationCallback mLocationCallback;
-    public String positionFromRegisterDistributoreActivity;
+    public String positionFromRegisterDistributoreActivity, addressDispenser;
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
     //String[] accountData;
 
@@ -84,6 +85,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            addressDispenser = getArguments().getString("indirizzo");
+        }
         //positionFromRegisterDistributoreActivity = getArguments().getString("indirizzo");
         if (checkFinePermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_REQUEST_ACCESS_FINE_LOCATION);

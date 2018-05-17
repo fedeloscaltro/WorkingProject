@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class User extends Object{
     public String name, email, psswd, age, gender, sede;
-    public ArrayList<String> carburanti;
 
     public User(String name, String email, String psswd, String age, String gender) {
         this.gender = gender;
@@ -18,12 +17,11 @@ public class User extends Object{
         this.age = age;
     }
 
-    public User(String name, String email, String password, String sede, ArrayList<String> carburanti){
+    public User(String name, String email, String password, String sede){
         this.name = name;
         this.email = email;
         this.psswd = password;
         this.sede = sede;
-        this.carburanti = carburanti;
     }
 
     public User(){
@@ -68,7 +66,4 @@ public class User extends Object{
 
     public void setSede(String sede) { this.sede = sede; }
 
-    public ArrayList<String> getCarburanti() { return carburanti; }
-
-    public void setCarburanti(ArrayList<String> carburanti) { this.carburanti = carburanti; }
 }

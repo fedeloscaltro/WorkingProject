@@ -43,11 +43,8 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
 
     private static final String TAG = RegisterDistributoreActivity.class.getSimpleName();
     private Button addToDB;
-    private EditText usernameValue, mailValue, psswdValue, sedeValue;
+    private EditText usernameValue, mailValue, psswdValue, sedeValue, benzaPrice, dieselPrice, gplPrice, metanoPrice, elettricitàPrice;
     private CheckBox checkBenzaValue, checkDieselValue, checkGPLValue, checkMetanoValue, checkElettricoValue;
-    /*private String keyName="Name";
-    private String keyMail="Email";
-    private String keyPsswd="Password";*/
 
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -56,6 +53,7 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     final Map<String, Object> users = new HashMap<>();
     final Map<String, Object> addresses = new HashMap<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +73,16 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
         checkGPLValue = findViewById(R.id.checkGPL);
         checkMetanoValue = findViewById(R.id.checkMetano);
 
+        benzaPrice = findViewById(R.id.benzaPrice);
+        dieselPrice = findViewById(R.id.dieselPrice);
+        gplPrice = findViewById(R.id.gplPrice);
+        metanoPrice = findViewById(R.id.metanoPrice);
+        elettricitàPrice = findViewById(R.id.elettricitàPrice);
+        benzaPrice.setEnabled(false);
+        dieselPrice.setEnabled(false);
+        gplPrice.setEnabled(false);
+        metanoPrice.setEnabled(false);
+        elettricitàPrice.setEnabled(false);
 
         //bottone che, una volta cliccato, aggiunge i dati sul db
         addToDB = (Button) findViewById(R.id.regDistributore);
@@ -95,6 +103,61 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
                 createAccount(mail, psswd);
             }
         });
+
+        checkBenzaValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkBenzaValue.isChecked()){
+                    benzaPrice.setEnabled(true);
+                } else {
+                    benzaPrice.setEnabled(false);
+                }
+            }
+        });
+
+        checkDieselValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkDieselValue.isChecked()){
+                    dieselPrice.setEnabled(true);
+                } else {
+                    dieselPrice.setEnabled(false);
+                }
+            }
+        });
+
+        checkMetanoValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkMetanoValue.isChecked()){
+                    metanoPrice.setEnabled(true);
+                } else {
+                    metanoPrice.setEnabled(false);
+                }
+            }
+        });
+
+        checkGPLValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkGPLValue.isChecked()){
+                    gplPrice.setEnabled(true);
+                } else {
+                    gplPrice.setEnabled(false);
+                }
+            }
+        });
+
+        checkElettricoValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkElettricoValue.isChecked()){
+                    elettricitàPrice.setEnabled(true);
+                } else {
+                    elettricitàPrice.setEnabled(false);
+                }
+            }
+        });
     }
 
     //porta utente nella schermata principale
@@ -102,6 +165,11 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
         queryDB(refAddr);
         final Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("user_data", usernameValue.getText().toString());
+        Bundle bundle = new Bundle();
+        bundle.putString("indirizzo", sedeValue.getText().toString());
+        // set MyFragment Arguments
+        MapsFragment myObj = new MapsFragment();
+        myObj.setArguments(bundle);
         startActivity(intent);
         finish();
     }
@@ -120,25 +188,32 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
         String username = usernameValue.getText().toString();
         String sede = sedeValue.getText().toString();
         ArrayList<String> carburanti = new ArrayList<String>();
+        ArrayList<String> prezzi = new ArrayList<>();
+
         if(checkBenzaValue.isChecked()){
             carburanti.add(checkBenzaValue.getText().toString());
+            prezzi.add(benzaPrice.getText().toString());
         }
         if (checkMetanoValue.isChecked()){
             carburanti.add(checkMetanoValue.getText().toString());
+            prezzi.add(metanoPrice.getText().toString());
         }
         if (checkGPLValue.isChecked()){
             carburanti.add(checkGPLValue.getText().toString());
+            prezzi.add(gplPrice.getText().toString());
         }
         if (checkElettricoValue.isChecked()){
             carburanti.add(checkElettricoValue.getText().toString());
+            prezzi.add(elettricitàPrice.getText().toString());
         }
         if (checkDieselValue.isChecked()){
             carburanti.add(checkDieselValue.getText().toString());
+            prezzi.add(dieselPrice.getText().toString());
         }
 
         //inserisco i dati nella mappa Hash
-        users.put(username, new User(username, mail, password, sede, carburanti));
-        addresses.put(username, new Addresses(sede));
+        users.put(username, new User(username, mail, password, sede));
+        addresses.put(username, new Addresses(sede, carburanti, prezzi));
 
         //aggiorno il DB
         ref.updateChildren(users);
