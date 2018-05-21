@@ -1,23 +1,21 @@
 package com.gibbo.salvatore;
 
-import java.util.ArrayList;
-
 /**
  * Created by federico.scaltriti on 25/02/2018.
  */
 
 public class User extends Object{
-    public String name, email, psswd, age, gender, sede;
+    private String name, email, psswd, birthday, gender, sede;
 
-    public User(String name, String email, String psswd, String age, String gender) {
+    User(String name, String email, String psswd, String birthday, String gender) {
         this.gender = gender;
         this.name = name;
         this.email = email;
         this.psswd = psswd;
-        this.age = age;
+        this.birthday = birthday;
     }
 
-    public User(String name, String email, String password, String sede){
+    User(String name, String email, String password, String sede){
         this.name = name;
         this.email = email;
         this.psswd = password;
@@ -54,12 +52,12 @@ public class User extends Object{
         this.psswd = psswd;
     }
 
-    public String getAge() {
-        return age;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setBirthday(String age) {
+        this.birthday = age;
     }
 
     public String getSede() { return sede; }

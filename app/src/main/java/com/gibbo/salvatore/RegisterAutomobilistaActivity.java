@@ -212,7 +212,7 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
 
         String gender;
         String username = usernameValue.getText().toString();
-        String age = dateOfBirth.getText().toString();
+        String birthday = dateOfBirth.getText().toString();
         int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
         if (((RadioButton) findViewById(radioButtonID)).getText().equals("Uomo")){
             gender="Uomo";
@@ -221,7 +221,7 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
         }
 
         //inserisco i dati nella mappa Hash
-        users.put(username, new User(username, mail, password, age, gender));
+        users.put(username, new User(username, mail, password, birthday, gender));
 
         //aggiorno il DB
         ref.updateChildren(users);
