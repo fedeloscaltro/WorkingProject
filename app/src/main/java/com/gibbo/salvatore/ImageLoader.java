@@ -21,6 +21,6 @@ public class ImageLoader extends AsyncTask<Void, Integer, Drawable> {
 
     private void convetDrawableToBitmap(){
         Bitmap backImage = BitmapFactory.decodeResource(context.getResources(),
-                R.mipmap.background_login);
+                R.drawable.background_login);
     }
 }

@@ -116,4 +116,21 @@
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="pref_title_display_fuel">Seleziona il carburante preferito</string>
+    <string-array name="pref_dispenser_fuel">
+        <item>Benzina</item>
+        <item>GPL</item>
+        <item>Diesel</item>
+        <item>Metano</item>
+        <item>Elettricità</item>
+    </string-array>
+    <string-array name="pref_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+        <item>-2</item>
+        <item>-3</item>
+    </string-array>
+
 </resources>

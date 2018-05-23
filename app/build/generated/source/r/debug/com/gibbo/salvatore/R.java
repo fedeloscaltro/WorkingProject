@@ -33,10 +33,12 @@ public final class R {
     public static final int list_preference_entries=0x7f030000;
     public static final int list_preference_entry_values=0x7f030001;
     public static final int multi_select_list_preference_default_value=0x7f030002;
-    public static final int pref_example_list_titles=0x7f030003;
-    public static final int pref_example_list_values=0x7f030004;
-    public static final int pref_sync_frequency_titles=0x7f030005;
-    public static final int pref_sync_frequency_values=0x7f030006;
+    public static final int pref_dispenser_fuel=0x7f030003;
+    public static final int pref_example_list_titles=0x7f030004;
+    public static final int pref_example_list_values=0x7f030005;
+    public static final int pref_list_values=0x7f030006;
+    public static final int pref_sync_frequency_titles=0x7f030007;
+    public static final int pref_sync_frequency_values=0x7f030008;
   }
   public static final class attr {
     /**
@@ -4393,8 +4395,7 @@ public final class R {
     public static final int main=0x7f0c0001;
   }
   public static final class mipmap {
-    public static final int background_login=0x7f0d0000;
-    public static final int ic_launcher=0x7f0d0001;
+    public static final int ic_launcher=0x7f0d0000;
   }
   public static final class string {
     public static final int abc_action_bar_home_description=0x7f0e0000;
@@ -4497,31 +4498,32 @@ public final class R {
     public static final int pref_header_notifications=0x7f0e0061;
     public static final int pref_ringtone_silent=0x7f0e0062;
     public static final int pref_title_add_friends_to_messages=0x7f0e0063;
-    public static final int pref_title_display_name=0x7f0e0064;
-    public static final int pref_title_new_message_notifications=0x7f0e0065;
-    public static final int pref_title_ringtone=0x7f0e0066;
-    public static final int pref_title_social_recommendations=0x7f0e0067;
-    public static final int pref_title_sync_frequency=0x7f0e0068;
-    public static final int pref_title_system_sync_settings=0x7f0e0069;
-    public static final int pref_title_vibrate=0x7f0e006a;
-    public static final int project_id=0x7f0e006b;
-    public static final int prompt_email=0x7f0e006c;
-    public static final int prompt_password=0x7f0e006d;
-    public static final int registerButton=0x7f0e006e;
-    public static final int s1=0x7f0e006f;
-    public static final int s2=0x7f0e0070;
-    public static final int s3=0x7f0e0071;
-    public static final int s4=0x7f0e0072;
-    public static final int s5=0x7f0e0073;
-    public static final int s6=0x7f0e0074;
-    public static final int s7=0x7f0e0075;
-    public static final int search_menu_title=0x7f0e0076;
-    public static final int signInText=0x7f0e0077;
-    public static final int status_bar_notification_info_overflow=0x7f0e0078;
-    public static final int title_activity_login=0x7f0e0079;
-    public static final int title_activity_main=0x7f0e007a;
-    public static final int title_activity_maps=0x7f0e007b;
-    public static final int title_activity_settings_automobilista=0x7f0e007c;
+    public static final int pref_title_display_fuel=0x7f0e0064;
+    public static final int pref_title_display_name=0x7f0e0065;
+    public static final int pref_title_new_message_notifications=0x7f0e0066;
+    public static final int pref_title_ringtone=0x7f0e0067;
+    public static final int pref_title_social_recommendations=0x7f0e0068;
+    public static final int pref_title_sync_frequency=0x7f0e0069;
+    public static final int pref_title_system_sync_settings=0x7f0e006a;
+    public static final int pref_title_vibrate=0x7f0e006b;
+    public static final int project_id=0x7f0e006c;
+    public static final int prompt_email=0x7f0e006d;
+    public static final int prompt_password=0x7f0e006e;
+    public static final int registerButton=0x7f0e006f;
+    public static final int s1=0x7f0e0070;
+    public static final int s2=0x7f0e0071;
+    public static final int s3=0x7f0e0072;
+    public static final int s4=0x7f0e0073;
+    public static final int s5=0x7f0e0074;
+    public static final int s6=0x7f0e0075;
+    public static final int s7=0x7f0e0076;
+    public static final int search_menu_title=0x7f0e0077;
+    public static final int signInText=0x7f0e0078;
+    public static final int status_bar_notification_info_overflow=0x7f0e0079;
+    public static final int title_activity_login=0x7f0e007a;
+    public static final int title_activity_main=0x7f0e007b;
+    public static final int title_activity_maps=0x7f0e007c;
+    public static final int title_activity_settings_automobilista=0x7f0e007d;
   }
   public static final class style {
     public static final int AlertDialog_AppCompat=0x7f0f0000;
