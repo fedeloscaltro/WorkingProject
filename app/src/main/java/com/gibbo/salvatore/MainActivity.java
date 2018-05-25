@@ -65,7 +65,9 @@ public class MainActivity extends AppCompatActivity
             accountUsername.setText(user.getDisplayName());
             accountMail.setText(user.getEmail());
         }*/
-
+        /*String dispenserAdded = getIntent().getStringExtra("add_dispenser");
+        Toast.makeText(MainActivity.this, dispenserAdded,
+                    Toast.LENGTH_LONG).show();*/
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

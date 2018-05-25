@@ -3,6 +3,7 @@ package com.gibbo.salvatore;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -109,7 +110,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                     mGoogleMap.addMarker(markerOptions);
                     //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                 }
-            };
+            }
         };
     }
 
@@ -167,8 +168,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             @Override
             public void onMapClick(final LatLng latLng) {
                 googleMap.clear(); //elimino i marker precedenti
-                String address, locality;
-                String city;
+                String address, city;
 
                 Geocoder geocoder;
                 List<Address> addresses;
@@ -293,6 +293,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         /*if (mRequestingLocationUpdates) {
             startLocationUpdates();
         }*/
+        /*MainActivity mainActivity = new MainActivity();
+        if (mainActivity.getIntent().getStringExtra("add_dispenser") != null) {
+            String dispenserData = mainActivity.getIntent().getStringExtra("add_dispenser");
+            Toast.makeText(getContext(), dispenserData,
+                    Toast.LENGTH_LONG).show();
+        }*/
+        String A = this.getActivity().getIntent().getStringExtra("add_dispenser");
+        Toast.makeText(getContext() , A, Toast.LENGTH_SHORT).show();
     }
 
     private void startLocationUpdates() {

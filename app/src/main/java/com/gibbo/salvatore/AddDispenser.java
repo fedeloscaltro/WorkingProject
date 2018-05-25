@@ -11,6 +11,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class AddDispenser extends AppCompatActivity {
 
     EditText indirizzo;
@@ -20,6 +29,11 @@ public class AddDispenser extends AppCompatActivity {
 
     private EditText benzaPrice, dieselPrice, gplPrice, metanoPrice, elettricitàPrice;
     private CheckBox checkBenzaValue, checkDieselValue, checkGPLValue, checkMetanoValue, checkElettricoValue;
+
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    final DatabaseReference ref = database.getReference("/addresses");
+
+    final Map<String, Object> addresses = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +56,9 @@ public class AddDispenser extends AppCompatActivity {
         gplPrice.setEnabled(false);
         metanoPrice.setEnabled(false);
         elettricitàPrice.setEnabled(false);
+
+        indirizzo = findViewById(R.id.indirizzo);
+
 
         //get the spinner from the xml.
         final Spinner dropdown = (Spinner) findViewById(R.id.compagnia);
@@ -128,6 +145,20 @@ public class AddDispenser extends AppCompatActivity {
 
     private void goToMainActivity(){
         final Intent intent = new Intent(this, MainActivity.class);
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        String username = user.getEmail();
+        String indirizzoValue = indirizzo.getText().toString();
+        ArrayList<String> carburanti = new ArrayList<String>();
+        ArrayList<String> prezzi = new ArrayList<>();
+
+        addresses.put(username, new Addresses(indirizzoValue, carburanti, prezzi));
+        Addresses a = new Addresses(indirizzoValue, carburanti, prezzi);
+        ref.updateChildren(addresses);
+
+        intent.putExtra("add_dispenser", a.getAddress());
         startActivity(intent);
     }
 
