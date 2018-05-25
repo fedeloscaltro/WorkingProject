@@ -1,19 +1,23 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference
+    <!--<SwitchPreference
         android:defaultValue="true"
         android:key="example_switch"
         android:summary="@string/pref_description_social_recommendations"
-        android:title="@string/pref_title_social_recommendations" />
+        android:title="@string/pref_title_social_recommendations" />-->
 
     <!-- NOTE: EditTextPreference accepts EditText attributes. -->
     <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
-    <ListPreference
-        android:defaultValue="-1"
-        android:entries="@array/list_preference_entries"
-        android:entryValues="@array/pref_list_values"
-        android:key="pref_fuel"
-        android:title="@string/pref_title_display_fuel"/>
+    <PreferenceCategory
+        android:title="Carburante preferito"
+        android:key="pref_caruburante">
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/list_preference_entries"
+            android:entryValues="@array/pref_list_values"
+            android:key="pref_fuel"
+            android:title="@string/pref_title_display_fuel"/>
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:title="Fascia di prezzo"
@@ -21,10 +25,17 @@
         <EditTextPreference
             android:title="Prezzo minimo"
             android:key="pref_prezzo_minimo"
+            android:numeric="decimal"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="Prezzo minimo"
             />
         <EditTextPreference
             android:title="Prezzo massimo"
             android:key="pref_prezzo_massimo"
+            android:numeric="decimal"
+            android:summary="Prezzo massimo"
             />
     </PreferenceCategory>
 
@@ -34,6 +45,8 @@
         <EditTextPreference
             android:title="Distanza massima"
             android:key="pref_distanza_massima"
+            android:numeric="decimal"
+            android:summary="Distanza massima"
             />
     </PreferenceCategory>
 

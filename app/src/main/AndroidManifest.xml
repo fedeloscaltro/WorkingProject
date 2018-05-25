@@ -21,6 +21,8 @@
         android:required="true" />
 
     <application
+        android:hardwareAccelerated="true"
+        android:largeHeap="true"
         android:name=".Salvatore"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

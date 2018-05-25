@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -17,10 +18,30 @@ public class AddDispenser extends AppCompatActivity {
     String defaultCompagnia = "Seleziona una compagnia";
     String indirizzoValue = "";
 
+    private EditText benzaPrice, dieselPrice, gplPrice, metanoPrice, elettricitàPrice;
+    private CheckBox checkBenzaValue, checkDieselValue, checkGPLValue, checkMetanoValue, checkElettricoValue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_dispenser);
+
+        checkBenzaValue = findViewById(R.id.checkBenza);
+        checkDieselValue = findViewById(R.id.checkDiesel);
+        checkElettricoValue = findViewById(R.id.checkElettrico);
+        checkGPLValue = findViewById(R.id.checkGPL);
+        checkMetanoValue = findViewById(R.id.checkMetano);
+
+        benzaPrice = findViewById(R.id.benzaPrice);
+        dieselPrice = findViewById(R.id.dieselPrice);
+        gplPrice = findViewById(R.id.gplPrice);
+        metanoPrice = findViewById(R.id.metanoPrice);
+        elettricitàPrice = findViewById(R.id.elettricitàPrice);
+        benzaPrice.setEnabled(false);
+        dieselPrice.setEnabled(false);
+        gplPrice.setEnabled(false);
+        metanoPrice.setEnabled(false);
+        elettricitàPrice.setEnabled(false);
 
         //get the spinner from the xml.
         final Spinner dropdown = (Spinner) findViewById(R.id.compagnia);
@@ -45,6 +66,62 @@ public class AddDispenser extends AppCompatActivity {
                 String compagniaValue = dropdown.getSelectedItem().toString();
 
                 checkValidityFields(indirizzoValue, compagniaValue);
+            }
+        });
+
+
+        checkBenzaValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkBenzaValue.isChecked()){
+                    benzaPrice.setEnabled(true);
+                } else {
+                    benzaPrice.setEnabled(false);
+                }
+            }
+        });
+
+        checkDieselValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkDieselValue.isChecked()){
+                    dieselPrice.setEnabled(true);
+                } else {
+                    dieselPrice.setEnabled(false);
+                }
+            }
+        });
+
+        checkMetanoValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkMetanoValue.isChecked()){
+                    metanoPrice.setEnabled(true);
+                } else {
+                    metanoPrice.setEnabled(false);
+                }
+            }
+        });
+
+        checkGPLValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkGPLValue.isChecked()){
+                    gplPrice.setEnabled(true);
+                } else {
+                    gplPrice.setEnabled(false);
+                }
+            }
+        });
+
+        checkElettricoValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkElettricoValue.isChecked()){
+                    elettricitàPrice.setEnabled(true);
+                } else {
+                    elettricitàPrice.setEnabled(false);
+                }
             }
         });
     }

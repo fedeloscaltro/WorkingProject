@@ -179,13 +179,13 @@ public final class R {
         public static final int common_signin_button_text = 0x7f0e003a;
         public static final int common_signin_button_text_long = 0x7f0e003b;
         public static final int fcm_fallback_notification_channel_label = 0x7f0e0043;
-        public static final int s1 = 0x7f0e0070;
-        public static final int s2 = 0x7f0e0071;
-        public static final int s3 = 0x7f0e0072;
-        public static final int s4 = 0x7f0e0073;
-        public static final int s5 = 0x7f0e0074;
-        public static final int s6 = 0x7f0e0075;
-        public static final int s7 = 0x7f0e0076;
+        public static final int s1 = 0x7f0e006e;
+        public static final int s2 = 0x7f0e006f;
+        public static final int s3 = 0x7f0e0070;
+        public static final int s4 = 0x7f0e0071;
+        public static final int s5 = 0x7f0e0072;
+        public static final int s6 = 0x7f0e0073;
+        public static final int s7 = 0x7f0e0074;
     }
     public static final class style {
         public static final int Theme_AppInvite_Preview = 0x7f0f0130;

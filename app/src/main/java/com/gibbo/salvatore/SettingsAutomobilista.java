@@ -177,7 +177,9 @@ public class SettingsAutomobilista extends AppCompatPreferenceActivity {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            //bindPreferenceSummaryToValue(findPreference("example_text"));
+            bindPreferenceSummaryToValue(findPreference("pref_prezzo_minimo"));
+            bindPreferenceSummaryToValue(findPreference("pref_prezzo_massimo"));
+            bindPreferenceSummaryToValue(findPreference("pref_distanza_massima"));
             bindPreferenceSummaryToValue(findPreference("pref_fuel"));
         }
 
