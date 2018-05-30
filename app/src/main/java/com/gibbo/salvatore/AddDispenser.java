@@ -198,7 +198,8 @@ public class AddDispenser extends AppCompatActivity {
         ref.updateChildren(addresses);
 
         String[] array = {username, indirizzoValue};
-        intent.putExtra("add_dispenser", array);
+        //intent.putExtra("add_dispenser", array);
+        intent.putExtra("add_dispenser", indirizzoValue);
         startActivity(intent);
     }
 

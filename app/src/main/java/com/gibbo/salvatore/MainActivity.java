@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,6 +28,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,8 +41,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,6 +54,7 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     TextView textViewUsername;
     TextView textViewEmail;
+    GoogleMap mGoogleMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +76,12 @@ public class MainActivity extends AppCompatActivity
             accountUsername.setText(user.getDisplayName());
             accountMail.setText(user.getEmail());
         }*/
-        /*String dispenserAdded = getIntent().getStringExtra("add_dispenser");
-        Toast.makeText(MainActivity.this, dispenserAdded,
+        String dispenserAdded = getIntent().getStringExtra("add_dispenser");
+        if (dispenserAdded!=null) {
+            /*Toast.makeText(MainActivity.this, dispenserAdded,
                     Toast.LENGTH_LONG).show();*/
+            geoLocate(dispenserAdded);
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -191,5 +205,66 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void geoLocate(String dispenserAdded){
+        Log.d("geoLocate: ", "geolocating");
+
+        Geocoder geocoder = new Geocoder(MainActivity.this);
+        List<Address> list = new ArrayList<>();
+
+        try{
+            list = geocoder.getFromLocationName(dispenserAdded, 1);
+        } catch (IOException e){
+            Log.e("#", "geolocate: IOException "+e.getMessage());
+        }
+
+        if (list.size()> 0){
+            Address address = list.get(0);
+
+            Toast.makeText(MainActivity.this, "Location found: "+ address, Toast.LENGTH_LONG).show();
+
+            int DEFAULT_ZOOM = 17;
+
+            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM);
+        }
+    }
+
+    private void moveCamera(LatLng latLng, int zoom){
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+
+        Geocoder geocoder;
+        String address, city;
+        List<Address> addresses;
+
+        geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
+
+        try{
+        //seleziono la località da far apparire sopra il marker
+            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            address = "";
+            city = addresses.get(0).getLocality();
+            if (addresses.size() > 0) {
+                Address addr = addresses.get(0);
+                if (addr.getThoroughfare() != null && addr.getThoroughfare() != "") {
+                    address += addr.getThoroughfare() + " ";
+                }
+                if (addr.getSubThoroughfare() != null && addr.getSubThoroughfare() != "") {
+                    address += addr.getSubThoroughfare() + ", ";
+                }
+                if (city != null && city != "") {
+                    address += city;
+                } else {
+                    address += addr.getCountryName();
+                }
+
+                MarkerOptions markerOptions = new MarkerOptions()
+                        .title(address)
+                        .position(latLng);
+                mGoogleMap.addMarker(markerOptions);
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }
