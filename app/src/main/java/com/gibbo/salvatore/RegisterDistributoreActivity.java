@@ -160,26 +160,37 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
         });
     }
 
-    //porta utente nella schermata principale
-    private void goToMainActivity(){
-        queryDB(refAddr);
-        final Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("user_data", usernameValue.getText().toString());
-        Bundle bundle = new Bundle();
-        bundle.putString("indirizzo", sedeValue.getText().toString());
-        // set MyFragment Arguments
-        MapsFragment myObj = new MapsFragment();
-        myObj.setArguments(bundle);
-        startActivity(intent);
-        finish();
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //updateUI(currentUser); per vedere se è loggato
+    }
+
+
+
+    //crea l'account con l'ausilio di email e password
+    private void createAccount(final String email, final String password){
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        //se la registrazione è andata bene aggiorna il db con le informazioni di sing-in
+                        if (task.isSuccessful()) {
+                            Log.d("#", "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(email, password);
+                            getLocationFromAddress(RegisterDistributoreActivity.this, sedeValue.getText().toString());
+                            goToMainActivity();
+                        } else {//se la registrazione è fallita, mostra un messaggio
+                            Log.w("#", "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(RegisterDistributoreActivity.this, task.getException().getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 
     //crea e aggiorna l'entità dell'utente
@@ -220,29 +231,6 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
         refAddr.updateChildren(addresses);
     }
 
-    //crea l'account con l'ausilio di email e password
-    private void createAccount(final String email, final String password){
-
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        //se la registrazione è andata bene aggiorna il db con le informazioni di sing-in
-                        if (task.isSuccessful()) {
-                            Log.d("#", "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(email, password);
-                            getLocationFromAddress(RegisterDistributoreActivity.this, sedeValue.getText().toString());
-                            goToMainActivity();
-                        } else {//se la registrazione è fallita, mostra un messaggio
-                            Log.w("#", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterDistributoreActivity.this, task.getException().getMessage(),
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-    }
-
     @Nullable
     private LatLng getLocationFromAddress(Context context, String strAddress){
         Geocoder coder= new Geocoder(context);
@@ -263,6 +251,20 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return position;
+    }
+
+    //porta utente nella schermata principale
+    private void goToMainActivity(){
+        queryDB(refAddr);
+        final Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("user_data", usernameValue.getText().toString());
+        Bundle bundle = new Bundle();
+        bundle.putString("indirizzo", sedeValue.getText().toString());
+        // set MyFragment Arguments
+        MapsFragment myObj = new MapsFragment();
+        myObj.setArguments(bundle);
+        startActivity(intent);
+        finish();
     }
 
     public void queryDB(DatabaseReference refAddresses){

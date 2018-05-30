@@ -31,9 +31,12 @@ public class AddDispenser extends AppCompatActivity {
     private CheckBox checkBenzaValue, checkDieselValue, checkGPLValue, checkMetanoValue, checkElettricoValue;
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    final DatabaseReference ref = database.getReference("/addresses");
+    final DatabaseReference ref = database.getReference("addresses");
 
     final Map<String, Object> addresses = new HashMap<>();
+
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = mAuth.getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,8 @@ public class AddDispenser extends AppCompatActivity {
 
         indirizzo = findViewById(R.id.indirizzo);
 
+        //Toast.makeText(AddDispenser.this, user.getEmail(), Toast.LENGTH_LONG).show();
+
 
         //get the spinner from the xml.
         final Spinner dropdown = (Spinner) findViewById(R.id.compagnia);
@@ -72,7 +77,6 @@ public class AddDispenser extends AppCompatActivity {
         //set the spinners adapter to the previously created one.
         dropdown.setAdapter(adapter);
 
-        indirizzo = findViewById(R.id.indirizzo);
 
         addDispenserButton = (Button) findViewById(R.id.addDispenserButton);
 
@@ -143,25 +147,6 @@ public class AddDispenser extends AppCompatActivity {
         });
     }
 
-    private void goToMainActivity(){
-        final Intent intent = new Intent(this, MainActivity.class);
-
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-
-        String username = user.getEmail();
-        String indirizzoValue = indirizzo.getText().toString();
-        ArrayList<String> carburanti = new ArrayList<String>();
-        ArrayList<String> prezzi = new ArrayList<>();
-
-        addresses.put(username, new Addresses(indirizzoValue, carburanti, prezzi));
-        Addresses a = new Addresses(indirizzoValue, carburanti, prezzi);
-        ref.updateChildren(addresses);
-
-        intent.putExtra("add_dispenser", a.getAddress());
-        startActivity(intent);
-    }
-
     private void checkValidityFields(String ragioneSocialeValue, String compagniaValue){
 
         if (ragioneSocialeValue.equals("") && compagniaValue.equals(defaultCompagnia)){
@@ -174,4 +159,47 @@ public class AddDispenser extends AppCompatActivity {
             goToMainActivity();
         }
     }
+
+    private void goToMainActivity(){
+        final Intent intent = new Intent(this, MainActivity.class);
+
+        String username = user.getEmail();
+        int i =username.indexOf(".");
+        String substring = username.substring(i, username.length());
+        username = username.replace(substring, "");
+
+        String indirizzoValue = indirizzo.getText().toString();
+        ArrayList<String> carburanti = new ArrayList<String>();
+        ArrayList<String> prezzi = new ArrayList<>();
+
+        if(checkBenzaValue.isChecked()){
+            carburanti.add(checkBenzaValue.getText().toString());
+            prezzi.add(benzaPrice.getText().toString());
+        }
+        if (checkMetanoValue.isChecked()){
+            carburanti.add(checkMetanoValue.getText().toString());
+            prezzi.add(metanoPrice.getText().toString());
+        }
+        if (checkGPLValue.isChecked()){
+            carburanti.add(checkGPLValue.getText().toString());
+            prezzi.add(gplPrice.getText().toString());
+        }
+        if (checkElettricoValue.isChecked()){
+            carburanti.add(checkElettricoValue.getText().toString());
+            prezzi.add(elettricitàPrice.getText().toString());
+        }
+        if (checkDieselValue.isChecked()){
+            carburanti.add(checkDieselValue.getText().toString());
+            prezzi.add(dieselPrice.getText().toString());
+        }
+
+        addresses.put(username, new Addresses(indirizzoValue, carburanti, prezzi));
+        Addresses a = new Addresses(indirizzoValue, carburanti, prezzi);
+        ref.updateChildren(addresses);
+
+        String[] array = {username, indirizzoValue};
+        intent.putExtra("add_dispenser", array);
+        startActivity(intent);
+    }
+
 }

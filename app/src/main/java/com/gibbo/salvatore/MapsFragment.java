@@ -299,8 +299,10 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             Toast.makeText(getContext(), dispenserData,
                     Toast.LENGTH_LONG).show();
         }*/
-        String A = this.getActivity().getIntent().getStringExtra("add_dispenser");
-        Toast.makeText(getContext() , A, Toast.LENGTH_SHORT).show();
+        String A = getActivity().getIntent().getStringExtra("add_dispenser");
+        if (A != null) {
+            Toast.makeText(getContext(), A, Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void startLocationUpdates() {
