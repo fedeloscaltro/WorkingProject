@@ -39,6 +39,24 @@ public class Util {
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
+    public static String writePosition(List<Address> addresses, LatLng latLng, String address, String city){
+        if (addresses.size() > 0) {
+            Address addr = addresses.get(0);
+            if (addr.getThoroughfare() != null && addr.getThoroughfare() != "") {
+                address += addr.getThoroughfare() + " ";
+            }
+            if (addr.getSubThoroughfare() != null && addr.getSubThoroughfare() != "") {
+                address += addr.getSubThoroughfare() + ", ";
+            }
+            if (city != null && city != "") {
+                address += city;
+            } else {
+                address += addr.getCountryName();
+            }
+        }
+        return address;
+    }
+
     public static LatLng getLocationFromAddress(Context context, String strAddress){
         Geocoder coder= new Geocoder(context);
         List<Address> address;

@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity
         if (dispenserAdded!=null) {
             /*Toast.makeText(MainActivity.this, dispenserAdded,
                     Toast.LENGTH_LONG).show();*/
-            geoLocate(dispenserAdded);
+            //geoLocate(dispenserAdded);
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -207,64 +207,4 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void geoLocate(String dispenserAdded){
-        Log.d("geoLocate: ", "geolocating");
-
-        Geocoder geocoder = new Geocoder(MainActivity.this);
-        List<Address> list = new ArrayList<>();
-
-        try{
-            list = geocoder.getFromLocationName(dispenserAdded, 1);
-        } catch (IOException e){
-            Log.e("#", "geolocate: IOException "+e.getMessage());
-        }
-
-        if (list.size()> 0){
-            Address address = list.get(0);
-
-            Toast.makeText(MainActivity.this, "Location found: "+ address, Toast.LENGTH_LONG).show();
-
-            int DEFAULT_ZOOM = 17;
-
-            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM);
-        }
-    }
-
-    private void moveCamera(LatLng latLng, int zoom){
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
-
-        Geocoder geocoder;
-        String address, city;
-        List<Address> addresses;
-
-        geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
-
-        try{
-        //seleziono la località da far apparire sopra il marker
-            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-            address = "";
-            city = addresses.get(0).getLocality();
-            if (addresses.size() > 0) {
-                Address addr = addresses.get(0);
-                if (addr.getThoroughfare() != null && addr.getThoroughfare() != "") {
-                    address += addr.getThoroughfare() + " ";
-                }
-                if (addr.getSubThoroughfare() != null && addr.getSubThoroughfare() != "") {
-                    address += addr.getSubThoroughfare() + ", ";
-                }
-                if (city != null && city != "") {
-                    address += city;
-                } else {
-                    address += addr.getCountryName();
-                }
-
-                MarkerOptions markerOptions = new MarkerOptions()
-                        .title(address)
-                        .position(latLng);
-                mGoogleMap.addMarker(markerOptions);
-            }
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
 }

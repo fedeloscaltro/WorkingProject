@@ -20,8 +20,9 @@
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/resources-debug.ap_" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/AddDispenser.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/AddDispenser.java" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/MainActivity.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/MapsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/MapsFragment.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/Util.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/Util.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -73,7 +74,7 @@
       <file leaf-file-name="RegisterDistributoreActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/RegisterDistributoreActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
+            <state relative-caret-position="2320">
               <caret line="182" column="47" lean-forward="false" selection-start-line="182" selection-start-column="46" selection-end-line="182" selection-end-column="47" />
               <folding />
             </state>
@@ -83,52 +84,59 @@
       <file leaf-file-name="AddDispenser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/AddDispenser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
+            <state relative-caret-position="2928">
               <caret line="201" column="55" lean-forward="false" selection-start-line="201" selection-start-column="55" selection-end-line="201" selection-end-column="55" />
-              <folding>
-                <element signature="e#3460#3793#0" expanded="true" />
-                <element signature="e#3792#3793#0" expanded="true" />
-                <element signature="e#3841#4151#0" expanded="true" />
-                <element signature="e#4150#4151#0" expanded="true" />
-                <element signature="e#4199#4513#0" expanded="true" />
-                <element signature="e#4512#4513#0" expanded="true" />
-                <element signature="e#4561#4875#0" expanded="true" />
-                <element signature="e#4874#4875#0" expanded="true" />
-                <element signature="e#4920#5225#0" expanded="true" />
-                <element signature="e#5224#5225#0" expanded="true" />
-                <element signature="e#5276#5603#0" expanded="true" />
-                <element signature="e#5602#5603#0" expanded="true" />
-                <element signature="e#6611#6619#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="247" column="19" lean-forward="true" selection-start-line="247" selection-start-column="19" selection-end-line="247" selection-end-column="19" />
+            <state relative-caret-position="231">
+              <caret line="208" column="0" lean-forward="false" selection-start-line="208" selection-start-column="0" selection-end-line="208" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3286#4940#0" expanded="true" />
-                <element signature="e#4158#4424#0" expanded="true" />
-                <element signature="e#4423#4424#0" expanded="true" />
-                <element signature="e#4475#4738#0" expanded="true" />
-                <element signature="e#4737#4738#0" expanded="true" />
-                <element signature="e#4939#4940#0" expanded="true" />
-                <element signature="e#5128#5159#0" expanded="true" />
-                <element signature="e#5161#5193#0" expanded="true" />
+                <element signature="e#3288#4942#0" expanded="true" />
+                <element signature="e#4160#4426#0" expanded="true" />
+                <element signature="e#4425#4426#0" expanded="true" />
+                <element signature="e#4477#4740#0" expanded="true" />
+                <element signature="e#4739#4740#0" expanded="true" />
+                <element signature="e#4941#4942#0" expanded="true" />
+                <element signature="e#5130#5161#0" expanded="true" />
+                <element signature="e#5163#5195#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapsFragment.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MapsFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/MapsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="170" column="16" lean-forward="true" selection-start-line="170" selection-start-column="16" selection-end-line="170" selection-end-column="37" />
+            <state relative-caret-position="190">
+              <caret line="163" column="8" lean-forward="false" selection-start-line="163" selection-start-column="8" selection-end-line="163" selection-end-column="8" />
+              <folding>
+                <element signature="e#6712#9393#0" expanded="true" />
+                <element signature="e#8523#8854#0" expanded="true" />
+                <element signature="e#8853#8854#0" expanded="true" />
+                <element signature="e#8913#9216#0" expanded="true" />
+                <element signature="e#9215#9216#0" expanded="true" />
+                <element signature="e#9392#9393#0" expanded="true" />
+                <element signature="e#10329#10653#0" expanded="true" />
+                <element signature="e#10652#10653#0" expanded="true" />
+                <element signature="e#10690#11570#0" expanded="true" />
+                <element signature="e#11569#11570#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Util.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/Util.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="327">
+              <caret line="56" column="23" lean-forward="false" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -147,9 +155,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setmy</find>
-      <find>pointToPosition</find>
-      <find>latLng</find>
       <find>camera</find>
       <find>positionFromRegisterDistributoreAcotivity</find>
       <find>buildToolsVersion</find>
@@ -162,7 +167,6 @@
       <find>bindPreferenceSummary</find>
       <find>get</find>
       <find>indirizzo</find>
-      <find>Toast.makeText</find>
       <find>updateChild</find>
       <find>checkBenzaValue.isChecked</find>
       <find>carburanti.add</find>
@@ -174,8 +178,13 @@
       <find>Marker</find>
       <find>Latlng</find>
       <find>zoom</find>
-      <find>move</find>
       <find>MarkerOptions</find>
+      <find>MainAct</find>
+      <find>addMarker</find>
+      <find>move</find>
+      <find>point</find>
+      <find>pointToPosition</find>
+      <find>Toast.makeText</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2271,7 +2280,6 @@
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/pref_headers.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/Util.java" />
         <option value="$PROJECT_DIR$/local.properties" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/RegisterActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/Addresses.java" />
@@ -2289,10 +2297,11 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_register_distributore.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_add_dispenser.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/MapsFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/RegisterDistributoreActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/AddDispenser.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/Util.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/MapsFragment.java" />
       </list>
     </option>
   </component>
@@ -2318,9 +2327,26 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
+            <path>
+              <item name="WorkingProject" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="WorkingProject" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="WorkingProject" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="salvatore" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
             <path>
               <item name="WorkingProject" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
@@ -2330,8 +2356,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -2702,7 +2726,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527677115036</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="MainActivity modificata. Modifiche da provare">
+      <created>1527703266839</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1527703266839</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2725,7 +2756,7 @@
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.10016978" sideWeight="0.5030211" order="15" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25245902" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33934426" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295082" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3967213" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -2734,12 +2765,11 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19108762" sideWeight="0.48319328" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25245902" sideWeight="0.49697885" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3442623" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3442623" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18806647" sideWeight="0.5168067" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2753,6 +2783,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -2780,7 +2811,8 @@
     <MESSAGE value="NO LAG and AddDispenser improved" />
     <MESSAGE value="Passaggio dei dati better, registrazione AddDispenser incompleta" />
     <MESSAGE value="AddDispenser funziona" />
-    <option name="LAST_COMMIT_MESSAGE" value="AddDispenser funziona" />
+    <MESSAGE value="MainActivity modificata. Modifiche da provare" />
+    <option name="LAST_COMMIT_MESSAGE" value="MainActivity modificata. Modifiche da provare" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3031,14 +3063,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/Util.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="27" column="41" lean-forward="false" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3166,7 +3190,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/RegisterDistributoreActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
+        <state relative-caret-position="2320">
           <caret line="182" column="47" lean-forward="false" selection-start-line="182" selection-start-column="46" selection-end-line="182" selection-end-column="47" />
           <folding />
         </state>
@@ -3174,48 +3198,53 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/AddDispenser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
+        <state relative-caret-position="2928">
           <caret line="201" column="55" lean-forward="false" selection-start-line="201" selection-start-column="55" selection-end-line="201" selection-end-column="55" />
-          <folding>
-            <element signature="e#3460#3793#0" expanded="true" />
-            <element signature="e#3792#3793#0" expanded="true" />
-            <element signature="e#3841#4151#0" expanded="true" />
-            <element signature="e#4150#4151#0" expanded="true" />
-            <element signature="e#4199#4513#0" expanded="true" />
-            <element signature="e#4512#4513#0" expanded="true" />
-            <element signature="e#4561#4875#0" expanded="true" />
-            <element signature="e#4874#4875#0" expanded="true" />
-            <element signature="e#4920#5225#0" expanded="true" />
-            <element signature="e#5224#5225#0" expanded="true" />
-            <element signature="e#5276#5603#0" expanded="true" />
-            <element signature="e#5602#5603#0" expanded="true" />
-            <element signature="e#6611#6619#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/MapsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="170" column="16" lean-forward="true" selection-start-line="170" selection-start-column="16" selection-end-line="170" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="247" column="19" lean-forward="true" selection-start-line="247" selection-start-column="19" selection-end-line="247" selection-end-column="19" />
+        <state relative-caret-position="231">
+          <caret line="208" column="0" lean-forward="false" selection-start-line="208" selection-start-column="0" selection-end-line="208" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3286#4940#0" expanded="true" />
-            <element signature="e#4158#4424#0" expanded="true" />
-            <element signature="e#4423#4424#0" expanded="true" />
-            <element signature="e#4475#4738#0" expanded="true" />
-            <element signature="e#4737#4738#0" expanded="true" />
-            <element signature="e#4939#4940#0" expanded="true" />
-            <element signature="e#5128#5159#0" expanded="true" />
-            <element signature="e#5161#5193#0" expanded="true" />
+            <element signature="e#3288#4942#0" expanded="true" />
+            <element signature="e#4160#4426#0" expanded="true" />
+            <element signature="e#4425#4426#0" expanded="true" />
+            <element signature="e#4477#4740#0" expanded="true" />
+            <element signature="e#4739#4740#0" expanded="true" />
+            <element signature="e#4941#4942#0" expanded="true" />
+            <element signature="e#5130#5161#0" expanded="true" />
+            <element signature="e#5163#5195#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/Util.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="56" column="23" lean-forward="false" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gibbo/salvatore/MapsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="163" column="8" lean-forward="false" selection-start-line="163" selection-start-column="8" selection-end-line="163" selection-end-column="8" />
+          <folding>
+            <element signature="e#6712#9393#0" expanded="true" />
+            <element signature="e#8523#8854#0" expanded="true" />
+            <element signature="e#8853#8854#0" expanded="true" />
+            <element signature="e#8913#9216#0" expanded="true" />
+            <element signature="e#9215#9216#0" expanded="true" />
+            <element signature="e#9392#9393#0" expanded="true" />
+            <element signature="e#10329#10653#0" expanded="true" />
+            <element signature="e#10652#10653#0" expanded="true" />
+            <element signature="e#10690#11570#0" expanded="true" />
+            <element signature="e#11569#11570#0" expanded="true" />
           </folding>
         </state>
       </provider>

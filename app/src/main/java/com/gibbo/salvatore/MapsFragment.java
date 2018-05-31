@@ -159,15 +159,15 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         Marker marker = googleMap.addMarker(markerOptions);
         marker.showInfoWindow();
         //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        Util.pointToPosition(mGoogleMap, marker.getPosition());*/
+        Util.pointToPosition(mGoogleMap, marker.getPosition());
 
-        //LatLng address = getLocationFromAddress(this, yourAddressString("Street Number, Street, Suburb, State, Postcode");
+        LatLng address = getLocationFromAddress(this, yourAddressString("Street Number, Street, Suburb, State, Postcode");*/
 
         //gestisco azioni quando si clicca sulla mappa
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(final LatLng latLng) {
-                googleMap.clear(); //elimino i marker precedenti
+                //googleMap.clear(); //elimino i marker precedenti
                 String address, city;
 
                 Geocoder geocoder;
@@ -180,19 +180,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                     addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
                     address = "";
                     city = addresses.get(0).getLocality();
-                    if (addresses.size() > 0) {
-                        Address addr = addresses.get(0);
-                        if (addr.getThoroughfare() != null && addr.getThoroughfare() != ""){
-                            address += addr.getThoroughfare() + " ";
-                        }
-                        if(addr.getSubThoroughfare() != null && addr.getSubThoroughfare() != ""){
-                            address += addr.getSubThoroughfare() + ", ";
-                        }
-                        if (city != null && city != ""){
-                            address += city;
-                        } else {
-                            address += addr.getCountryName();
-                        }
+
+                    address = Util.writePosition(addresses,latLng, address, city);
 
                         MarkerOptions markerOptions = new MarkerOptions()
                                 .position(latLng)
@@ -223,14 +212,19 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                                         dialog.cancel();
                                     }
                                 }).setIcon(android.R.drawable.ic_dialog_map).show();
-
-                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
             }
         });
+
+        String dispenserAdded = getActivity().getIntent().getStringExtra("add_dispenser");
+        if (dispenserAdded != null) {
+            //Toast.makeText(getContext(), dispenserAdded, Toast.LENGTH_SHORT).show();
+
+            geoLocate(dispenserAdded, googleMap);
+        }
     }
 
 
@@ -299,10 +293,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             Toast.makeText(getContext(), dispenserData,
                     Toast.LENGTH_LONG).show();
         }*/
-        String A = getActivity().getIntent().getStringExtra("add_dispenser");
-        if (A != null) {
-            Toast.makeText(getContext(), A, Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void startLocationUpdates() {
@@ -313,5 +303,86 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
+    private void geoLocate(String dispenserAdded, GoogleMap googleMap){
+        //mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        String address, city;
 
+        Log.d("geoLocate: ", "geolocating");
+
+        Geocoder geocoder = new Geocoder(getActivity());
+        List<Address> list = new ArrayList<>();
+        List<Address> addresses;
+
+        try{
+            list = geocoder.getFromLocationName(dispenserAdded, 1);
+        } catch (IOException e){
+            Log.e("#", "geolocate: IOException "+e.getMessage());
+        }
+
+        if (list.size()> 0){
+            Address addressList = list.get(0);
+
+            //Toast.makeText(getActivity(), "Location found: "+ addressList, Toast.LENGTH_LONG).show();
+
+            //int DEFAULT_ZOOM = 17;
+
+            //moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM, googleMap);
+            LatLng latLng = new LatLng(addressList.getLatitude(), addressList.getLongitude());
+            Util.pointToPosition(googleMap, latLng);
+
+            try{
+                //seleziono la località da far apparire sopra il marker
+                addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                address = "";
+                city = addresses.get(0).getLocality();
+
+                address = Util.writePosition(addresses, latLng, address, city);
+
+                    MarkerOptions markerOptions = new MarkerOptions()
+                            .title(address)
+                            .position(latLng);
+                    googleMap.addMarker(markerOptions).showInfoWindow();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void moveCamera(LatLng latLng, int zoom, GoogleMap googleMap){
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+
+        Geocoder geocoder;
+        String address, city;
+        List<Address> addresses;
+
+        geocoder = new Geocoder(getActivity(), Locale.getDefault());
+
+        try{
+            //seleziono la località da far apparire sopra il marker
+            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            address = "";
+            city = addresses.get(0).getLocality();
+            if (addresses.size() > 0) {
+                Address addr = addresses.get(0);
+                if (addr.getThoroughfare() != null && addr.getThoroughfare() != "") {
+                    address += addr.getThoroughfare() + " ";
+                }
+                if (addr.getSubThoroughfare() != null && addr.getSubThoroughfare() != "") {
+                    address += addr.getSubThoroughfare() + ", ";
+                }
+                if (city != null && city != "") {
+                    address += city;
+                } else {
+                    address += addr.getCountryName();
+                }
+
+                MarkerOptions markerOptions = new MarkerOptions()
+                        .title(address)
+                        .position(latLng);
+                googleMap.addMarker(markerOptions).showInfoWindow();
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 }
