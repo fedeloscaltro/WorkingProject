@@ -39,16 +39,16 @@ public class Util {
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
-    public static String writePosition(List<Address> addresses, LatLng latLng, String address, String city){
+    public static String writePosition(List<Address> addresses, String address, String city){
         if (addresses.size() > 0) {
             Address addr = addresses.get(0);
-            if (addr.getThoroughfare() != null && addr.getThoroughfare() != "") {
+            if (addr.getThoroughfare() != null && !addr.getThoroughfare().equals("")) {
                 address += addr.getThoroughfare() + " ";
             }
-            if (addr.getSubThoroughfare() != null && addr.getSubThoroughfare() != "") {
+            if (addr.getSubThoroughfare() != null && !addr.getSubThoroughfare().equals("")) {
                 address += addr.getSubThoroughfare() + ", ";
             }
-            if (city != null && city != "") {
+            if (city != null && !city.equals("")) {
                 address += city;
             } else {
                 address += addr.getCountryName();

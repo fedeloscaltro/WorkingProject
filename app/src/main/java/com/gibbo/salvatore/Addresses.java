@@ -3,13 +3,17 @@ package com.gibbo.salvatore;
 import java.util.ArrayList;
 
 public class Addresses {
-    public String address;
+    private String address;
     private ArrayList<String> prices, carburanti;
 
-    public Addresses(String address, ArrayList<String> prices, ArrayList<String> carburanti){
+    private Addresses(String address, ArrayList<String> prices, ArrayList<String> carburanti){
         this.address = address;
         this.prices = prices;
         this.carburanti = carburanti;
+    }
+
+    public Addresses(){
+
     }
 
     public String getAddress() {

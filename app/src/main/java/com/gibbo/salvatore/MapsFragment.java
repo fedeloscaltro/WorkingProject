@@ -3,30 +3,22 @@ package com.gibbo.salvatore;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.location.Address;
 import android.location.Geocoder;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -50,16 +42,22 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.Executor;
+import java.util.Map;
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback{
@@ -78,6 +76,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     GoogleMap mGoogleMap;
     MapView mMapView;
     View mView;
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    final DatabaseReference refAddr = database.getReference("/addresses");
 
     public MapsFragment() {
         // Required empty public constructor
@@ -86,6 +86,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             addressDispenser = getArguments().getString("indirizzo");
         }
@@ -134,7 +135,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mMapView = (MapView) mView.findViewById(R.id.map);
+        mMapView = mView.findViewById(R.id.map);
         if (mMapView != null) {
             mMapView.onCreate(null);
             mMapView.onResume();
@@ -152,6 +153,26 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             createLocationRequest();
         }
 
+        Query q = refAddr.orderByChild("address").startAt("");
+
+        q.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
+                    for (DataSnapshot o: dataSnapshot.getChildren()){
+                        Addresses addresses =  o.getValue(Addresses.class);
+                        //Toast.makeText(getActivity(), addresses.getAddress(), Toast.LENGTH_LONG).show();
+                        retrieveMarkers(addresses.getAddress(), googleMap);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         /*MarkerOptions markerOptions = new MarkerOptions()
                 .position(Util.getLocationFromAddress(getContext(), positionFromRegisterDistributoreActivity))
                 .title("posizione ricevuta");
@@ -181,7 +202,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                     address = "";
                     city = addresses.get(0).getLocality();
 
-                    address = Util.writePosition(addresses,latLng, address, city);
+                    address = Util.writePosition(addresses, address, city);
 
                         MarkerOptions markerOptions = new MarkerOptions()
                                 .position(latLng)
@@ -193,25 +214,33 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                         Util.pointToPosition(mGoogleMap, marker.getPosition());
                         //ins. richiesta
 
-                        AlertDialog.Builder builder;
+                        final AlertDialog.Builder builder;
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
                             builder = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog ); //android.R.style.Theme_Material_Dialog_Alert
                         } else {
                             builder = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog);
                         }
-                        builder.setTitle("Navigazione").setMessage("Iniziare la navigazione verso "+address+"?")
-                                .setPositiveButton("Sì", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int i) {
-                                        Util.launchNavigation(getContext(), latLng);
-                                    }
-                                })
-                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int i) {
-                                        dialog.cancel();
-                                    }
-                                }).setIcon(android.R.drawable.ic_dialog_map).show();
+                    final String finalAddress = address;
+                    googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(final Marker marker) {
+                                builder.setTitle("Navigazione").setMessage("Iniziare la navigazione verso "+ finalAddress +"?")
+                                        .setPositiveButton("Sì", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int i) {
+                                                Util.launchNavigation(getContext(), latLng);
+                                            }
+                                        })
+                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int i) {
+                                                dialog.cancel();
+                                                marker.remove();
+                                            }
+                                        }).setIcon(android.R.drawable.ic_dialog_map).show();
+                                return true;
+                            }
+                        });
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -221,9 +250,39 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
         String dispenserAdded = getActivity().getIntent().getStringExtra("add_dispenser");
         if (dispenserAdded != null) {
-            //Toast.makeText(getContext(), dispenserAdded, Toast.LENGTH_SHORT).show();
-
             geoLocate(dispenserAdded, googleMap);
+        }
+
+        if (addressDispenser != null){
+            Geocoder geocoder = new Geocoder(getActivity());
+            List<Address> addresses;
+
+
+            List<Address> list = new ArrayList<>();
+
+            try{
+                list = geocoder.getFromLocationName(addressDispenser, 1);
+            } catch (IOException e){
+                Log.e("#", "geolocate: IOException "+e.getMessage());
+            }
+            if (list.size()> 0) {
+                Address addressList = list.get(0);
+
+                //Toast.makeText(getActivity(), "Location found: "+ addressList, Toast.LENGTH_LONG).show();
+
+                //int DEFAULT_ZOOM = 17;
+
+                //moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM, googleMap);
+                LatLng latLng = new LatLng(addressList.getLatitude(), addressList.getLongitude());
+                MarkerOptions markerOptions = new MarkerOptions()
+                        .position(latLng)
+                        .title(addressDispenser);
+
+                Marker marker = googleMap.addMarker(markerOptions);
+                marker.showInfoWindow();
+
+                Util.pointToPosition(mGoogleMap, marker.getPosition());
+            }
         }
     }
 
@@ -270,13 +329,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == MY_REQUEST_ACCESS_FINE_LOCATION) {
             if (permissions.length == 1 &&
-                    permissions[0] == Manifest.permission.ACCESS_FINE_LOCATION &&
+                    permissions[0].equals(Manifest.permission.ACCESS_FINE_LOCATION) &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             } else {
                 // Permission was denied. Display an error message.
+                Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -336,7 +396,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                 address = "";
                 city = addresses.get(0).getLocality();
 
-                address = Util.writePosition(addresses, latLng, address, city);
+                address = Util.writePosition(addresses, address, city);
 
                     MarkerOptions markerOptions = new MarkerOptions()
                             .title(address)
@@ -348,41 +408,38 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
-    private void moveCamera(LatLng latLng, int zoom, GoogleMap googleMap){
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+    private void retrieveMarkers(String n_position, GoogleMap googleMap){
+        //String address, city;
 
-        Geocoder geocoder;
-        String address, city;
+        Log.d("geoLocate: ", "geolocating");
+
+        Geocoder geocoder = new Geocoder(getActivity());
+        List<Address> list = new ArrayList<>();
         List<Address> addresses;
 
-        geocoder = new Geocoder(getActivity(), Locale.getDefault());
-
         try{
-            //seleziono la località da far apparire sopra il marker
-            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-            address = "";
-            city = addresses.get(0).getLocality();
-            if (addresses.size() > 0) {
-                Address addr = addresses.get(0);
-                if (addr.getThoroughfare() != null && addr.getThoroughfare() != "") {
-                    address += addr.getThoroughfare() + " ";
-                }
-                if (addr.getSubThoroughfare() != null && addr.getSubThoroughfare() != "") {
-                    address += addr.getSubThoroughfare() + ", ";
-                }
-                if (city != null && city != "") {
-                    address += city;
-                } else {
-                    address += addr.getCountryName();
-                }
+            list = geocoder.getFromLocationName(n_position, 1);
+        } catch (IOException e){
+            Log.e("#", "geolocate: IOException "+e.getMessage());
+        }
+
+        if (list.size()> 0){
+            Address addressList = list.get(0);
+            LatLng latLng = new LatLng(addressList.getLatitude(), addressList.getLongitude());
+
+            /*try{
+                //seleziono la località da far apparire sopra il marker
+                addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                address = "";
+                city = addresses.get(0).getLocality();
+
+                address = Util.writePosition(addresses, address, city);*/
 
                 MarkerOptions markerOptions = new MarkerOptions()
-                        .title(address)
+                        .title(n_position)
                         .position(latLng);
                 googleMap.addMarker(markerOptions).showInfoWindow();
-            }
-        }catch(IOException e){
-            e.printStackTrace();
+
         }
     }
 }
