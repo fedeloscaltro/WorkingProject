@@ -5,11 +5,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -38,6 +43,8 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -204,9 +211,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
                     address = Util.writePosition(addresses, address, city);
 
+                    Bitmap icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.dispensericon);
+
                         MarkerOptions markerOptions = new MarkerOptions()
                                 .position(latLng)
-                                .title(address);
+                                .title(address)
+                                .icon(BitmapDescriptorFactory.fromBitmap(icon));
 
                         Marker marker = googleMap.addMarker(markerOptions);
                         marker.showInfoWindow();

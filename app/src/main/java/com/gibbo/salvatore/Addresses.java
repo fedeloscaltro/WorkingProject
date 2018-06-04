@@ -6,7 +6,7 @@ public class Addresses {
     private String address;
     private ArrayList<String> prices, carburanti;
 
-    private Addresses(String address, ArrayList<String> prices, ArrayList<String> carburanti){
+    public Addresses(String address, ArrayList<String> prices, ArrayList<String> carburanti){
         this.address = address;
         this.prices = prices;
         this.carburanti = carburanti;
