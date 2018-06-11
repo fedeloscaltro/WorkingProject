@@ -62,6 +62,11 @@ public class AddDispenser extends AppCompatActivity {
 
         indirizzo = findViewById(R.id.indirizzo);
 
+        String s = getIntent().getStringExtra("dispenserToAdd");
+        if (s != null){
+            indirizzo.setText(s);
+        }
+
         //Toast.makeText(AddDispenser.this, user.getEmail(), Toast.LENGTH_LONG).show();
 
 

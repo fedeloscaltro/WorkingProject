@@ -3,6 +3,7 @@ package com.gibbo.salvatore;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -16,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -193,6 +195,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
         //gestisco azioni quando si clicca sulla mappa
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onMapClick(final LatLng latLng) {
                 //googleMap.clear(); //elimino i marker precedenti
@@ -212,6 +215,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                     address = Util.writePosition(addresses, address, city);
 
                     Bitmap icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.dispensericon);
+                    Toast.makeText(getContext(), "Height: "+icon.getHeight() + " Width: "+icon.getWidth(), Toast.LENGTH_LONG).show();
 
                         MarkerOptions markerOptions = new MarkerOptions()
                                 .position(latLng)
@@ -230,25 +234,43 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                         } else {
                             builder = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog);
                         }
-                    final String finalAddress = address;
+                    //final String finalAddress = address;
                     googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                             @Override
                             public boolean onMarkerClick(final Marker marker) {
-                                builder.setTitle("Navigazione").setMessage("Iniziare la navigazione verso "+ finalAddress +"?")
-                                        .setPositiveButton("Sì", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int i) {
-                                                Util.launchNavigation(getContext(), latLng);
-                                            }
-                                        })
-                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int i) {
-                                                dialog.cancel();
-                                                marker.remove();
-                                            }
-                                        }).setIcon(android.R.drawable.ic_dialog_map).show();
-                                return true;
+                                String address;
+                                final String city;
+
+                                Geocoder geocoder;
+                                final List<Address> addresses;
+
+                                geocoder = new Geocoder(getActivity(), Locale.getDefault());
+                                try{
+                                    addresses = geocoder.getFromLocation(marker.getPosition().latitude, marker.getPosition().longitude, 1);
+                                    address = "";
+                                    city = addresses.get(0).getLocality();
+
+                                    address = Util.writePosition(addresses, address, city);
+                                    builder.setTitle("Navigazione").setMessage("Aggiungere un distributore in " + address + " o iniziare la navigazione?")
+                                            .setPositiveButton("Navigazione", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int i) {
+                                                    Util.launchNavigation(getContext(), latLng);
+                                                }
+                                            })
+                                            .setNegativeButton("Aggiunta", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int i) {
+                                                    final Intent intent = new Intent(getContext(), AddDispenser.class);
+                                                    final String addr;
+                                                    intent.putExtra("dispenserToAdd", addresses.get(0).getAddressLine(0));
+                                                    startActivity(intent);
+                                                }
+                                            }).setIcon(android.R.drawable.ic_dialog_map).show();
+                                    return true;
+                                }catch(IOException e){
+                                    return false;
+                                }
                             }
                         });
                 } catch (IOException e) {

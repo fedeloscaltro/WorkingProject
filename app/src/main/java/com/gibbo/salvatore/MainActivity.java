@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    private void goToAddDispenser(){
+    public void goToAddDispenser(){
         final Intent intent = new Intent(this, AddDispenser.class);
         startActivity(intent);
     }
