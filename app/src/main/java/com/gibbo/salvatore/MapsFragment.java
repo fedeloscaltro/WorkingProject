@@ -77,7 +77,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest mLocationRequest;
     private LocationCallback mLocationCallback;
-    public String positionFromRegisterDistributoreActivity, addressDispenser;
+    public String addressDispenser, prezziDispenser;
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
     //String[] accountData;
 
@@ -98,8 +98,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
         if (getArguments() != null) {
             addressDispenser = getArguments().getString("indirizzo");
+            prezziDispenser = getArguments().getString("prezziSignUp");
         }
-        //positionFromRegisterDistributoreActivity = getArguments().getString("indirizzo");
+
         if (checkFinePermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_REQUEST_ACCESS_FINE_LOCATION);
         }
@@ -118,7 +119,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                             .position(newPos);
 
                     mGoogleMap.addMarker(markerOptions);
-                    //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                 }
             }
         };
@@ -135,8 +135,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_maps, container, false);
-        /*RegisterAutomobilistaActivity activity = (RegisterAutomobilistaActivity) getActivity();
-        accountData = activity.getData();*/
         return mView;
     }
 
@@ -251,14 +249,21 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                                     city = addresses.get(0).getLocality();
 
                                     address = Util.writePosition(addresses, address, city);
-                                    builder.setTitle("Navigazione").setMessage("Aggiungere un distributore in " + address + " o iniziare la navigazione?")
-                                            .setPositiveButton("Navigazione", new DialogInterface.OnClickListener() {
+                                    builder.setTitle("Distributore").setMessage("Aggiungere un distributore in " + address + " o iniziare la navigazione?")
+                                            .setNeutralButton("Annulla", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    marker.remove();
+                                                    dialogInterface.cancel();
+                                                }
+                                            })
+                                            .setPositiveButton("Naviga", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int i) {
                                                     Util.launchNavigation(getContext(), latLng);
                                                 }
                                             })
-                                            .setNegativeButton("Aggiunta", new DialogInterface.OnClickListener() {
+                                            .setNegativeButton("Aggiungi", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int i) {
                                                     final Intent intent = new Intent(getContext(), AddDispenser.class);
@@ -266,7 +271,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                                                     intent.putExtra("dispenserToAdd", addresses.get(0).getAddressLine(0));
                                                     startActivity(intent);
                                                 }
-                                            }).setIcon(android.R.drawable.ic_dialog_map).show();
+                                            })
+                                            .setIcon(R.drawable.dispensericon).show();
                                     return true;
                                 }catch(IOException e){
                                     return false;
@@ -281,8 +287,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         });
 
         String dispenserAdded = getActivity().getIntent().getStringExtra("add_dispenser");
+        String prices = getActivity().getIntent().getStringExtra("prices");
         if (dispenserAdded != null) {
-            geoLocate(dispenserAdded, googleMap);
+            geoLocate(dispenserAdded, googleMap, prices);
         }
 
         if (addressDispenser != null){
@@ -308,7 +315,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                 LatLng latLng = new LatLng(addressList.getLatitude(), addressList.getLongitude());
                 MarkerOptions markerOptions = new MarkerOptions()
                         .position(latLng)
-                        .title(addressDispenser);
+                        .title(addressDispenser + " " + prezziDispenser + "CIAO");
 
                 Marker marker = googleMap.addMarker(markerOptions);
                 marker.showInfoWindow();
@@ -395,7 +402,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
-    private void geoLocate(String dispenserAdded, GoogleMap googleMap){
+    private void geoLocate(String dispenserAdded, GoogleMap googleMap, String prices){
         //mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         String address, city;
 
@@ -431,7 +438,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                 address = Util.writePosition(addresses, address, city);
 
                     MarkerOptions markerOptions = new MarkerOptions()
-                            .title(address)
+                            .title(address + " " + prices)
                             .position(latLng);
                     googleMap.addMarker(markerOptions).showInfoWindow();
             }catch(IOException e){

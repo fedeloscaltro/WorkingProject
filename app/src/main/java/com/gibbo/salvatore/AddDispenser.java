@@ -204,6 +204,7 @@ public class AddDispenser extends AppCompatActivity {
 
         String[] array = {username, indirizzoValue};
         //intent.putExtra("add_dispenser", array);
+        intent.putExtra("prices", carburanti+" "+prezzi);
         intent.putExtra("add_dispenser", indirizzoValue);
         startActivity(intent);
     }

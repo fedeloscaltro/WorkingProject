@@ -276,6 +276,7 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     Addresses ad = (Addresses) dataSnapshot.getValue(false);
                     bundle.putString("indirizzo", ad.getAddress());
+                    bundle.putString("prezziSignUp", ad.getCarburanti().toString() + ad.getPrices());
                     MapsFragment mapsFragment = new MapsFragment();
                     mapsFragment.setArguments(bundle);
                 }
