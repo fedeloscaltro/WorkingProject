@@ -1,5 +1,6 @@
 package com.gibbo.salvatore;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -163,6 +165,54 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        //View i = (View) menu.findItem(R.id.action_settings);
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference refAddr = database.getReference();
+        final FirebaseUser user = mAuth.getCurrentUser();
+        //Toast.makeText(MainActivity.this, refAddr.getParent().toString(), Toast.LENGTH_LONG).show();
+
+         MenuItem m = menu.findItem(R.id.action_settings);
+         m.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+             @Override
+             public boolean onMenuItemClick(MenuItem menuItem) {
+                 Query q = refAddr.child("email").equalTo(user.getEmail());
+                 q.addListenerForSingleValueEvent(new ValueEventListener() {
+                     @Override
+                     public void onDataChange(DataSnapshot dataSnapshot) {
+                         if (dataSnapshot.exists()) {
+                             //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
+                             for (DataSnapshot o : dataSnapshot.getChildren()) {
+                                 if(o.getValue().getClass().toString().equals(User.class.toString())){
+                                     //inflate layout user
+                                     Toast.makeText(MainActivity.this, User.class.toString(), Toast.LENGTH_LONG).show();
+                                 }
+                                 else{
+                                     //inflate layout dispenser
+                                 }
+                                 //Toast.makeText(getActivity(), addresses.getAddress(), Toast.LENGTH_LONG).show();
+
+                             }
+                         }
+                     }
+                      @Override
+                      public void onCancelled(DatabaseError databaseError) {
+
+                      }
+                 });
+
+                 //Toast.makeText(MainActivity.this, refAddr.child("addresses").toString(), Toast.LENGTH_LONG).show();
+                 return true;
+             }
+         });/*
+        i.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, refAddr.getParent().toString(), Toast.LENGTH_LONG).show();
+                user.getEmail();
+                //refAddr.getParent();
+
+            }
+        });*/
         return true;
     }
 
