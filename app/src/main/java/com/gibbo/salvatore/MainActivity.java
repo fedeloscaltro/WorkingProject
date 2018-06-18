@@ -167,7 +167,8 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
         //View i = (View) menu.findItem(R.id.action_settings);
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference refAddr = database.getReference();
+        final DatabaseReference refDr = database.getReference("/drivers");
+        final DatabaseReference refDi = database.getReference("/dispensers");
         final FirebaseUser user = mAuth.getCurrentUser();
         //Toast.makeText(MainActivity.this, refAddr.getParent().toString(), Toast.LENGTH_LONG).show();
 
@@ -175,22 +176,15 @@ public class MainActivity extends AppCompatActivity
          m.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
              @Override
              public boolean onMenuItemClick(MenuItem menuItem) {
-                 Query q = refAddr.child("email").equalTo(user.getEmail());
+                 Query q = refDi.orderByChild("email").equalTo(user.getEmail());
                  q.addListenerForSingleValueEvent(new ValueEventListener() {
                      @Override
                      public void onDataChange(DataSnapshot dataSnapshot) {
                          if (dataSnapshot.exists()) {
                              //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
                              for (DataSnapshot o : dataSnapshot.getChildren()) {
-                                 if(o.getValue().getClass().toString().equals(User.class.toString())){
-                                     //inflate layout user
-                                     Toast.makeText(MainActivity.this, User.class.toString(), Toast.LENGTH_LONG).show();
-                                 }
-                                 else{
-                                     //inflate layout dispenser
-                                 }
-                                 //Toast.makeText(getActivity(), addresses.getAddress(), Toast.LENGTH_LONG).show();
-
+                                 Toast.makeText(MainActivity.this, "Sono un distributore", Toast.LENGTH_LONG).show();
+                                 //fare il goto
                              }
                          }
                      }
@@ -198,6 +192,23 @@ public class MainActivity extends AppCompatActivity
                       public void onCancelled(DatabaseError databaseError) {
 
                       }
+                 });
+                 Query q1 = refDr.orderByChild("email").equalTo(user.getEmail());
+                 q1.addListenerForSingleValueEvent(new ValueEventListener() {
+                     @Override
+                     public void onDataChange(DataSnapshot dataSnapshot) {
+                         if (dataSnapshot.exists()) {
+                             //HashMap<Oject, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
+                             for (DataSnapshot o : dataSnapshot.getChildren()) {
+                                 Toast.makeText(MainActivity.this, "Sono un guidatore", Toast.LENGTH_LONG).show();
+                                 //fare il goto
+                             }
+                         }
+                     }
+                     @Override
+                     public void onCancelled(DatabaseError databaseError) {
+
+                     }
                  });
 
                  //Toast.makeText(MainActivity.this, refAddr.child("addresses").toString(), Toast.LENGTH_LONG).show();
