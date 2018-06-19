@@ -14,7 +14,7 @@
 
     <header
         android:fragment="com.gibbo.salvatore.SettingsDistributore$ManagePreferenceFragment"
-        android:icon="@drawable/ic_menu_manage"
+        android:icon="@drawable/baseline_build_black_24dp"
         android:title="Gestione distributore"
         android:tint="#000"
         android:backgroundTint="#000"/>

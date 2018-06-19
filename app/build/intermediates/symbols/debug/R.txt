@@ -857,7 +857,7 @@ int drawable abc_vector_test 0x7f080058
 int drawable avd_hide_password 0x7f080059
 int drawable avd_show_password 0x7f08005a
 int drawable background_login 0x7f08005b
-int drawable baseline_settings_black_18dp 0x7f08005c
+int drawable baseline_build_black_24dp 0x7f08005c
 int drawable common_full_open_on_phone 0x7f08005d
 int drawable common_google_signin_btn_icon_dark 0x7f08005e
 int drawable common_google_signin_btn_icon_dark_focused 0x7f08005f

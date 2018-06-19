@@ -3964,7 +3964,7 @@ public final class R {
     public static final int avd_hide_password=0x7f080059;
     public static final int avd_show_password=0x7f08005a;
     public static final int background_login=0x7f08005b;
-    public static final int baseline_settings_black_18dp=0x7f08005c;
+    public static final int baseline_build_black_24dp=0x7f08005c;
     public static final int common_full_open_on_phone=0x7f08005d;
     public static final int common_google_signin_btn_icon_dark=0x7f08005e;
     public static final int common_google_signin_btn_icon_dark_focused=0x7f08005f;
