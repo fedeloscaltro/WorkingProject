@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<preference-headers xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <header
-        android:fragment="com.gibbo.salvatore.SettingsAutomobilista$GeneralPreferenceFragment"
+        android:fragment="com.gibbo.salvatore.SettingsDistributore$GeneralPreferenceFragment"
         android:icon="@drawable/ic_info_black_24dp"
         android:title="@string/pref_header_general" />
 
     <header
-        android:fragment="com.gibbo.salvatore.SettingsAutomobilista$NotificationPreferenceFragment"
+        android:fragment="com.gibbo.salvatore.SettingsDistributore$NotificationPreferenceFragment"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/pref_header_notifications"
         />
 
     <header
-        android:fragment="com.gibbo.salvatore.SettingsAutomobilista$NotificationPreferenceFragment"
-        android:icon="@drawable/euro_symbol_black_18dp"
+        android:fragment="com.gibbo.salvatore.SettingsDistributore$ManagePreferenceFragment"
+        android:icon="@drawable/ic_menu_manage"
         android:title="Gestione distributore"
-        />
-</PreferenceScreen>
+        android:tint="#000"
+        android:backgroundTint="#000"/>
+</preference-headers>

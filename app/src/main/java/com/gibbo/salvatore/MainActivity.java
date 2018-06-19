@@ -183,8 +183,8 @@ public class MainActivity extends AppCompatActivity
                          if (dataSnapshot.exists()) {
                              //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
                              for (DataSnapshot o : dataSnapshot.getChildren()) {
-                                 Toast.makeText(MainActivity.this, "Sono un distributore", Toast.LENGTH_LONG).show();
-                                 //fare il goto
+                                 goToSettingsDistributore();
+
                              }
                          }
                      }
@@ -200,8 +200,7 @@ public class MainActivity extends AppCompatActivity
                          if (dataSnapshot.exists()) {
                              //HashMap<Oject, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
                              for (DataSnapshot o : dataSnapshot.getChildren()) {
-                                 Toast.makeText(MainActivity.this, "Sono un guidatore", Toast.LENGTH_LONG).show();
-                                 //fare il goto
+                                 goToSettings();
                              }
                          }
                      }
@@ -236,7 +235,45 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            goToSettings();
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            final DatabaseReference refDr = database.getReference("/drivers");
+            final DatabaseReference refDi = database.getReference("/dispensers");
+            final FirebaseUser user = mAuth.getCurrentUser();
+
+            Query q = refDi.orderByChild("email").equalTo(user.getEmail());
+            q.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
+                        for (DataSnapshot o : dataSnapshot.getChildren()) {
+                            goToSettingsDistributore();
+
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            Query q1 = refDr.orderByChild("email").equalTo(user.getEmail());
+            q1.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        //HashMap<Oject, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
+                        for (DataSnapshot o : dataSnapshot.getChildren()) {
+                            goToSettings();
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            //goToSettings();
         }
 
         return super.onOptionsItemSelected(item);
@@ -252,6 +289,11 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void goToSettingsDistributore(){
+        final Intent intent = new Intent(this, SettingsDistributore.class);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Gestire gli elementi della navigation view cliccati qui.
@@ -260,7 +302,45 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             goToAddDispenser();
         } else if (id == R.id.nav_manage) {
-            goToSettings();
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            final DatabaseReference refDr = database.getReference("/drivers");
+            final DatabaseReference refDi = database.getReference("/dispensers");
+            final FirebaseUser user = mAuth.getCurrentUser();
+
+            Query q = refDi.orderByChild("email").equalTo(user.getEmail());
+            q.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
+                        for (DataSnapshot o : dataSnapshot.getChildren()) {
+                            goToSettingsDistributore();
+
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            Query q1 = refDr.orderByChild("email").equalTo(user.getEmail());
+            q1.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        //HashMap<Oject, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
+                        for (DataSnapshot o : dataSnapshot.getChildren()) {
+                            goToSettings();
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            //goToSettings();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

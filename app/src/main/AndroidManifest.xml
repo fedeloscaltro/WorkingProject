@@ -56,6 +56,10 @@
             android:name=".SettingsAutomobilista"
             android:label="@string/title_activity_settings_automobilista"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingsDistributore"
+            android:label="@string/title_activity_settings_automobilista"
+            android:screenOrientation="portrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
