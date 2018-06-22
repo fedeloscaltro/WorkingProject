@@ -1,9 +1,17 @@
 package com.gibbo.salvatore;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -12,12 +20,17 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.SwitchPreference;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -39,6 +52,7 @@ public class SettingsAutomobilista extends AppCompatPreferenceActivity {
      * to reflect its new value.
      */
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
+
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
@@ -206,11 +220,86 @@ public class SettingsAutomobilista extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_notification);
             setHasOptionsMenu(true);
 
+            final int uniqueId = 5753;
+            final NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE); //getActivity()
+            NotificationChannel mChannel;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                /*mChannel = new NotificationChannel(uniqueId,
+                        getContext().getString(R.string.notificationChannelName),
+                        NotificationManager.IMPORTANCE_HIGH);*/
+                //notificationManager.createNotificationChannel(mChannel);
+            }
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
             bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
+            SwitchPreference switchPreference = (SwitchPreference) findPreference("notifications_new_message");
+
+            switchPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object o) {
+                    if (preference instanceof SwitchPreference){
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+
+                            Toast.makeText(getContext(), preference.getClass().toString(), Toast.LENGTH_LONG).show();
+
+                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getContext(), "12")
+                                    .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                                    .setColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark))
+                                    .setContentTitle("My notification")
+                                    .setContentText("Much longer text that cannot fit one line...")
+                                    .setLargeIcon(largeIcon(getContext()))
+                                    .setStyle(new NotificationCompat.BigTextStyle()
+                                            .bigText("Much longer text that cannot fit one line..."))
+                                    .setDefaults(Notification.DEFAULT_VIBRATE)
+                                    .setPriority(NotificationCompat.PRIORITY_MAX)
+                                    .setAutoCancel(true);
+
+                            Intent intent = new Intent(getContext(), getClass());
+                            //intent.setFlags(FLAG_)
+                            PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                            mBuilder.setContentIntent(pendingIntent);
+
+
+                            notificationManager.notify(1, mBuilder.build());
+                        }
+                    }
+                    return true;
+                }
+            });
+            /*switchPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.M)
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+
+                    if (preference instanceof SwitchPreference){
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+
+                            Toast.makeText(getContext(), preference.getClass().toString(), Toast.LENGTH_LONG).show();
+
+                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getContext(), "12")
+                                    .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                                    .setContentTitle("My notification")
+                                    .setContentText("Much longer text that cannot fit one line...")
+                                    .setStyle(new NotificationCompat.BigTextStyle()
+                                            .bigText("Much longer text that cannot fit one line..."))
+                                    .setPriority(NotificationCompat.PRIORITY_MAX)
+                                    .setAutoCancel(true);
+
+                            Intent intent = new Intent(getContext(), SettingsAutomobilista.class);
+                            PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                            mBuilder.setContentIntent(pendingIntent);
+
+                            NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE); //getActivity()
+                            notificationManager.notify(1, mBuilder.build());
+                        }
+                    }
+                    return true;
+                }
+            });*/
         }
 
         @Override
@@ -222,6 +311,35 @@ public class SettingsAutomobilista extends AppCompatPreferenceActivity {
             }
             return super.onOptionsItemSelected(item);
         }
+
+        SwitchPreference switchPreference = (SwitchPreference) findPreference("notifications_new_message");
+
+        /*@RequiresApi(api = Build.VERSION_CODES.M)
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            Toast.makeText(getContext(), preference.getClass().toString(), Toast.LENGTH_LONG).show();
+            if (preference instanceof SwitchPreference){
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getContext(), "12")
+                            .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                            .setContentTitle("My notification")
+                            .setContentText("Much longer text that cannot fit one line...")
+                            .setStyle(new NotificationCompat.BigTextStyle()
+                                    .bigText("Much longer text that cannot fit one line..."))
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setAutoCancel(true);
+
+                    Intent intent = new Intent(getContext(), SettingsAutomobilista.class);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                    mBuilder.setContentIntent(pendingIntent);
+
+                    NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+                    notificationManager.notify(uniqueId, mBuilder.build());
+                }
+            }
+            return true;
+        }*/
     }
 
     /**
@@ -251,5 +369,14 @@ public class SettingsAutomobilista extends AppCompatPreferenceActivity {
             }
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    private static Bitmap largeIcon(Context context) {
+        // TODO (5) Get a Resources object from the context.
+        Resources res = context.getResources();
+        // TODO (6) Create and return a bitmap using BitmapFactory.decodeResource, passing in the
+        // resources object and R.drawable.ic_local_drink_black_24px
+        Bitmap largeIcon = BitmapFactory.decodeResource(res, R.drawable.ic_notifications_black_24dp);
+        return largeIcon;
     }
 }
