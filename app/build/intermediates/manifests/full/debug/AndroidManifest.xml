@@ -8,6 +8,7 @@
         android:minSdkVersion="16"
         android:targetSdkVersion="26" />
 
+    <permission android:name="android.permission.VIBRATE" />
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -94,6 +95,7 @@
 
         <activity
             android:name="com.gibbo.salvatore.AddDispenser"
+            android:parentActivityName="com.gibbo.salvatore.MainActivity"
             android:screenOrientation="portrait" >
         </activity>
 

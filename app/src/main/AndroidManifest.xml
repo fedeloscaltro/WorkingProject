@@ -74,7 +74,8 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".AddDispenser"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity">
 
         </activity>
     </application>

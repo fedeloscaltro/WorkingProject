@@ -1,6 +1,11 @@
 package com.gibbo.salvatore;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,6 +25,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -79,6 +86,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     private LocationCallback mLocationCallback;
     public String addressDispenser, prezziDispenser;
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
+
+    final int uniqueId = 45678;
+    String EXTRA_NOTIFICATION_ID = "1232";
     //String[] accountData;
 
     //private OnFragmentInteractionListener mListener;
@@ -122,6 +132,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                 }
             }
         };
+
+
     }
 
     private boolean checkFinePermission(Context context, String accessPermission) {
@@ -150,11 +162,63 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());
         mGoogleMap = googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+
+
+
+        /*----------------------------------------BLOCCO CODICE NOTIFICHE ----------------------------------------------------*/
+        createNotificationChannel();
+
+        Intent snoozeIntent = new Intent(getContext(), AddDispenser.class);
+        snoozeIntent.setAction("com.gibbo.salvatore.AddDispenser");
+        snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
+        PendingIntent snoozePendingIntent =
+                PendingIntent.getBroadcast(getContext(), 0, snoozeIntent, 0);
+
+        // Create an Intent for the activity you want to start
+        Intent addDispenserIntent = new Intent(getContext(), AddDispenser.class);
+        // Create the TaskStackBuilder and add the intent, which inflates the back stack
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getContext());
+        stackBuilder.addNextIntentWithParentStack(addDispenserIntent);
+        // Get the PendingIntent containing the entire back stack
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        final NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "12")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("Vuoi aggiornare i prezzi di questo distributore?")
+                .setContentText("Sei passato vicino a LUOGO, vuoi aggiornarne i prezzi?")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Sei passato vicino a XXXXXXX LUOGO, vuoi aggiornarne i prezzi?"))
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .addAction(R.drawable.ic_notifications_black_24dp, "Sì",
+                        snoozePendingIntent)
+                .addAction(R.drawable.ic_notifications_black_24dp, "No",
+                        snoozePendingIntent)
+                .setAutoCancel(true)
+                .setCategory(NotificationCompat.CATEGORY_REMINDER)
+                .setVisibility(Notification.VISIBILITY_PUBLIC);
+        builder.setContentIntent(resultPendingIntent);
+
+
+        final NotificationManagerCompat notificationManager1 = NotificationManagerCompat.from(getContext());
+
+        notificationManager1.notify(uniqueId, builder.build());
+
+    /*----------------------------------------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mGoogleMap.setMyLocationEnabled(true);
             createLocationRequest();
@@ -479,6 +543,22 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                         .position(latLng);
                 googleMap.addMarker(markerOptions).showInfoWindow();
 
+        }
+    }
+
+    private void createNotificationChannel(){
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("12", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 }

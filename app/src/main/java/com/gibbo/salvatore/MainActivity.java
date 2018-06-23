@@ -1,5 +1,11 @@
 package com.gibbo.salvatore;
 
+import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,12 +13,17 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
+import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -57,7 +68,10 @@ public class MainActivity extends AppCompatActivity
     TextView textViewUsername;
     TextView textViewEmail;
     GoogleMap mGoogleMap;
+    final int uniqueId = 45678;
+    String EXTRA_NOTIFICATION_ID = "1232";
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,10 +99,59 @@ public class MainActivity extends AppCompatActivity
             //geoLocate(dispenserAdded);
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*-------------------------------BLOCCO CODICE NOTIFICHE DA ELIMINARE------------------------------------------------------*/
+        createNotificationChannel();
+
+        Intent snoozeIntent = new Intent(this, AddDispenser.class);
+        snoozeIntent.setAction("com.gibbo.salvatore.AddDispenser");
+        snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
+        PendingIntent snoozePendingIntent =
+                PendingIntent.getBroadcast(this, 0, snoozeIntent, 0);
+
+
+
+
+
+
+        // Create an Intent for the activity you want to start
+        Intent addDispenserIntent = new Intent(this, AddDispenser.class);
+        // Create the TaskStackBuilder and add the intent, which inflates the back stack
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addNextIntentWithParentStack(addDispenserIntent);
+        // Get the PendingIntent containing the entire back stack
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        final NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "12")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("Vuoi aggiornare i prezzi di questo distributore?")
+                .setContentText("Sei passato vicino a LUOGO, vuoi aggiornarne i prezzi?")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Sei passato vicino a XXXXXXX LUOGO, vuoi aggiornarne i prezzi?"))
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .addAction(R.drawable.ic_notifications_black_24dp, "Sì",
+                        snoozePendingIntent)
+                .addAction(R.drawable.ic_notifications_black_24dp, "No",
+                        snoozePendingIntent)
+                .setAutoCancel(true)
+                .setCategory(NotificationCompat.CATEGORY_REMINDER)
+                .setVisibility(Notification.VISIBILITY_PUBLIC);
+        builder.setContentIntent(resultPendingIntent);
+
+
+        final NotificationManagerCompat notificationManager1 = NotificationManagerCompat.from(this);
+
+        /*-------------------------------------------------------------------------------------*/
+
+
+
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                createNotificationChannel();
+
+                notificationManager1.notify(uniqueId, builder.build());
+
                 //creazione finestra di dialogo per inserire un nuovo distributore
                 AlertDialog.Builder builder;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
@@ -112,25 +175,24 @@ public class MainActivity extends AppCompatActivity
                         }).setIcon(android.R.drawable.ic_input_add).show();
 
 
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         View mHeaderView = navigationView.getHeaderView(0);
 
         //https://stackoverflow.com/questions/43023042/android-firebase-database-fetch-username-by-user-id
 
-        textViewUsername = (TextView) mHeaderView.findViewById(R.id.accountUsername);
-        textViewEmail= (TextView) mHeaderView.findViewById(R.id.accountMail);
+        textViewUsername = mHeaderView.findViewById(R.id.accountUsername);
+        textViewEmail= mHeaderView.findViewById(R.id.accountMail);
 
         final FirebaseUser firebaseUser = mAuth.getCurrentUser();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -153,7 +215,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -295,7 +357,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Gestire gli elementi della navigation view cliccati qui.
         int id = item.getItemId();
 
@@ -343,9 +405,24 @@ public class MainActivity extends AppCompatActivity
             //goToSettings();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
+    private void createNotificationChannel(){
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("12", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 }
