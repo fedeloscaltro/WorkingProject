@@ -15,9 +15,11 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
@@ -76,7 +78,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback{
+        ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final String TAG = MapsFragment.class.getSimpleName();
     public static final int MY_REQUEST_ACCESS_FINE_LOCATION = 1;
@@ -206,17 +208,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         builder.setContentIntent(resultPendingIntent);
 
 
-        final NotificationManagerCompat notificationManager1 = NotificationManagerCompat.from(getContext());
+        final NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
 
-        notificationManager1.notify(uniqueId, builder.build());*/
+        notificationManager.notify(uniqueId, builder.build());*/
 
-    /*----------------------------------------------------------------------------------------------------------*/
-
-
-
-
-
-
+        /*----------------------------------------------------------------------------------------------------------*/
 
 
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -224,30 +220,25 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             createLocationRequest();
         }
 
-        if(!MainActivity.automobilista){
-            Query q = refAddr.orderByChild("address").startAt("");
-            q.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
-                        for (DataSnapshot o: dataSnapshot.getChildren()){
-                            Addresses addresses =  o.getValue(Addresses.class);
-                            //Toast.makeText(getActivity(), addresses.getAddress(), Toast.LENGTH_LONG).show();
-                            retrieveMarkers(addresses.getAddress(), googleMap);
-                        }
+        Query q = refAddr.orderByChild("address").startAt("");
+        q.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
+                    for (DataSnapshot o : dataSnapshot.getChildren()) {
+                        Addresses addresses = o.getValue(Addresses.class);
+                        //Toast.makeText(getActivity(), addresses.getAddress(), Toast.LENGTH_LONG).show();
+                        retrieveMarkers(addresses.getAddress(), googleMap);
                     }
                 }
+            }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-                }
-            });
-        }
-        else{
-
-        }
+            }
+        });
         /*MarkerOptions markerOptions = new MarkerOptions()
                 .position(Util.getLocationFromAddress(getContext(), positionFromRegisterDistributoreActivity))
                 .title("posizione ricevuta");
@@ -281,72 +272,71 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                     address = Util.writePosition(addresses, address, city);
 
                     Bitmap icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.dispensericon);
-                    Toast.makeText(getContext(), "Height: "+icon.getHeight() + " Width: "+icon.getWidth(), Toast.LENGTH_LONG).show();
 
-                        MarkerOptions markerOptions = new MarkerOptions()
-                                .position(latLng)
-                                .title(address)
-                                .icon(BitmapDescriptorFactory.fromBitmap(icon));
+                    MarkerOptions markerOptions = new MarkerOptions()
+                            .position(latLng)
+                            .title(address)
+                            .icon(BitmapDescriptorFactory.fromBitmap(icon));
 
-                        Marker marker = googleMap.addMarker(markerOptions);
-                        marker.showInfoWindow();
+                    Marker marker = googleMap.addMarker(markerOptions);
+                    marker.showInfoWindow();
 
-                        Util.pointToPosition(mGoogleMap, marker.getPosition());
-                        //ins. richiesta
+                    Util.pointToPosition(mGoogleMap, marker.getPosition());
+                    //ins. richiesta
 
-                        final AlertDialog.Builder builder;
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-                            builder = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog ); //android.R.style.Theme_Material_Dialog_Alert
-                        } else {
-                            builder = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog);
-                        }
+                    final AlertDialog.Builder builder;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        builder = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog); //android.R.style.Theme_Material_Dialog_Alert
+                    } else {
+                        builder = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog);
+                    }
                     //final String finalAddress = address;
                     googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                            @Override
-                            public boolean onMarkerClick(final Marker marker) {
-                                String address;
-                                final String city;
+                        @Override
+                        public boolean onMarkerClick(final Marker marker) {
+                            String address;
+                            final String city;
 
-                                Geocoder geocoder;
-                                final List<Address> addresses;
+                            Geocoder geocoder;
+                            final List<Address> addresses;
 
-                                geocoder = new Geocoder(getActivity(), Locale.getDefault());
-                                try{
-                                    addresses = geocoder.getFromLocation(marker.getPosition().latitude, marker.getPosition().longitude, 1);
-                                    address = "";
-                                    city = addresses.get(0).getLocality();
+                            geocoder = new Geocoder(getActivity(), Locale.getDefault());
+                            try {
+                                addresses = geocoder.getFromLocation(marker.getPosition().latitude, marker.getPosition().longitude, 1);
+                                address = "";
+                                city = addresses.get(0).getLocality();
 
-                                    address = Util.writePosition(addresses, address, city);
-                                    builder.setTitle("Distributore").setMessage("Aggiungere un distributore in " + address + " o iniziare la navigazione?")
-                                            .setNeutralButton("Annulla", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    marker.remove();
-                                                    dialogInterface.cancel();
-                                                }
-                                            })
-                                            .setPositiveButton("Naviga", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int i) {
-                                                    Util.launchNavigation(getContext(), latLng);
-                                                }
-                                            })
-                                            .setNegativeButton("Aggiungi", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int i) {
-                                                    final Intent intent = new Intent(getContext(), AddDispenser.class);
-                                                    final String addr;
-                                                    intent.putExtra("dispenserToAdd", addresses.get(0).getAddressLine(0));
-                                                    startActivity(intent);
-                                                }
-                                            })
-                                            .setIcon(R.drawable.dispensericon).show();
-                                    return true;
-                                }catch(IOException e){
-                                    return false;
-                                }
+                                address = Util.writePosition(addresses, address, city);
+                                builder.setTitle("Distributore").setMessage("Aggiungere un distributore in " + address + " o iniziare la navigazione?")
+                                        .setNeutralButton("Annulla", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                marker.remove();
+                                                dialogInterface.cancel();
+                                            }
+                                        })
+                                        .setPositiveButton("Naviga", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int i) {
+                                                Util.launchNavigation(getContext(), latLng);
+                                            }
+                                        })
+                                        .setNegativeButton("Aggiungi", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int i) {
+                                                final Intent intent = new Intent(getContext(), AddDispenser.class);
+                                                final String addr;
+                                                intent.putExtra("dispenserToAdd", addresses.get(0).getAddressLine(0));
+                                                startActivity(intent);
+                                            }
+                                        })
+                                        .setIcon(R.drawable.dispensericon).show();
+                                return true;
+                            } catch (IOException e) {
+                                return false;
                             }
-                        });
+                        }
+                    });
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -360,19 +350,19 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             geoLocate(dispenserAdded, googleMap, prices);
         }
 
-        if (addressDispenser != null){
+        if (addressDispenser != null) {
             Geocoder geocoder = new Geocoder(getActivity());
             List<Address> addresses;
 
 
             List<Address> list = new ArrayList<>();
 
-            try{
+            try {
                 list = geocoder.getFromLocationName(addressDispenser, 1);
-            } catch (IOException e){
-                Log.e("#", "geolocate: IOException "+e.getMessage());
+            } catch (IOException e) {
+                Log.e("#", "geolocate: IOException " + e.getMessage());
             }
-            if (list.size()> 0) {
+            if (list.size() > 0) {
                 Address addressList = list.get(0);
 
                 //Toast.makeText(getActivity(), "Location found: "+ addressList, Toast.LENGTH_LONG).show();
@@ -400,15 +390,107 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         mLocationRequest.setFastestInterval(100);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+        final LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(mLocationRequest);
 
-        SettingsClient client = LocationServices.getSettingsClient(getContext());
+        final SettingsClient client = LocationServices.getSettingsClient(getContext());
         Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
 
+        //quando la richiesta di ottenere la posizione attuale va a buon fine
         task.addOnSuccessListener(getActivity(), new OnSuccessListener<LocationSettingsResponse>() {
             @Override
             public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+                //prendo la posizione attuale
+                LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+                Criteria criteria = new Criteria();
+                //faccio il controllo dei permessi
+                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    //trovo il valore della location
+                    final Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+
+                    //richiedo tutti gli indirizzi memorizzati nel DB
+                    Query q = refAddr.orderByChild("address").startAt("");
+                    q.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                for (DataSnapshot o : dataSnapshot.getChildren()) {
+                                    //per ogni indirizzo
+                                    Addresses addresses = o.getValue(Addresses.class);
+
+                                    Geocoder geocoder = new Geocoder(getActivity());
+                                    List<Address> list = new ArrayList<>();
+
+                                    try{
+                                        //controllo il nome e prendo un solo risultato
+                                        list = geocoder.getFromLocationName(addresses.getAddress(), 1);
+                                    } catch (IOException e){
+                                        Log.e("#", "geolocate: IOException "+e.getMessage());
+                                    }
+
+                                    if (list.size()> 0) {
+                                        Address addressList = list.get(0);
+                                        //creo un oggetto LatLng per identificare il risultato della query
+                                        LatLng latLngQuery = new LatLng(addressList.getLatitude(), addressList.getLongitude());
+                                        //creo un oggetto LatLng per identificare la posizione attuale
+                                        LatLng latLngLivePosition = new LatLng(location.getLatitude(), location.getLongitude());
+                                        Double result = Util.calculationByDistance(latLngLivePosition, latLngQuery);
+                                        //se la distanza tra i 2 punti è minore di 100 m
+                                        if (result<=50){
+                                            //creo il canale per la notifica
+                                            createNotificationChannel();
+
+                                            // Creo un Intent per l'activity che voglio iniziare
+                                            Intent addDispenserIntent = new Intent(getContext(), AddDispenser.class);
+                                            // Creo il TaskStackBuilder e aggiungo l'intent, che fa l'inflate del back stack
+                                            TaskStackBuilder stackBuilder = TaskStackBuilder.create(getContext());
+                                            stackBuilder.addNextIntentWithParentStack(addDispenserIntent);
+                                            // Ottengo il PendingIntent che contiene l'intero back stack
+                                            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                                            //creo la notifica
+                                            final NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "12")
+                                                    .setSmallIcon(R.mipmap.ic_launcher)
+                                                    .setContentTitle("Vuoi aggiornare i prezzi di questo distributore?")
+                                                    .setContentText("Sei passato vicino a "+addresses.getAddress()+", vuoi aggiornarne i prezzi?")
+                                                    .setStyle(new NotificationCompat.BigTextStyle()
+                                                            .bigText("Sei passato vicino a "+addresses.getAddress()+", vuoi aggiornarne i prezzi?"))
+                                                    .setPriority(NotificationCompat.PRIORITY_MAX)
+                                                    .setAutoCancel(true)
+                                                    .setCategory(NotificationCompat.CATEGORY_REMINDER)
+                                                    .setVisibility(Notification.VISIBILITY_PUBLIC);
+                                            builder.setContentIntent(resultPendingIntent);
+
+                                            final NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
+
+                                            //la visualizzo
+                                            notificationManager.notify(uniqueId, builder.build());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+
+                //LatLng address = Util.getLocationFromAddress(this, yourAddressString("Street Number, Street, Suburb, State, Postcode"));
+
+
                 Log.i(TAG, "le impostazioni solo abilitate correttamente");
                 MapsFragment.mRequestingLocationUpdates = true;
             }
