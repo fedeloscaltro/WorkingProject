@@ -173,7 +173,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
 
         /*----------------------------------------BLOCCO CODICE NOTIFICHE ----------------------------------------------------*/
-        createNotificationChannel();
+        /*createNotificationChannel();
 
         Intent snoozeIntent = new Intent(getContext(), AddDispenser.class);
         snoozeIntent.setAction("com.gibbo.salvatore.AddDispenser");
@@ -208,7 +208,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
         final NotificationManagerCompat notificationManager1 = NotificationManagerCompat.from(getContext());
 
-        notificationManager1.notify(uniqueId, builder.build());
+        notificationManager1.notify(uniqueId, builder.build());*/
 
     /*----------------------------------------------------------------------------------------------------------*/
 
@@ -224,26 +224,30 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             createLocationRequest();
         }
 
-        Query q = refAddr.orderByChild("address").startAt("");
-
-        q.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
-                    for (DataSnapshot o: dataSnapshot.getChildren()){
-                        Addresses addresses =  o.getValue(Addresses.class);
-                        //Toast.makeText(getActivity(), addresses.getAddress(), Toast.LENGTH_LONG).show();
-                        retrieveMarkers(addresses.getAddress(), googleMap);
+        if(!MainActivity.automobilista){
+            Query q = refAddr.orderByChild("address").startAt("");
+            q.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
+                        for (DataSnapshot o: dataSnapshot.getChildren()){
+                            Addresses addresses =  o.getValue(Addresses.class);
+                            //Toast.makeText(getActivity(), addresses.getAddress(), Toast.LENGTH_LONG).show();
+                            retrieveMarkers(addresses.getAddress(), googleMap);
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
+        else{
+
+        }
         /*MarkerOptions markerOptions = new MarkerOptions()
                 .position(Util.getLocationFromAddress(getContext(), positionFromRegisterDistributoreActivity))
                 .title("posizione ricevuta");
@@ -542,7 +546,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                         .title(n_position)
                         .position(latLng);
                 googleMap.addMarker(markerOptions).showInfoWindow();
-
         }
     }
 
