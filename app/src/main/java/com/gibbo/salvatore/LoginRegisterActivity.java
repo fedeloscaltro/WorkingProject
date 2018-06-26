@@ -102,7 +102,8 @@ public class LoginRegisterActivity extends AppCompatActivity {
 
         showProgressDialog();
 
-        mAuth.signInWithEmailAndPassword(email, password)
+        String cryptedPsswd = Util.md5(password);
+        mAuth.signInWithEmailAndPassword(email, cryptedPsswd)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

@@ -443,6 +443,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
                                             // Creo un Intent per l'activity che voglio iniziare
                                             Intent addDispenserIntent = new Intent(getContext(), AddDispenser.class);
+                                            addDispenserIntent.putExtra("distributore_da_modificare", addresses.getAddress());
                                             // Creo il TaskStackBuilder e aggiungo l'intent, che fa l'inflate del back stack
                                             TaskStackBuilder stackBuilder = TaskStackBuilder.create(getContext());
                                             stackBuilder.addNextIntentWithParentStack(addDispenserIntent);

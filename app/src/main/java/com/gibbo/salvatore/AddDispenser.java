@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +30,7 @@ public class AddDispenser extends AppCompatActivity {
 
     private EditText benzaPrice, dieselPrice, gplPrice, metanoPrice, elettricitàPrice;
     private CheckBox checkBenzaValue, checkDieselValue, checkGPLValue, checkMetanoValue, checkElettricoValue;
+    private TextView titleAddDispenser;
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     final DatabaseReference ref = database.getReference("addresses");
@@ -62,10 +64,19 @@ public class AddDispenser extends AppCompatActivity {
 
         indirizzo = findViewById(R.id.indirizzo);
 
-        String s = getIntent().getStringExtra("dispenserToAdd");
-        if (s != null){
-            indirizzo.setText(s);
+        titleAddDispenser = findViewById(R.id.titleAddDispenser);
+
+        String dispenserToAdd = getIntent().getStringExtra("dispenserToAdd");
+        String dispenserToModify = getIntent().getStringExtra("distributore_da_modificare");
+        if (dispenserToAdd != null){
+            indirizzo.setText(dispenserToAdd);
+            titleAddDispenser.setText("Aggiungi un distributore");
         }
+        if (dispenserToModify != null){
+            indirizzo.setText(dispenserToModify);
+            titleAddDispenser.setText("Modifica un distributore");
+        }
+
 
         //Toast.makeText(AddDispenser.this, user.getEmail(), Toast.LENGTH_LONG).show();
 

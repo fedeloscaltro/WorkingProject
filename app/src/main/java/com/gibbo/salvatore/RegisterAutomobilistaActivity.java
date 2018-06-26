@@ -82,9 +82,10 @@ public class RegisterAutomobilistaActivity extends AppCompatActivity {
 
                 String mail = mailValue.getText().toString();
                 String psswd = psswdValue.getText().toString();
+                String newPsswd = Util.md5(psswd);
 
                 //funzione per creazione account
-                createAccount(mail, psswd);
+                createAccount(mail, newPsswd);
             }
         });
 
