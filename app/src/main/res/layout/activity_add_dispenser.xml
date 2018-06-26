@@ -132,7 +132,7 @@
                     android:layout_width="67dp"
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@+id/benzaPrice"
-                    android:layout_below="@+id/dieselPrice"
+                    android:layout_below="@+id/checkDiesel"
                     android:inputType="numberDecimal"
                     tools:ignore="RtlCompat" />
 

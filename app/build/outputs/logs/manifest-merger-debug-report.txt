@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-83:12
-INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-83:12
-INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-83:12
-INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-83:12
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-84:12
+INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-84:12
+INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-84:12
+INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-84:12
 MERGED from [com.android.support:multidex:1.0.2] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\multidex-1.0.2.aar\da6406274c502a373c52a0c655112256\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:design:26.1.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\c6669694603c577c087956e31cb3da35\AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\9c2212feb82e1f67d2d4a974c6a7c68c\AndroidManifest.xml:17:1-31:12
@@ -77,20 +77,20 @@ MERGED from [com.google.firebase:firebase-analytics-impl-license:11.8.0] C:\User
 MERGED from [com.google.firebase:firebase-dynamic-links-license:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\firebase-dynamic-links-license-11.8.0.aar\1d1581747ddbce8129015f16fd34c3a4\AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-ads-lite-license:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-license-11.8.0.aar\88a6c972d49f029587a7334f4f45d897\AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-gass-license:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-gass-license-11.8.0.aar\2f8a0954651e1267398afc2bbd8dd9e5\AndroidManifest.xml:2:1-6:12
-INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-83:12
-INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-83:12
-INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-83:12
+INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-84:12
+INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-84:12
+INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-84:12
 	package
 		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:3:5-34
 		INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-83:12
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-84:12
 		INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-83:12
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:1-84:12
 		INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:2:11-69
@@ -156,8 +156,12 @@ MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\stefano.
 		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:21:9-41
 	android:required
 		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:22:9-32
+uses-permission#android.permission.VIBRATE
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:24:5-66
+	android:name
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:24:22-63
 application
-ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:24:5-81:19
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:25:5-82:19
 MERGED from [com.android.support:design:26.1.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\c6669694603c577c087956e31cb3da35\AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:design:26.1.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\c6669694603c577c087956e31cb3da35\AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\9c2212feb82e1f67d2d4a974c6a7c68c\AndroidManifest.xml:25:5-29:19
@@ -291,95 +295,95 @@ MERGED from [com.google.android.gms:play-services-ads-lite-license:11.8.0] C:\Us
 MERGED from [com.google.android.gms:play-services-gass-license:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-gass-license-11.8.0.aar\2f8a0954651e1267398afc2bbd8dd9e5\AndroidManifest.xml:5:5-20
 MERGED from [com.google.android.gms:play-services-gass-license:11.8.0] C:\Users\stefano.scaltriti\.gradle\caches\transforms-1\files-1.1\play-services-gass-license-11.8.0.aar\2f8a0954651e1267398afc2bbd8dd9e5\AndroidManifest.xml:5:5-20
 	android:supportsRtl
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:31:9-35
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:32:9-35
 	android:label
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:30:9-41
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:31:9-41
 	android:hardwareAccelerated
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:25:9-43
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:26:9-43
 	android:largeHeap
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:26:9-33
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:27:9-33
 	android:icon
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:29:9-43
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:30:9-43
 	android:allowBackup
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:28:9-35
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:29:9-35
 	android:theme
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:32:9-40
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:33:9-40
 	android:name
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:27:9-34
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:28:9-34
 activity#com.gibbo.salvatore.LoginRegisterActivity
-ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:33:9-41:20
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:34:9-42:20
 	android:screenOrientation
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:35:13-49
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:36:13-49
 	android:name
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:34:13-50
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:35:13-50
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:36:13-40:29
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:37:13-41:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:37:17-69
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:38:17-69
 	android:name
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:37:25-66
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:38:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:39:17-77
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:40:17-77
 	android:name
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:39:27-74
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:40:27-74
 activity#com.gibbo.salvatore.RegisterActivity
-ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:42:9-44:52
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:43:9-45:52
 	android:screenOrientation
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:44:13-49
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:45:13-49
 	android:name
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:43:13-45
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:44:13-45
 activity#com.gibbo.salvatore.RegisterAutomobilistaActivity
-ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:45:9-47:52
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:46:9-48:52
 	android:screenOrientation
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:47:13-49
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:48:13-49
 	android:name
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:46:13-58
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:47:13-58
 activity#com.gibbo.salvatore.RegisterDistributoreActivity
-ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:48:9-50:52
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:49:9-51:52
 	android:screenOrientation
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:50:13-49
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:51:13-49
 	android:name
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:49:13-57
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:50:13-57
 activity#com.gibbo.salvatore.MainActivity
-ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:51:9-55:59
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:52:9-56:59
 	android:screenOrientation
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:54:13-49
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:55:13-49
 	android:label
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:53:13-56
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:54:13-56
 	android:theme
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:55:13-56
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:56:13-56
 	android:name
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:52:13-41
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:53:13-41
 activity#com.gibbo.salvatore.SettingsAutomobilista
-ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:56:9-59:52
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:57:9-60:52
 	android:screenOrientation
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:59:13-49
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:60:13-49
 	android:label
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:58:13-74
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:59:13-74
 	android:name
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:57:13-50
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:58:13-50
 activity#com.gibbo.salvatore.SettingsDistributore
-ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:60:9-63:52
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:61:9-64:52
 	android:screenOrientation
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:63:13-49
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:64:13-49
 	android:label
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:62:13-74
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:63:13-74
 	android:name
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:61:13-49
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:62:13-49
 meta-data#com.google.android.geo.API_KEY
-ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:72:9-74:55
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:73:9-75:55
 	android:value
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:74:13-52
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:75:13-52
 	android:name
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:73:13-58
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:74:13-58
 activity#com.gibbo.salvatore.AddDispenser
-ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:76:9-80:20
+ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:77:9-81:20
 	android:screenOrientation
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:77:13-49
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:78:13-49
 	android:parentActivityName
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:78:13-55
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:79:13-55
 	android:name
-		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:76:19-47
+		ADDED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml:77:19-47
 uses-sdk
 INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\stefano.scaltriti\Documents\tesina\WorkingProject\app\src\main\AndroidManifest.xml

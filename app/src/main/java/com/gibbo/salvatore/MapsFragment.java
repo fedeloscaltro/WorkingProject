@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -22,6 +23,7 @@ import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -87,6 +89,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     private LocationRequest mLocationRequest;
     private LocationCallback mLocationCallback;
     public String addressDispenser, prezziDispenser;
+    public boolean switchPreference;
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
 
     final int uniqueId = 45678;
@@ -111,6 +114,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         if (getArguments() != null) {
             addressDispenser = getArguments().getString("indirizzo");
             prezziDispenser = getArguments().getString("prezziSignUp");
+            switchPreference = getArguments().getBoolean("switchPreference");
         }
 
         if (checkFinePermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -436,8 +440,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                                         //creo un oggetto LatLng per identificare la posizione attuale
                                         LatLng latLngLivePosition = new LatLng(location.getLatitude(), location.getLongitude());
                                         Double result = Util.calculationByDistance(latLngLivePosition, latLngQuery);
+
+                                        /*SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                                        SharedPreferences.Editor editor = mPreferences.edit();
+
+                                        boolean notificationEnabled = mPreferences.getBoolean("switchPreference", );*/
                                         //se la distanza tra i 2 punti è minore di 100 m
-                                        if (result<=50){
+                                        if (result<=50 && switchPreference){
                                             //creo il canale per la notifica
                                             createNotificationChannel();
 

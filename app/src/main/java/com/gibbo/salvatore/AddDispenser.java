@@ -66,15 +66,19 @@ public class AddDispenser extends AppCompatActivity {
 
         titleAddDispenser = findViewById(R.id.titleAddDispenser);
 
+        addDispenserButton = (Button) findViewById(R.id.addDispenserButton);
+
         String dispenserToAdd = getIntent().getStringExtra("dispenserToAdd");
         String dispenserToModify = getIntent().getStringExtra("distributore_da_modificare");
         if (dispenserToAdd != null){
             indirizzo.setText(dispenserToAdd);
             titleAddDispenser.setText("Aggiungi un distributore");
+            addDispenserButton.setText("AGGIUNGI");
         }
         if (dispenserToModify != null){
             indirizzo.setText(dispenserToModify);
             titleAddDispenser.setText("Modifica un distributore");
+            addDispenserButton.setText("MODIFICA");
         }
 
 
@@ -94,7 +98,7 @@ public class AddDispenser extends AppCompatActivity {
         dropdown.setAdapter(adapter);
 
 
-        addDispenserButton = (Button) findViewById(R.id.addDispenserButton);
+
 
         addDispenserButton.setOnClickListener(new View.OnClickListener() {
             @Override

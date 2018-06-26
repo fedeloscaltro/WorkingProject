@@ -8,6 +8,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -17,13 +18,16 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.SwitchPreference;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.SharedPreferencesCompat;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -214,12 +218,76 @@ public class SettingsAutomobilista extends AppCompatPreferenceActivity {
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class NotificationPreferenceFragment extends PreferenceFragment {
+        private SwitchPreference switchPref;
+
+        @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_notification);
             setHasOptionsMenu(true);
 
+            final SwitchPreference switchPreference = (SwitchPreference) findPreference("notifications_new_message");
+
+            /*if(switchPreference.getSharedPreferences().getBoolean("notifications_new_message", true)){
+                Toast.makeText(getContext(), "true", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getContext(), "false", Toast.LENGTH_LONG).show();
+            }*/
+
+            SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+            final SharedPreferences.Editor editor = mPreferences.edit();
+
+            switchPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object o) {
+                        if (switchPreference.isChecked()) {
+                            Toast.makeText(getContext(), "false", Toast.LENGTH_LONG).show();
+                            switchPreference.setChecked(false);
+
+                            Fragment mapsFragment = new MapsFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("switchPreference", switchPreference.isChecked());
+                            mapsFragment.setArguments(bundle);
+                            //showFragment();
+                            /*editor.putBoolean("switchPreference", false);
+                            editor.commit();*/
+                        } else {
+                            Toast.makeText(getContext(), "true", Toast.LENGTH_LONG).show();
+                            switchPreference.setChecked(true);
+
+                            Fragment mapsFragment = new MapsFragment();
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("switchPreference", switchPreference.isChecked());
+                            mapsFragment.setArguments(bundle);
+                            /*editor.putBoolean("switchPreference", true);
+                            editor.commit();*/
+                        }
+                    return true;
+                }
+            });
+
+
+            final SwitchPreference vibrationPreference = (SwitchPreference) findPreference("notifications_new_message_vibrate");
+
+            vibrationPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object isVibrateOnObject) {
+                    boolean isVibrateOn = (Boolean) isVibrateOnObject;
+                    if (isVibrateOn) {
+                        Vibrator v = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+                        if (v != null) {
+                            v.vibrate(400);
+                            editor.putBoolean("isVibrateOn", true);
+                            editor.commit();
+                        }
+                    } else {
+                        editor.putBoolean("isVibrateOn", false);
+                        editor.commit();
+                    }
+                    return true;
+                }
+            });
         }
 
         @Override
@@ -231,33 +299,6 @@ public class SettingsAutomobilista extends AppCompatPreferenceActivity {
             }
             return super.onOptionsItemSelected(item);
         }
-
-        /*@RequiresApi(api = Build.VERSION_CODES.M)
-        @Override
-        public boolean onPreferenceClick(Preference preference) {
-            Toast.makeText(getContext(), preference.getClass().toString(), Toast.LENGTH_LONG).show();
-            if (preference instanceof SwitchPreference){
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getContext(), "12")
-                            .setSmallIcon(R.drawable.ic_notifications_black_24dp)
-                            .setContentTitle("My notification")
-                            .setContentText("Much longer text that cannot fit one line...")
-                            .setStyle(new NotificationCompat.BigTextStyle()
-                                    .bigText("Much longer text that cannot fit one line..."))
-                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                            .setAutoCancel(true);
-
-                    Intent intent = new Intent(getContext(), SettingsAutomobilista.class);
-                    PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                    mBuilder.setContentIntent(pendingIntent);
-
-                    NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
-                    notificationManager.notify(uniqueId, mBuilder.build());
-                }
-            }
-            return true;
-        }*/
     }
 
     /**
@@ -287,13 +328,5 @@ public class SettingsAutomobilista extends AppCompatPreferenceActivity {
             }
             return super.onOptionsItemSelected(item);
         }
-    }
-
-    private static Bitmap largeIcon(Context context) {
-        // TODO (5) Get a Resources object from the context.
-        Resources res = context.getResources();
-        // TODO (6) Create and return a bitmap using BitmapFactory.decodeResource, passing in the
-        // resources object and R.drawable.ic_local_drink_black_24px
-        return BitmapFactory.decodeResource(res, R.drawable.ic_notifications_black_24dp);
     }
 }
