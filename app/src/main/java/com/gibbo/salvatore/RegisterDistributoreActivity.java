@@ -261,6 +261,32 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
         intent.putExtra("user_data", usernameValue.getText().toString());
         Bundle bundle = new Bundle();
         bundle.putString("indirizzo", sedeValue.getText().toString());
+
+        ArrayList<String> carburanti = new ArrayList<String>();
+        ArrayList<String> prezzi = new ArrayList<>();
+
+        if(checkBenzaValue.isChecked()){
+            carburanti.add(checkBenzaValue.getText().toString());
+            prezzi.add(benzaPrice.getText().toString());
+        }
+        if (checkMetanoValue.isChecked()){
+            carburanti.add(checkMetanoValue.getText().toString());
+            prezzi.add(metanoPrice.getText().toString());
+        }
+        if (checkGPLValue.isChecked()){
+            carburanti.add(checkGPLValue.getText().toString());
+            prezzi.add(gplPrice.getText().toString());
+        }
+        if (checkElettricoValue.isChecked()){
+            carburanti.add(checkElettricoValue.getText().toString());
+            prezzi.add(elettricitàPrice.getText().toString());
+        }
+        if (checkDieselValue.isChecked()){
+            carburanti.add(checkDieselValue.getText().toString());
+            prezzi.add(dieselPrice.getText().toString());
+        }
+
+        intent.putExtra("prices_distributore", carburanti+" "+prezzi);
         // set MyFragment Arguments
         MapsFragment myObj = new MapsFragment();
         myObj.setArguments(bundle);

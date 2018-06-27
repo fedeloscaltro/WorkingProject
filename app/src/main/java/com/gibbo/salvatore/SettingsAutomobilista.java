@@ -242,24 +242,24 @@ public class SettingsAutomobilista extends AppCompatPreferenceActivity {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object o) {
                         if (switchPreference.isChecked()) {
-                            Toast.makeText(getContext(), "false", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getContext(), "false", Toast.LENGTH_LONG).show();
                             switchPreference.setChecked(false);
 
-                            Fragment mapsFragment = new MapsFragment();
+                            /*Fragment mapsFragment = new MapsFragment();
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("switchPreference", switchPreference.isChecked());
-                            mapsFragment.setArguments(bundle);
+                            mapsFragment.setArguments(bundle);*/
                             //showFragment();
                             /*editor.putBoolean("switchPreference", false);
                             editor.commit();*/
                         } else {
-                            Toast.makeText(getContext(), "true", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getContext(), "true", Toast.LENGTH_LONG).show();
                             switchPreference.setChecked(true);
 
-                            Fragment mapsFragment = new MapsFragment();
+                            /*Fragment mapsFragment = new MapsFragment();
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("switchPreference", switchPreference.isChecked());
-                            mapsFragment.setArguments(bundle);
+                            mapsFragment.setArguments(bundle);*/
                             /*editor.putBoolean("switchPreference", true);
                             editor.commit();*/
                         }

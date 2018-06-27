@@ -10,4 +10,15 @@
             android:key="pref_carbu"
             android:title="@string/pref_title_display_fuel"/>
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Inserisci il prezzo"
+        android:key="pref_fascia_prezzo_carburante">
+        <EditTextPreference
+            android:title="Prezzo"
+            android:key="pref_prezzo_massimo"
+            android:numeric="decimal"
+            android:summary="Prezzo carburante"
+            />
+    </PreferenceCategory>
 </PreferenceScreen>

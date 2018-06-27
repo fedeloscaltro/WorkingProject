@@ -91,6 +91,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     public String addressDispenser, prezziDispenser;
     public boolean switchPreference;
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
+    ArrayList<Double> results = new ArrayList<Double>();
+    int i=0;
+    Double minDistance = 0.0;
 
     final int uniqueId = 45678;
     String EXTRA_NOTIFICATION_ID = "1232";
@@ -111,10 +114,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        i=0;
+
         if (getArguments() != null) {
             addressDispenser = getArguments().getString("indirizzo");
             prezziDispenser = getArguments().getString("prezziSignUp");
-            switchPreference = getArguments().getBoolean("switchPreference");
+            //switchPreference = getArguments().getBoolean("switchPreference");
         }
 
         if (checkFinePermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -233,7 +238,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             createLocationRequest();
         }
 
-        if(!MainActivity.automobilista) {
+        //if(!MainActivity.automobilista) {
             Query q = refAddr.orderByChild("address").startAt("");
             q.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -242,6 +247,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                         //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
                         for (DataSnapshot o : dataSnapshot.getChildren()) {
                             Addresses addresses = o.getValue(Addresses.class);
+                            //String values = o.getValue(String.class);
                             //Toast.makeText(getActivity(), addresses.getAddress(), Toast.LENGTH_LONG).show();
                             retrieveMarkers(addresses.getAddress(), googleMap);
                         }
@@ -253,10 +259,10 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
                 }
             });
-        }else{
+        /*}else{
             SharedPreferences sp = getActivity().getSharedPreferences("com.gibbo.salvatore", Context.MODE_PRIVATE);
             int c=0;
-        }
+        }*/
         /*MarkerOptions markerOptions = new MarkerOptions()
                 .position(Util.getLocationFromAddress(getContext(), positionFromRegisterDistributoreActivity))
                 .title("posizione ricevuta");
@@ -368,7 +374,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             geoLocate(dispenserAdded, googleMap, prices);
         }
 
-        if (addressDispenser != null) {
+        String prices_distributore = getActivity().getIntent().getStringExtra("prices_distributore");
+        if (addressDispenser != null){
+            geoLocate(addressDispenser, googleMap, prices_distributore);
+        }
+
+        /*if (addressDispenser != null) {
             Geocoder geocoder = new Geocoder(getActivity());
             List<Address> addresses;
 
@@ -398,7 +409,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
                 Util.pointToPosition(mGoogleMap, marker.getPosition());
             }
-        }
+        }*/
     }
 
 
@@ -440,6 +451,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                                     Geocoder geocoder = new Geocoder(getActivity());
                                     List<Address> list = new ArrayList<>();
 
+
+
                                     try{
                                         //controllo il nome e prendo un solo risultato
                                         list = geocoder.getFromLocationName(addresses.getAddress(), 1);
@@ -460,36 +473,76 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
                                         boolean notificationEnabled = mPreferences.getBoolean("switchPreference", );*/
                                         //se la distanza tra i 2 punti è minore di 100 m
-                                        if (result<=50 && switchPreference){
-                                            //creo il canale per la notifica
-                                            createNotificationChannel();
 
-                                            // Creo un Intent per l'activity che voglio iniziare
-                                            Intent addDispenserIntent = new Intent(getContext(), AddDispenser.class);
-                                            addDispenserIntent.putExtra("distributore_da_modificare", addresses.getAddress());
-                                            // Creo il TaskStackBuilder e aggiungo l'intent, che fa l'inflate del back stack
-                                            TaskStackBuilder stackBuilder = TaskStackBuilder.create(getContext());
-                                            stackBuilder.addNextIntentWithParentStack(addDispenserIntent);
-                                            // Ottengo il PendingIntent che contiene l'intero back stack
-                                            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                                        result *= 10;
+                                        if (result<=5) {// && switchPreference
+                                            if (i==0) {
+                                                minDistance = result;
+                                                createNotificationChannel();
+                                                i++;
 
-                                            //creo la notifica
-                                            final NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "12")
-                                                    .setSmallIcon(R.mipmap.ic_launcher)
-                                                    .setContentTitle("Vuoi aggiornare i prezzi di questo distributore?")
-                                                    .setContentText("Sei passato vicino a "+addresses.getAddress()+", vuoi aggiornarne i prezzi?")
-                                                    .setStyle(new NotificationCompat.BigTextStyle()
-                                                            .bigText("Sei passato vicino a "+addresses.getAddress()+", vuoi aggiornarne i prezzi?"))
-                                                    .setPriority(NotificationCompat.PRIORITY_MAX)
-                                                    .setAutoCancel(true)
-                                                    .setCategory(NotificationCompat.CATEGORY_REMINDER)
-                                                    .setVisibility(Notification.VISIBILITY_PUBLIC);
-                                            builder.setContentIntent(resultPendingIntent);
+                                                // Creo un Intent per l'activity che voglio iniziare
+                                                Intent addDispenserIntent = new Intent(getContext(), AddDispenser.class);
+                                                addDispenserIntent.putExtra("distributore_da_modificare", "Via Balzac 12, Reggio Emilia");
+                                                // Creo il TaskStackBuilder e aggiungo l'intent, che fa l'inflate del back stack
+                                                TaskStackBuilder stackBuilder = TaskStackBuilder.create(getContext());
+                                                stackBuilder.addNextIntentWithParentStack(addDispenserIntent);
+                                                // Ottengo il PendingIntent che contiene l'intero back stack
+                                                PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-                                            final NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
 
-                                            //la visualizzo
-                                            notificationManager.notify(uniqueId, builder.build());
+                                                //addresses.getAddress()
+                                                //creo la notifica
+                                                final NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "12")
+                                                        .setSmallIcon(R.mipmap.ic_launcher)
+                                                        .setContentTitle("Vuoi aggiornare i prezzi di questo distributore?")
+                                                        .setContentText("Sei passato vicino a " + "Via Balzac 12, Reggio Emilia" + ", vuoi aggiornarne i prezzi?")
+                                                        .setStyle(new NotificationCompat.BigTextStyle()
+                                                                .bigText("Sei passato vicino a " + "Via Balzac 12, Reggio Emilia" + ", vuoi aggiornarne i prezzi?"))
+                                                        .setPriority(NotificationCompat.PRIORITY_MAX)
+                                                        .setAutoCancel(true)
+                                                        .setCategory(NotificationCompat.CATEGORY_REMINDER)
+                                                        .setVisibility(Notification.VISIBILITY_PUBLIC);
+                                                builder.setContentIntent(resultPendingIntent);
+
+                                                final NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
+
+                                                //la visualizzo
+                                                notificationManager.notify(uniqueId, builder.build());
+                                            } else {
+                                                if (result < minDistance) {
+                                                    //creo il canale per la notifica
+                                                    createNotificationChannel();
+                                                    i++;
+
+                                                    // Creo un Intent per l'activity che voglio iniziare
+                                                    Intent addDispenserIntent = new Intent(getContext(), AddDispenser.class);
+                                                    addDispenserIntent.putExtra("distributore_da_modificare", "Via Balzac 12, Reggio Emilia");
+                                                    // Creo il TaskStackBuilder e aggiungo l'intent, che fa l'inflate del back stack
+                                                    TaskStackBuilder stackBuilder = TaskStackBuilder.create(getContext());
+                                                    stackBuilder.addNextIntentWithParentStack(addDispenserIntent);
+                                                    // Ottengo il PendingIntent che contiene l'intero back stack
+                                                    PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                                                    //creo la notifica
+                                                    final NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "12")
+                                                            .setSmallIcon(R.mipmap.ic_launcher)
+                                                            .setContentTitle("Vuoi aggiornare i prezzi di questo distributore?")
+                                                            .setContentText("Sei passato vicino a " + "Via Balzac 12, Reggio Emilia" + ", vuoi aggiornarne i prezzi?")
+                                                            .setStyle(new NotificationCompat.BigTextStyle()
+                                                                    .bigText("Sei passato vicino a " + "Via Balzac 12, Reggio Emilia" + ", vuoi aggiornarne i prezzi?"))
+                                                            .setPriority(NotificationCompat.PRIORITY_MAX)
+                                                            .setAutoCancel(true)
+                                                            .setCategory(NotificationCompat.CATEGORY_REMINDER)
+                                                            .setVisibility(Notification.VISIBILITY_PUBLIC);
+                                                    builder.setContentIntent(resultPendingIntent);
+
+                                                    final NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
+
+                                                    //la visualizzo
+                                                    notificationManager.notify(uniqueId, builder.build());
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -601,7 +654,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
 
             //moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM, googleMap);
             LatLng latLng = new LatLng(addressList.getLatitude(), addressList.getLongitude());
-            Util.pointToPosition(googleMap, latLng);
 
             try{
                 //seleziono la località da far apparire sopra il marker
@@ -615,6 +667,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                             .title(address + " " + prices)
                             .position(latLng);
                     googleMap.addMarker(markerOptions).showInfoWindow();
+                Util.pointToPosition(googleMap, latLng);
             }catch(IOException e){
                 e.printStackTrace();
             }
