@@ -213,8 +213,7 @@ public class AddDispenser extends AppCompatActivity {
             prezzi.add(dieselPrice.getText().toString());
         }
 
-        addresses.put(username, new Addresses(indirizzoValue, carburanti, prezzi));
-        Addresses a = new Addresses(indirizzoValue, carburanti, prezzi);
+        addresses.put(username, new Addresses(indirizzoValue, prezzi, carburanti));
         ref.updateChildren(addresses);
 
         String[] array = {username, indirizzoValue};

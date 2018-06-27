@@ -43,6 +43,7 @@ import android.widget.Toast;
 import com.firebase.client.Firebase;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.tasks.*;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity
     GoogleMap mGoogleMap;
     final int uniqueId = 45678;
     String EXTRA_NOTIFICATION_ID = "1232";
-    public static boolean automobilista = false;
+    public static boolean automobilista;
 
     public void setUserType(){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity
         final FirebaseUser user = mAuth.getCurrentUser();
         boolean daRet = false;
 
+        //Query q = refDi.orderByChild("email").equalTo(user.getEmail());
         Query q = refDi.orderByChild("email").equalTo(user.getEmail());
         q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -86,7 +88,9 @@ public class MainActivity extends AppCompatActivity
                 if (dataSnapshot.exists()) {
                     //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
                     for (DataSnapshot o : dataSnapshot.getChildren()) {
-                        automobilista = false;
+                        MainActivity.automobilista = false;
+                        MapsFragment fragment = (MapsFragment) getSupportFragmentManager().findFragmentById(R.id.maps_fragment);
+                        fragment.startMap();
                     }
                 }
             }
@@ -95,6 +99,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+        //Query q1 =
         Query q1 = refDr.orderByChild("email").equalTo(user.getEmail());
         q1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -102,7 +107,9 @@ public class MainActivity extends AppCompatActivity
                 if (dataSnapshot.exists()) {
                     //HashMap<Oject, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
                     for (DataSnapshot o : dataSnapshot.getChildren()) {
-                        automobilista = true;
+                        MainActivity.automobilista = true;
+                        MapsFragment fragment = (MapsFragment) getSupportFragmentManager().findFragmentById(R.id.maps_fragment);
+                        fragment.startMap();
                     }
                 }
             }
@@ -341,6 +348,10 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             goToAddDispenser();
         } else if (id == R.id.nav_manage) {
+            if(automobilista) goToSettings();
+            else goToSettingsDistributore();
+
+            /*
             final FirebaseDatabase database = FirebaseDatabase.getInstance();
             final DatabaseReference refDr = database.getReference("/drivers");
             final DatabaseReference refDi = database.getReference("/dispensers");
@@ -378,7 +389,7 @@ public class MainActivity extends AppCompatActivity
                 public void onCancelled(DatabaseError databaseError) {
 
                 }
-            });
+            });*/
             //goToSettings();
         }
 

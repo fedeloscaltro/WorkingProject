@@ -164,8 +164,17 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         if (mMapView != null) {
             mMapView.onCreate(null);
             mMapView.onResume();
-            mMapView.getMapAsync(this);
+            //mMapView.getMapAsync(this);
         }
+    }
+
+    public void startMap(){
+        //startMapAgain();
+        mMapView.getMapAsync(this);
+    }
+
+    private void startMapAgain(){
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -224,25 +233,30 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             createLocationRequest();
         }
 
-        Query q = refAddr.orderByChild("address").startAt("");
-        q.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
-                    for (DataSnapshot o : dataSnapshot.getChildren()) {
-                        Addresses addresses = o.getValue(Addresses.class);
-                        //Toast.makeText(getActivity(), addresses.getAddress(), Toast.LENGTH_LONG).show();
-                        retrieveMarkers(addresses.getAddress(), googleMap);
+        if(!MainActivity.automobilista) {
+            Query q = refAddr.orderByChild("address").startAt("");
+            q.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
+                        for (DataSnapshot o : dataSnapshot.getChildren()) {
+                            Addresses addresses = o.getValue(Addresses.class);
+                            //Toast.makeText(getActivity(), addresses.getAddress(), Toast.LENGTH_LONG).show();
+                            retrieveMarkers(addresses.getAddress(), googleMap);
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }else{
+            SharedPreferences sp = getActivity().getSharedPreferences("com.gibbo.salvatore", Context.MODE_PRIVATE);
+            int c=0;
+        }
         /*MarkerOptions markerOptions = new MarkerOptions()
                 .position(Util.getLocationFromAddress(getContext(), positionFromRegisterDistributoreActivity))
                 .title("posizione ricevuta");
