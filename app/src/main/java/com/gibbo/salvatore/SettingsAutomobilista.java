@@ -19,6 +19,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -37,6 +38,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -183,7 +185,6 @@ public class SettingsAutomobilista extends AppCompatPreferenceActivity {
      * This fragment shows general preferences only. It is used when the
      * activity is showing a two-pane settings UI.
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class GeneralPreferenceFragment extends PreferenceFragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -191,14 +192,86 @@ public class SettingsAutomobilista extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_general);
             setHasOptionsMenu(true);
 
+            final SwitchPreference filterSwitch = (SwitchPreference) findPreference("switch_filter");
+            final ListPreference carburante = (ListPreference) findPreference("pref_fuel");
+            final EditTextPreference minPrice = (EditTextPreference) findPreference("pref_prezzo_minimo");
+            final EditTextPreference maxPrice = (EditTextPreference) findPreference("pref_prezzo_massimo");
+
+            SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+            final SharedPreferences.Editor editor = mPreferences.edit();
+
+            editor.putBoolean("switchFilter", filterSwitch.isChecked());
+            editor.commit();
+            editor.putString("favFuel", carburante.getValue());
+            editor.commit();
+            editor.putString("minPrice", minPrice.getText());
+            editor.commit();
+            editor.putString("maxPrice", maxPrice.getText());
+            editor.commit();
+
+            filterSwitch.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object o) {
+                    if(filterSwitch.isChecked()) {
+                        filterSwitch.setChecked(false);
+                        editor.putBoolean("switchFilter", false);
+                        editor.commit();
+                        /*MapsFragment fragment = (MapsFragment) getSupportFragmentManager().findFragmentById(R.id.maps_fragment);
+                    fragment.aggiornaMappa();*/
+                    }
+                    else {
+                        filterSwitch.setChecked(true);
+                        editor.putBoolean("switchFilter", true);
+                        editor.commit();
+                        /*MapsFragment fragment = (MapsFragment) getSupportFragmentManager().findFragmentById(R.id.maps_fragment);
+                    fragment.aggiornaMappa();*/
+                    }
+                    return true;
+                }
+            });
+            carburante.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object o) {
+                    editor.putString("favFuel", carburante.getValue());
+                    editor.commit();
+                    /*MapsFragment fragment = (MapsFragment) getSupportFragmentManager().findFragmentById(R.id.maps_fragment);
+                    fragment.aggiornaMappa();*/
+                    return true;
+                }
+            });
+
+            minPrice.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object o) {
+                    editor.putString("minPrice", minPrice.getText());
+                    editor.commit();
+                    /*MapsFragment fragment = (MapsFragment) getSupportFragmentManager().findFragmentById(R.id.maps_fragment);
+                    fragment.aggiornaMappa();*/
+                    return true;
+                }
+            });
+
+            maxPrice.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object o) {
+                    editor.putString("maxPrice", maxPrice.getText());
+                    editor.commit();
+                    /*MapsFragment fragment = (MapsFragment) getSupportFragmentManager().findFragmentById(R.id.maps_fragment);
+                    fragment.aggiornaMappa();*/
+                    return true;
+                }
+            });
+
+
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
             bindPreferenceSummaryToValue(findPreference("pref_prezzo_minimo"));
             bindPreferenceSummaryToValue(findPreference("pref_prezzo_massimo"));
-            bindPreferenceSummaryToValue(findPreference("pref_distanza_massima"));
+            //bindPreferenceSummaryToValue(findPreference("pref_distanza_massima"));
             bindPreferenceSummaryToValue(findPreference("pref_fuel"));
+
         }
 
         @Override
@@ -228,7 +301,6 @@ public class SettingsAutomobilista extends AppCompatPreferenceActivity {
             setHasOptionsMenu(true);
 
             final SwitchPreference switchPreference = (SwitchPreference) findPreference("notifications_new_message");
-
             /*if(switchPreference.getSharedPreferences().getBoolean("notifications_new_message", true)){
                 Toast.makeText(getContext(), "true", Toast.LENGTH_LONG).show();
             } else {

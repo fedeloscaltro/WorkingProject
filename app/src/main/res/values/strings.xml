@@ -139,4 +139,6 @@
     <string name="channel_name">Channel name</string>
     <string name="channel_description">Channel description</string>
 
+    <string name="filters">Filtri</string>
+
 </resources>

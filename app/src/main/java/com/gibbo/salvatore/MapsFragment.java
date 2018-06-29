@@ -1,6 +1,7 @@
 package com.gibbo.salvatore;
 
 import android.Manifest;
+import android.app.DownloadManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -24,6 +25,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -94,6 +96,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     ArrayList<Double> results = new ArrayList<Double>();
     int i=0;
     Double minDistance = 0.0;
+    SwitchPreference switchFilter = null;
 
     final int uniqueId = 45678;
     String EXTRA_NOTIFICATION_ID = "1232";
@@ -174,12 +177,70 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
     }
 
     public void startMap(){
-        //startMapAgain();
         mMapView.getMapAsync(this);
     }
 
-    private void startMapAgain(){
+    public void searchAddressesWithFilters(SharedPreferences setting){
+        Toast.makeText(this.getActivity(), "ricerca con filtri", 2000).show();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
+        Query q = refAddr.orderByChild("carburanti").equalTo(sp.getString("favFuel", ""));
+                q.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
+                    for (DataSnapshot o : dataSnapshot.getChildren()) {
+                        Addresses addresses = o.getValue(Addresses.class);
+                        //String values = o.getValue(String.class);
+                        //Toast.makeText(getActivity(), addresses.getAddress(), Toast.LENGTH_LONG).show();
+                        retrieveMarkers(addresses.getAddress(), mGoogleMap);
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void searchAddressesWithoutFilters(){
+        Toast.makeText(this.getActivity(), "ricerca senza filtri", 2000).show();
+        Query q = refAddr.orderByChild("address").startAt("");
+        q.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
+                    for (DataSnapshot o : dataSnapshot.getChildren()) {
+                        Addresses addresses = o.getValue(Addresses.class);
+                        //String values = o.getValue(String.class);
+                        //Toast.makeText(getActivity(), addresses.getAddress(), Toast.LENGTH_LONG).show();
+                        retrieveMarkers(addresses.getAddress(), mGoogleMap);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void aggiornaMappa(){
+        if(mGoogleMap != null) mGoogleMap.clear();
+        if(!MainActivity.automobilista) {
+            searchAddressesWithoutFilters();
+        }else{
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
+            if(sp.getBoolean("switchFilter", false)){
+                searchAddressesWithFilters(sp);
+            }else {
+                searchAddressesWithoutFilters();
+            }
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -238,31 +299,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             createLocationRequest();
         }
 
-        //if(!MainActivity.automobilista) {
-            Query q = refAddr.orderByChild("address").startAt("");
-            q.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        //HashMap<Object, Addresses> map = ((HashMap<Object, Addresses>) dataSnapshot.getValue());
-                        for (DataSnapshot o : dataSnapshot.getChildren()) {
-                            Addresses addresses = o.getValue(Addresses.class);
-                            //String values = o.getValue(String.class);
-                            //Toast.makeText(getActivity(), addresses.getAddress(), Toast.LENGTH_LONG).show();
-                            retrieveMarkers(addresses.getAddress(), googleMap);
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        /*}else{
-            SharedPreferences sp = getActivity().getSharedPreferences("com.gibbo.salvatore", Context.MODE_PRIVATE);
-            int c=0;
-        }*/
+        aggiornaMappa();
         /*MarkerOptions markerOptions = new MarkerOptions()
                 .position(Util.getLocationFromAddress(getContext(), positionFromRegisterDistributoreActivity))
                 .title("posizione ricevuta");
@@ -412,7 +449,23 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
         }*/
     }
 
-
+    /*private Location getLastKnownLocation(LocationManager locationManager) {
+        List<String> providers = locationManager.getProviders(true);
+        Location bestLocation = null;
+        for (String provider : providers) {
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                Location l = locationManager.getLastKnownLocation(provider);
+                if (l == null) {
+                    continue;
+                }
+                if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                    // Found best last known location: %s", l);
+                    bestLocation = l;
+                }
+            }
+        }
+        return bestLocation;
+    }*/
     protected LocationRequest createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(100);
@@ -435,11 +488,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
                 //faccio il controllo dei permessi
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     //trovo il valore della location
+                    assert locationManager != null;
                     final Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-
+                    //if(location != null)
                     //richiedo tutti gli indirizzi memorizzati nel DB
                     Query q = refAddr.orderByChild("address").startAt("");
-                    q.addListenerForSingleValueEvent(new ValueEventListener() {
+                    q.addListenerForSingleValueEvent(new ValueEventListener(){
                         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -619,6 +673,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback,
             Toast.makeText(getContext(), dispenserData,
                     Toast.LENGTH_LONG).show();
         }*/
+        if(mGoogleMap != null) aggiornaMappa();
     }
 
     private void startLocationUpdates() {

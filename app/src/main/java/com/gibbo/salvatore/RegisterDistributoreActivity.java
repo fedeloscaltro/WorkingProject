@@ -225,7 +225,7 @@ public class RegisterDistributoreActivity extends AppCompatActivity {
 
         //inserisco i dati nella mappa Hash
         users.put(username, new User(username, mail, password, sede));
-        addresses.put(username, new Addresses(sede, carburanti, prezzi));
+        addresses.put(username, new Addresses(sede, prezzi, carburanti));
 
         //aggiorno il DB
         ref.updateChildren(users);
